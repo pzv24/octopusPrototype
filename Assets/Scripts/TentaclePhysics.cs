@@ -29,7 +29,10 @@ public class TentaclePhysics : MonoBehaviour
         _finalVector = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
-            _finalVector += _tentacles[i].FromPlayerVector;
+            if(_tentacles[i].IsConnected)
+            {
+                _finalVector += _tentacles[i].FromPlayerVector;
+            }
         }
     }
 
