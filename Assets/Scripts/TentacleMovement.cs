@@ -77,7 +77,7 @@ public class TentacleMovement : MonoBehaviour
         if (_activeTentacles.Count >= _maxActiveTentacles)
         {
             // deactivate the oldest tentacle in the list
-            _activeTentacles[0].DeactivateTentacle();
+            _activeTentacles[0].DeactivateTentacle(_tentacleLaunchSpeed);
             _tentacleBank.Add(_activeTentacles[0]);
             _activeTentacles.RemoveAt(0);
         }
