@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
             _targetLocation = transform.position;
         }
     }
+    public void OnRelease()
+    {
+        Debug.Log("Releasing tentacles");
+        _movement.ReleaseAllTentacles();
+    }
 
     public void OnSetTargetLocationController(InputValue input)
     {

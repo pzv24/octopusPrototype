@@ -10,6 +10,14 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
+
+    [SerializeField] private float _linearDragConnected = 5;
+    [SerializeField] private float _angularDragConnected = 5;
+
+    [SerializeField] private float _linearDragFree = 0.2f;
+    [SerializeField] private float _angularDragFree = 0.2f;
+
+    [SerializeField] private float _lilImpulseStrength = 1;
     //public void FindIndividualVectors()
     //{
     //    _tentacleVectors.Clear();
@@ -29,10 +37,20 @@ public class TentaclePhysics : MonoBehaviour
         _finalVector = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
-            if(_tentacles[i].IsConnected)
+            if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
                 _finalVector += _tentacles[i].FromPlayerVector;
             }
+        }
+        if( _finalVector == Vector2.zero )
+        {
+            _rigidBody.angularDrag = _angularDragFree;
+            _rigidBody.drag = _linearDragFree;
+        }
+        else
+        {
+            _rigidBody.angularDrag = _angularDragConnected;
+            _rigidBody.drag = _linearDragConnected;
         }
     }
 

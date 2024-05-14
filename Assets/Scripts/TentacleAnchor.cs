@@ -8,6 +8,7 @@ public class TentacleAnchor : MonoBehaviour
     [SerializeField] private LineRenderer _tentacleVisual;
     [SerializeField] private Rigidbody2D _playerRB;
     [SerializeField] private bool _isConnected = true;
+    [SerializeField] private float _breakDistance = 10;
 
     [SerializeField, ReadOnly] private Vector2 _fromPlayerVector = Vector2.zero;
     public Vector2 FromPlayerVector { get { return _fromPlayerVector; } }
@@ -20,6 +21,10 @@ public class TentacleAnchor : MonoBehaviour
             _fromPlayerVector = PlayerToAnchorVector();
             _tentacleVisual.SetPosition(1, Vector3.zero);
             _tentacleVisual.SetPosition(0, -_fromPlayerVector);
+            if(_fromPlayerVector.magnitude > _breakDistance)
+            {
+                DeactivateTentacle(12);
+            }
         }
     }
 

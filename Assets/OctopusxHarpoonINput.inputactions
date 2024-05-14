@@ -49,6 +49,15 @@
                     "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Release",
+                    "type": "Button",
+                    "id": "bdca4114-f319-46a0-b58f-cb6ebc02e973",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -291,6 +300,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SetTargetLocationController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4877a52f-b5c9-4f68-9524-859b8df5dd35",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Release",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

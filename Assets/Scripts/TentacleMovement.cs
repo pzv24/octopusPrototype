@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using TreeEditor;
 using System.Runtime.CompilerServices;
+using UnityEngine.Analytics;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private int _maxActiveTentacles = 3;
     [SerializeField] private LayerMask _tentacleCollisionLayers;
 
+    [SerializeField] private int _raycastConeCount = 10;
+    [SerializeField] private int _raycastDepth = 3;
+    [SerializeField] private float _angleWidth = 40f;
+
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
     [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
-    [SerializeField, ReadOnly] private int _activeTentavles;
+    [SerializeField, ReadOnly] private int _activeTentacleCount;
 
     private void Start()
     {
@@ -38,6 +43,16 @@ public class TentacleMovement : MonoBehaviour
         TryChangeTentacleAnchor();
     }
 
+    public void ReleaseAllTentacles()
+    {
+        for (int i = 0; i < _activeTentacles.Count; i++)
+        {
+            _activeTentacles[i].DeactivateTentacle(_tentacleLaunchSpeed);
+            _tentacleBank.Add(_activeTentacles[i]);
+        }
+        _activeTentacles.Clear();
+    }
+
     private void TryChangeTentacleAnchor()
     {
         if(Vector3.Distance(_targetLocation, transform.position) > 0.5f)
@@ -45,7 +60,8 @@ public class TentacleMovement : MonoBehaviour
             if(_tentacleChangeElapsed > _tentacleFireCooldown)
             {
                 //raycast to see if we find a new anchor location
-                Vector2 newAnchorPosition = RaycastTentacle();
+                Vector2 newAnchorPosition = RaycastConeAndChoose();
+                Debug.DrawLine(transform.position, newAnchorPosition, Color.green);
 
                 // if location valid, then launch a new tentacle in that direction
                 if (newAnchorPosition != Vector2.zero)
@@ -57,18 +73,70 @@ public class TentacleMovement : MonoBehaviour
             }
         }
     }
-    private Vector2 RaycastTentacle()
+    private RaycastHit2D RaycastTentacle(Vector2 directionalVector)
     {
-        Vector3 targetDirection = (_targetLocation - transform.position).normalized;
-        RaycastHit2D[] hitInfo = new RaycastHit2D[1];
-        int hits = Physics2D.RaycastNonAlloc(transform.position, targetDirection, hitInfo, _tentacleMaxDistance, _tentacleCollisionLayers);
-        //Debug.DrawRay(transform.position, targetDirection * _tentacleMaxDistance, Color.cyan);
+        RaycastHit2D[] hitInfo = new RaycastHit2D[_raycastDepth];
+        int hits = Physics2D.RaycastNonAlloc(transform.position, directionalVector, hitInfo, _tentacleMaxDistance, _tentacleCollisionLayers);
+        Debug.DrawRay(transform.position, directionalVector * _tentacleMaxDistance, Color.cyan);
         if (hits == 0)
         {
-            return Vector2.zero;
+            return hitInfo[0];
         }
-        Debug.DrawLine(transform.position, hitInfo[0].point, Color.magenta, 0.5f);
-        return hitInfo[0].point;
+        for (int i  = 0; i < hits; i++)
+        {
+            // if you hit a solid wall, that's the farthest you can go already
+            if (hitInfo[i].collider.gameObject.layer == LayerMask.NameToLayer("SolidTerrain"))
+            {
+                return hitInfo[i];
+                //Debug.Log("got a terrain!");
+            }
+            continue;
+        }
+        // if no solid walls were hit, return the farthest point
+        return hitInfo[hits - 1];
+    }
+
+    //raycast in a cone and return the farthest reaching vector
+    private Vector2 RaycastConeAndChoose()
+    {
+        // get the target position and make it a Vector2 directional vector
+        Vector2 targetDirection = (_targetLocation - transform.position).normalized;
+        Vector2 vector2Target = new Vector2(targetDirection.x, targetDirection.y);
+
+        // calculate the spet length for the angle lerp
+        float stepLength = (_angleWidth / _raycastConeCount);
+
+        // calculate the start (left-most angle of the cone)
+        Vector2 coneStart = ReturnRotatedVectorByXDegrees(vector2Target, -_angleWidth/2);
+
+        // prep the arary for the best hits for each
+        RaycastHit2D[] allHits = new RaycastHit2D[_raycastConeCount];
+
+        // do the raycast
+        for (int i = 0; i < _raycastConeCount; i++)
+        {
+            Vector2 raycastVector = ReturnRotatedVectorByXDegrees(coneStart, stepLength * i);
+            RaycastHit2D outputHit = RaycastTentacle(raycastVector);
+            allHits[i] = outputHit;
+            Debug.DrawRay(transform.position, raycastVector * _tentacleMaxDistance, Color.yellow);
+        }
+        RaycastHit2D bestHit = allHits[0];
+        //chose best vector
+        for (int i = 0; i < allHits.Length;i++)
+        {
+            if (allHits[i].distance > bestHit.distance)
+            {
+                bestHit = allHits[i];
+            }
+        }
+        return bestHit.point;
+    }
+
+    private Vector2 ReturnRotatedVectorByXDegrees(Vector2 vector, float degrees)
+    {
+        return new Vector3(
+            vector.x * Mathf.Cos(Mathf.Deg2Rad * degrees) - vector.y * Mathf.Sin(Mathf.Deg2Rad * degrees),
+            vector.y * Mathf.Cos(Mathf.Deg2Rad * degrees) + vector.x * Mathf.Sin(Mathf.Deg2Rad * degrees));
     }
     private void MoveTentacleAnchor(Vector2 newPosition)
     {
@@ -113,7 +181,7 @@ public class TentacleMovement : MonoBehaviour
                 count++;
             }
         }
-        _activeTentavles = count;
+        _activeTentacleCount = count;
         return count;
     }
     //private void IncrementTentacleIndex()
