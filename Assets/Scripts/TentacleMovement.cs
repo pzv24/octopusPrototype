@@ -8,8 +8,8 @@ using UnityEngine.Analytics;
 
 public class TentacleMovement : MonoBehaviour
 {
-    [SerializeField] private List<TentacleAnchor> _tentacleBank = new List<TentacleAnchor>();
-    [SerializeField] private List<TentacleAnchor> _activeTentacles = new List<TentacleAnchor>();
+    [SerializeField] private List<Tentacle> _tentacleBank = new List<Tentacle>();
+    [SerializeField] private List<Tentacle> _activeTentacles = new List<Tentacle>();
     [SerializeField] private float _tentacleFireCooldown =1f;
     [SerializeField] private float _tentacleMaxDistance;
     [SerializeField] private float _tentacleLaunchSpeed = 3;
@@ -149,11 +149,11 @@ public class TentacleMovement : MonoBehaviour
             _tentacleBank.Add(_activeTentacles[0]);
             _activeTentacles.RemoveAt(0);
         }
-        TentacleAnchor anchorToMove = _tentacleBank[0];
+        Tentacle tentacleToMove = _tentacleBank[0];
         _tentacleBank.RemoveAt(0);
-        _activeTentacles.Add(anchorToMove);
-        anchorToMove.gameObject.SetActive(true);
-        anchorToMove.LaunchTentacle(newPosition, _tentacleLaunchSpeed);
+        _activeTentacles.Add(tentacleToMove);
+        tentacleToMove.gameObject.SetActive(true);
+        tentacleToMove.LaunchTentacle(newPosition, _tentacleLaunchSpeed);
 
     }
 

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 public class TentaclePhysics : MonoBehaviour
 {
 
-    [SerializeField] private List<TentacleAnchor> _tentacles = new List<TentacleAnchor>();
+    [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
@@ -39,7 +39,7 @@ public class TentaclePhysics : MonoBehaviour
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                _finalVector += _tentacles[i].FromPlayerVector;
+                _finalVector += _tentacles[i].PlayerToAnchorVector;
             }
         }
         if( _finalVector == Vector2.zero )
@@ -66,9 +66,9 @@ public class TentaclePhysics : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        foreach (TentacleAnchor tentacle in _tentacles)
+        foreach (Tentacle tentacle in _tentacles)
         {
-            Gizmos.DrawLine(transform.position, tentacle.FromPlayerVector + Get2DPosition());
+            Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
         }
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());

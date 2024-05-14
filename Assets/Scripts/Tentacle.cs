@@ -2,37 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TreeEditor;
 
-public class TentacleAnchor : MonoBehaviour
+public class Tentacle : MonoBehaviour
 {
     [SerializeField] private LineRenderer _tentacleVisual;
     [SerializeField] private Rigidbody2D _playerRB;
     [SerializeField] private bool _isConnected = true;
     [SerializeField] private float _breakDistance = 10;
+    [SerializeField, ReadOnly] private Vector2 _anchorPosition;
 
-    [SerializeField, ReadOnly] private Vector2 _fromPlayerVector = Vector2.zero;
-    public Vector2 FromPlayerVector { get { return _fromPlayerVector; } }
+    [SerializeField, ReadOnly] private Vector2 _playerToAnchorVector = Vector2.zero;
+    public Vector2 PlayerToAnchorVector 
+    { 
+        get 
+        { 
+            return new Vector2(_anchorPosition.x, _anchorPosition.y) - new Vector2(transform.position.x, transform.position.y); 
+        } 
+    }
     public bool IsConnected { get { return _isConnected; } } 
 
     private void Update()
     {
         if( _isConnected)
         {
-            _fromPlayerVector = PlayerToAnchorVector();
-            _tentacleVisual.SetPosition(1, Vector3.zero);
-            _tentacleVisual.SetPosition(0, -_fromPlayerVector);
-            if(_fromPlayerVector.magnitude > _breakDistance)
+            _tentacleVisual.SetPosition(1, PlayerToAnchorVector);
+            if(_playerToAnchorVector.magnitude > _breakDistance)
             {
                 DeactivateTentacle(12);
             }
         }
-    }
-
-    private Vector2 PlayerToAnchorVector()
-    {
-        Vector2 playerV2 = new Vector2(_playerRB.gameObject.transform.position.x, _playerRB.gameObject.transform.position.y);
-        Vector2 currentV2 = new Vector2(transform.position.x, transform.position.y);
-        return currentV2 - playerV2;
     }
 
     public void DeactivateTentacle(float speed)
@@ -40,24 +39,22 @@ public class TentacleAnchor : MonoBehaviour
         StartCoroutine(TentacleVisualLerpBack(speed));
     }
 
-    public void ActivateTentacle()
+    public void ActivateTentacleVisual()
     {
         _tentacleVisual.gameObject.SetActive(true);
-        //gameObject.SetActive(true);
     }
     public void OnTentacleConnected(Vector2 anchorPosition)
     {
-        transform.position = new Vector3(anchorPosition.x, anchorPosition.y, transform.position.z);
+        //transform.position = new Vector3(anchorPosition.x, anchorPosition.y, transform.position.z);
         _isConnected = true;
     }
 
     public void LaunchTentacle(Vector3 anchorPosition, float travelSpeed = 10f)
     {
-        transform.position = new Vector3(anchorPosition.x, anchorPosition.y, transform.position.z);
-        _fromPlayerVector = PlayerToAnchorVector();
-        _tentacleVisual.SetPosition(1, -_fromPlayerVector);
-        _tentacleVisual.SetPosition(0, -_fromPlayerVector);
-        ActivateTentacle();
+        _anchorPosition = anchorPosition;
+        _tentacleVisual.SetPosition(1, Vector3.zero);
+        _tentacleVisual.SetPosition(0, Vector3.zero);
+        ActivateTentacleVisual();
         StartCoroutine(TentacleVisualLerp(anchorPosition, travelSpeed));
         Debug.Log(anchorPosition);
     }
@@ -71,9 +68,8 @@ public class TentacleAnchor : MonoBehaviour
         {
             iterator += speed * Time.deltaTime;
             // the "start" of the tentacle, the part attached to the player
-            Vector3 lerpingVector = Vector3.Slerp(PlayerToAnchorVector(), Vector2.zero, iterator);
-            _tentacleVisual.SetPosition(1, -lerpingVector);
-            _tentacleVisual.SetPosition(0, -PlayerToAnchorVector());
+            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVector, iterator);
+            _tentacleVisual.SetPosition(1, lerpingVector);
             yield return new WaitForEndOfFrame();
         }
         OnTentacleConnected(anchorPosition);
@@ -86,9 +82,8 @@ public class TentacleAnchor : MonoBehaviour
         {
             iterator -= speed * Time.deltaTime;
             // the "start" of the tentacle, the part attached to the player
-            Vector3 lerpingVector = Vector3.Slerp(PlayerToAnchorVector(), Vector2.zero, iterator);
-            _tentacleVisual.SetPosition(1, -lerpingVector);
-            _tentacleVisual.SetPosition(0, -PlayerToAnchorVector());
+            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVector, iterator);
+            _tentacleVisual.SetPosition(1, lerpingVector);
             yield return new WaitForEndOfFrame();
         }
         _tentacleVisual.gameObject.SetActive(false);
