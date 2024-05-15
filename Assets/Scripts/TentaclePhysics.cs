@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 
 public class TentaclePhysics : MonoBehaviour
 {
 
-    [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
+    [SerializeField, ReadOnly] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
@@ -17,7 +18,20 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _linearDragFree = 0.2f;
     [SerializeField] private float _angularDragFree = 0.2f;
 
-    [SerializeField] private float _lilImpulseStrength = 1;
+    [Header("Little Impulse Settings")]
+    [SerializeField] private float _lilImpulseMaxDistance = 1;
+    [SerializeField] private float _lilAccelerationBoost = 1;
+    [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
+    [SerializeField] private float _lilImpulseCooldown = 0.2f;
+
+    [Header("On Surface Settings")]
+    [SerializeField] private LayerMask _groundLayers;
+    [SerializeField] private float _groundSphereCastRadius = 1;
+
+    public bool IsOnSurface = false;
+    public Vector3 CurrentSurfaceNormal = Vector3.up;
+    private Coroutine _impulseCooldownCoroutine = null;
+    private PlayerController _controller;
     //public void FindIndividualVectors()
     //{
     //    _tentacleVectors.Clear();
@@ -31,6 +45,11 @@ public class TentaclePhysics : MonoBehaviour
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _controller = GetComponent<PlayerController>();
+    }
+    public void InitPhysics(List<Tentacle> tentacles)
+    {
+        _tentacles = tentacles;
     }
     private void FindFinal()
     {
@@ -54,14 +73,59 @@ public class TentaclePhysics : MonoBehaviour
         }
     }
 
-    private void Impulse()
+    private void ImpulseByTentacles()
     {
         _rigidBody.AddForce(_finalVector * _implulseMagnitude);
     }
     private void Update()
     {
+        IsOnSurface = CheckSurface();
         FindFinal();
-        Impulse();
+        ImpulseByTentacles();
+    }
+    private bool CheckSurface()
+    {
+        RaycastHit2D[] hitInfo = new RaycastHit2D[1];
+        //int hit = Physics2D.OverlapCircleNonAlloc(transform.position, _groundSphereCastRadius, hitInfo, _groundLayers);
+        int hit = Physics2D.CircleCastNonAlloc(transform.position, _groundSphereCastRadius, Vector2.zero, hitInfo, 0, _groundLayers);
+        if (hit > 0)
+        {
+            CurrentSurfaceNormal = hitInfo[0].normal;
+            return true;
+        }
+        return false;
+    }
+    public void TryGiveFreeImpulse(Vector3 targetDirectionNormalized, int activeTentacleCount)
+    {
+        if (_controller.HasActiveInput)
+        {
+            if(IsOnSurface)
+            {
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized));
+            }
+            else if (!IsOnSurface && activeTentacleCount > 0)
+            {
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized) * _notGroundedForceMultiplier);
+            }
+        }
+        if(IsOnSurface && _controller.HasActiveInput)
+        {
+            //_impulseCooldownCoroutine = StartCoroutine(FreeImpulse(targetDirectionNormalized));
+            //Debug.Log("GOTHERE");
+            Vector2 targetVelocity = (_lilImpulseMaxDistance / Time.deltaTime) * targetDirectionNormalized.normalized;
+            Vector2 velocityDiff = targetVelocity - _rigidBody.velocity;
+            Vector2 acceleration = velocityDiff * _lilAccelerationBoost;
+            _rigidBody.AddForce(acceleration * _rigidBody.mass);
+            //yield return new WaitForSeconds(_lilImpulseCooldown);
+            _impulseCooldownCoroutine = null;
+        }
+    }
+    public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)
+    {
+        Vector2 targetVelocity = (_lilImpulseMaxDistance / Time.deltaTime) * targetDirectionNormalized.normalized;
+        Vector2 velocityDiff = targetVelocity - _rigidBody.velocity;
+        Vector2 acceleration = velocityDiff * _lilAccelerationBoost;
+        return acceleration;
     }
 
     private void OnDrawGizmos()

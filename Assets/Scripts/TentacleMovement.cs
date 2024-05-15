@@ -22,16 +22,25 @@ public class TentacleMovement : MonoBehaviour
 
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
     [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
-    [SerializeField, ReadOnly] private int _activeTentacleCount;
+
+    private TentaclePhysics _tentaclePhysics;
+    public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
 
     private void Start()
     {
         _tentacleChangeElapsed = 0;
+        _tentaclePhysics = GetComponent<TentaclePhysics>();
+        //_tentaclePhysics.InitPhysics(_tentacleBank);
     }
 
     public void SetTargetLocation(Vector3 targetLocation)
     {
         _targetLocation = targetLocation;
+        if(targetLocation != Vector3.zero)
+        {
+            Vector2 targetDirection = (_targetLocation - transform.position).normalized;
+            _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
+        }
         //Debug.DrawLine(transform.position, _targetLocation);
         //Debug.DrawRay(transform.position, _targetLocation.normalized);
     }
@@ -40,7 +49,11 @@ public class TentacleMovement : MonoBehaviour
     {
         _tentacleChangeElapsed += Time.deltaTime;
         //RaycastTentacle();
-        TryChangeTentacleAnchor();
+        // if has active input basically
+        if (Vector3.Distance(_targetLocation, transform.position) > 0.5f)
+        {
+            TryChangeTentacleAnchor();
+        }
     }
 
     public void ReleaseAllTentacles()
@@ -55,21 +68,18 @@ public class TentacleMovement : MonoBehaviour
 
     private void TryChangeTentacleAnchor()
     {
-        if(Vector3.Distance(_targetLocation, transform.position) > 0.5f)
+        if(_tentacleChangeElapsed > _tentacleFireCooldown)
         {
-            if(_tentacleChangeElapsed > _tentacleFireCooldown)
-            {
-                //raycast to see if we find a new anchor location
-                Vector2 newAnchorPosition = RaycastConeAndChoose();
-                Debug.DrawLine(transform.position, newAnchorPosition, Color.green);
+            //raycast to see if we find a new anchor location
+            Vector2 newAnchorPosition = RaycastConeAndChoose();
+            Debug.DrawLine(transform.position, newAnchorPosition, Color.green);
 
-                // if location valid, then launch a new tentacle in that direction
-                if (newAnchorPosition != Vector2.zero)
-                {
-                    _tentacleChangeElapsed = 0;
-                    Debug.Log("firing tentacle");
-                    MoveTentacleAnchor(newAnchorPosition);
-                }
+            // if location valid, then launch a new tentacle in that direction
+            if (newAnchorPosition != Vector2.zero)
+            {
+                _tentacleChangeElapsed = 0;
+                Debug.Log("firing tentacle");
+                MoveTentacleAnchor(newAnchorPosition);
             }
         }
     }
@@ -171,19 +181,19 @@ public class TentacleMovement : MonoBehaviour
     //}
 
 
-    private int ActiveTentacleCount()
-    {
-        int count = 0;
-        for (int i = 0;  i < _tentacleBank.Count; i++)
-        {
-            if (_tentacleBank[i].isActiveAndEnabled && _tentacleBank[i].IsConnected)
-            {
-                count++;
-            }
-        }
-        _activeTentacleCount = count;
-        return count;
-    }
+    //private int ActiveTentacleCount()
+    //{
+    //    int count = 0;
+    //    for (int i = 0;  i < _tentacleBank.Count; i++)
+    //    {
+    //        if (_tentacleBank[i].isActiveAndEnabled && _tentacleBank[i].IsConnected)
+    //        {
+    //            count++;
+    //        }
+    //    }
+    //    _activeTentacleCount = count;
+    //    return count;
+    //}
     //private void IncrementTentacleIndex()
     //{
     //    _tentacleIndexHead += 1;

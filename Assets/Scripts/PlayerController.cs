@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
 
+    public bool HasActiveInput { get; private set; }
+
     private void Start()
     {
         _movement = GetComponent<TentacleMovement>();
@@ -63,10 +65,12 @@ public class PlayerController : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
             SetTargetLocation(mousePosition);
+            HasActiveInput = true;
         }
         else
         {
             SetTargetLocation(transform.position);
+            HasActiveInput = false;
         }
         _movement.SetTargetLocation(_targetLocation);
     }
