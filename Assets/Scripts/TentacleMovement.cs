@@ -24,6 +24,8 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
 
     private TentaclePhysics _tentaclePhysics;
+
+    [SerializeField] private bool _canFireTentacles = true;
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
 
     private void Start()
@@ -39,7 +41,10 @@ public class TentacleMovement : MonoBehaviour
         if(targetLocation != Vector3.zero)
         {
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
-            _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
+            if(_canFireTentacles)
+            {
+                _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
+            }
         }
         //Debug.DrawLine(transform.position, _targetLocation);
         //Debug.DrawRay(transform.position, _targetLocation.normalized);
@@ -68,7 +73,7 @@ public class TentacleMovement : MonoBehaviour
 
     private void TryChangeTentacleAnchor()
     {
-        if(_tentacleChangeElapsed > _tentacleFireCooldown)
+        if(_tentacleChangeElapsed > _tentacleFireCooldown && _canFireTentacles)
         {
             //raycast to see if we find a new anchor location
             Vector2 newAnchorPosition = RaycastConeAndChoose();
@@ -82,6 +87,10 @@ public class TentacleMovement : MonoBehaviour
                 MoveTentacleAnchor(newAnchorPosition);
             }
         }
+    }
+    public void CanFireTentacles(bool canFireTentacles)
+    {
+        _canFireTentacles = canFireTentacles;
     }
     private RaycastHit2D RaycastTentacle(Vector2 directionalVector)
     {
@@ -131,12 +140,15 @@ public class TentacleMovement : MonoBehaviour
             Debug.DrawRay(transform.position, raycastVector * _tentacleMaxDistance, Color.yellow);
         }
         RaycastHit2D bestHit = allHits[0];
+        float bestHidDistanceTotarget = Vector2.Distance(bestHit.point, _targetLocation);
         //chose best vector
         for (int i = 0; i < allHits.Length;i++)
         {
-            if (allHits[i].distance > bestHit.distance)
+            float currentDistanceToTarget = (Vector2.Distance(allHits[i].point, _targetLocation));
+            if (currentDistanceToTarget < bestHidDistanceTotarget)
             {
                 bestHit = allHits[i];
+                bestHidDistanceTotarget = currentDistanceToTarget;
             }
         }
         return bestHit.point;

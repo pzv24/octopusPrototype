@@ -52,12 +52,12 @@
                 },
                 {
                     "name": "Release",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "bdca4114-f319-46a0-b58f-cb6ebc02e973",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

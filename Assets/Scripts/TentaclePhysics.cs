@@ -19,7 +19,7 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _angularDragFree = 0.2f;
 
     [Header("Little Impulse Settings")]
-    [SerializeField] private float _lilImpulseMaxDistance = 1;
+    [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
     [SerializeField] private float _lilImpulseCooldown = 0.2f;
@@ -27,6 +27,8 @@ public class TentaclePhysics : MonoBehaviour
     [Header("On Surface Settings")]
     [SerializeField] private LayerMask _groundLayers;
     [SerializeField] private float _groundSphereCastRadius = 1;
+
+    [SerializeField, ReadOnly] private float _speed;
 
     public bool IsOnSurface = false;
     public Vector3 CurrentSurfaceNormal = Vector3.up;
@@ -82,6 +84,7 @@ public class TentaclePhysics : MonoBehaviour
         IsOnSurface = CheckSurface();
         FindFinal();
         ImpulseByTentacles();
+        _speed = _rigidBody.velocity.magnitude;
     }
     private bool CheckSurface()
     {
@@ -108,21 +111,10 @@ public class TentaclePhysics : MonoBehaviour
                 _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized) * _notGroundedForceMultiplier);
             }
         }
-        if(IsOnSurface && _controller.HasActiveInput)
-        {
-            //_impulseCooldownCoroutine = StartCoroutine(FreeImpulse(targetDirectionNormalized));
-            //Debug.Log("GOTHERE");
-            Vector2 targetVelocity = (_lilImpulseMaxDistance / Time.deltaTime) * targetDirectionNormalized.normalized;
-            Vector2 velocityDiff = targetVelocity - _rigidBody.velocity;
-            Vector2 acceleration = velocityDiff * _lilAccelerationBoost;
-            _rigidBody.AddForce(acceleration * _rigidBody.mass);
-            //yield return new WaitForSeconds(_lilImpulseCooldown);
-            _impulseCooldownCoroutine = null;
-        }
     }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)
     {
-        Vector2 targetVelocity = (_lilImpulseMaxDistance / Time.deltaTime) * targetDirectionNormalized.normalized;
+        Vector2 targetVelocity = _lilImpulseMaxSpeed * targetDirectionNormalized.normalized;
         Vector2 velocityDiff = targetVelocity - _rigidBody.velocity;
         Vector2 acceleration = velocityDiff * _lilAccelerationBoost;
         return acceleration;
@@ -134,7 +126,7 @@ public class TentaclePhysics : MonoBehaviour
         {
             Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
         }
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());
     }
 

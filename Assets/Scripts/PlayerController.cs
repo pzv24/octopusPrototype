@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private Vector2 _moveInput;
     private bool _mousePressed = false;
+    private bool _canFireTentacles = true;
 
     [SerializeField] private float _tentacleRange = 5;
 
@@ -39,10 +40,18 @@ public class PlayerController : MonoBehaviour
             _targetLocation = transform.position;
         }
     }
-    public void OnRelease()
+    public void OnRelease(InputValue input)
     {
-        Debug.Log("Releasing tentacles");
-        _movement.ReleaseAllTentacles();
+        if(input.Get<float>() == 1)
+        {
+            Debug.Log("Releasing tentacles");
+            _movement.ReleaseAllTentacles();
+            _movement.CanFireTentacles(false);
+        }
+        else
+        {
+            _movement.CanFireTentacles(true);
+        }
     }
 
     public void OnSetTargetLocationController(InputValue input)

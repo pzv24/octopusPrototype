@@ -87,6 +87,7 @@ public class Tentacle : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         _tentacleVisual.gameObject.SetActive(false);
+        _anchorPosition = Vector3.zero;
         gameObject.SetActive(false);
     }
 }
