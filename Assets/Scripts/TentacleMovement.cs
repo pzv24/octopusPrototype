@@ -27,12 +27,13 @@ public class TentacleMovement : MonoBehaviour
 
     [SerializeField] private bool _canFireTentacles = true;
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
+    public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
 
     private void Start()
     {
         _tentacleChangeElapsed = 0;
         _tentaclePhysics = GetComponent<TentaclePhysics>();
-        //_tentaclePhysics.InitPhysics(_tentacleBank);
+        _tentaclePhysics.InitPhysics(_tentacleBank);
     }
 
     public void SetTargetLocation(Vector3 targetLocation)
@@ -91,6 +92,13 @@ public class TentacleMovement : MonoBehaviour
     public void CanFireTentacles(bool canFireTentacles)
     {
         _canFireTentacles = canFireTentacles;
+    }
+    public void LockTentacleMagnitudes(bool lockedMagnitude)
+    {
+        //for (int i = 0; i < _activeTentacles.Count; i++)
+        //{
+        //    _activeTentacles[i].SetLockMagnitude(lockedMagnitude);
+        //}
     }
     private RaycastHit2D RaycastTentacle(Vector2 directionalVector)
     {

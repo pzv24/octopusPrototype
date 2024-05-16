@@ -11,27 +11,57 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private bool _isConnected = true;
     [SerializeField] private float _breakDistance = 10;
     [SerializeField, ReadOnly] private Vector2 _anchorPosition;
+    [SerializeField, Range(0,1)] private float _currentForceMultiplier = 1;
+    [SerializeField] private float _angleThresholdForMaxInfluence = 5;
+    [SerializeField] private float _angleThresholdForMinInfluence = 108;
+    [SerializeField] private float _minForceMult = 0.5f;
+    [SerializeField] private float _maxForceMult = 1;
 
-    [SerializeField, ReadOnly] private Vector2 _playerToAnchorVector = Vector2.zero;
-    public Vector2 PlayerToAnchorVector 
+    [SerializeField, ReadOnly] private float  _playerToAnchorMagnitude = 0f;
+    private float _lockedMagnitude;
+    private FixedJoint2D _rope;
+    private TentacleMovement _movement;
+
+    public Vector2 PlayerToAnchorVectoRaw 
     { 
         get 
         { 
             return new Vector2(_anchorPosition.x, _anchorPosition.y) - new Vector2(transform.position.x, transform.position.y); 
         } 
     }
+    public float CurrentInfluenceModifier { get { return  _currentForceMultiplier; } }
     public bool IsConnected { get { return _isConnected; } } 
+    public float LockedMagnitude { get { return _lockedMagnitude; } }
 
+    private void Start()
+    {
+        _rope = GetComponentInChildren<FixedJoint2D>();
+        _movement = GetComponentInParent<TentacleMovement>();
+    }
     private void Update()
     {
         if( _isConnected)
         {
-            _tentacleVisual.SetPosition(1, PlayerToAnchorVector);
-            if(_playerToAnchorVector.magnitude > _breakDistance)
+            _tentacleVisual.SetPosition(1, PlayerToAnchorVectoRaw);
+            if(PlayerToAnchorVectoRaw.magnitude > _breakDistance)
             {
                 DeactivateTentacle(12);
             }
+            CalculateInfluenceModifier();
         }
+        if (_rope != null)
+        {
+            _rope.anchor = PlayerToAnchorVectoRaw;
+        }
+    }
+    private void CalculateInfluenceModifier()
+    {
+        float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVectoRaw.normalized);
+        float lerp = Mathf.InverseLerp(_angleThresholdForMinInfluence, _angleThresholdForMaxInfluence, angle);
+        _currentForceMultiplier = Mathf.Lerp(_minForceMult, _maxForceMult, lerp);
+        //Debug.DrawRay(transform.position, _movement.TargetDirectionNormalized * 15, Color.red);
+        //Debug.DrawRay(transform.position, PlayerToAnchorVectoRaw.normalized * 15, Color.red);
+        //Debug.Log(angle);
     }
 
     public void DeactivateTentacle(float speed)
@@ -47,6 +77,17 @@ public class Tentacle : MonoBehaviour
     {
         //transform.position = new Vector3(anchorPosition.x, anchorPosition.y, transform.position.z);
         _isConnected = true;
+    }
+    public void SetLockMagnitude(bool lockmagnitude)
+    {
+        if (lockmagnitude)
+        {
+            _lockedMagnitude = PlayerToAnchorVectoRaw.magnitude;
+        }
+        else
+        {
+            _lockedMagnitude = -1;
+        }
     }
 
     public void LaunchTentacle(Vector3 anchorPosition, float travelSpeed = 10f)
@@ -68,7 +109,7 @@ public class Tentacle : MonoBehaviour
         {
             iterator += speed * Time.deltaTime;
             // the "start" of the tentacle, the part attached to the player
-            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVector, iterator);
+            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVectoRaw, iterator);
             _tentacleVisual.SetPosition(1, lerpingVector);
             yield return new WaitForEndOfFrame();
         }
@@ -82,12 +123,13 @@ public class Tentacle : MonoBehaviour
         {
             iterator -= speed * Time.deltaTime;
             // the "start" of the tentacle, the part attached to the player
-            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVector, iterator);
+            Vector3 lerpingVector = Vector3.Slerp(Vector2.zero, PlayerToAnchorVectoRaw, iterator);
             _tentacleVisual.SetPosition(1, lerpingVector);
             yield return new WaitForEndOfFrame();
         }
         _tentacleVisual.gameObject.SetActive(false);
         _anchorPosition = Vector3.zero;
         gameObject.SetActive(false);
+        SetLockMagnitude(false);
     }
 }

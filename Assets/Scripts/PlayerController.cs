@@ -33,11 +33,13 @@ public class PlayerController : MonoBehaviour
         if(input.Get<float>() == 1)
         {
             _mousePressed = true;
+            _movement.LockTentacleMagnitudes(false);
         }
         else
         {
             _mousePressed = false;
             _targetLocation = transform.position;
+            _movement.LockTentacleMagnitudes(true);
         }
     }
     public void OnRelease(InputValue input)
