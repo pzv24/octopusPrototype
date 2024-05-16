@@ -20,6 +20,7 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _angularDragFree = 0.2f;
 
     [Header("Little Impulse Settings")]
+    [SerializeField] private bool _useFreeImpulse = true;
     [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
@@ -70,7 +71,7 @@ public class TentaclePhysics : MonoBehaviour
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
                 float modifier = _useImpulseModifier ? _tentacles[i].CurrentInfluenceModifier : 1;
-                _finalVector += _tentacles[i].PlayerToAnchorVectoRaw.normalized * modifier;
+                _finalVector += _tentacles[i].PlayerToAnchorVectoRaw * modifier;
             }
         }
     }
@@ -132,7 +133,7 @@ public class TentaclePhysics : MonoBehaviour
     }
     public void TryGiveFreeImpulse(Vector3 targetDirectionNormalized, int activeTentacleCount)
     {
-        if (_controller.HasActiveInput)
+        if (_useFreeImpulse && _controller.HasActiveInput)
         {
             if(IsOnSurface)
             {

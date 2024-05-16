@@ -59,6 +59,7 @@ public class Tentacle : MonoBehaviour
         float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVectoRaw.normalized);
         float lerp = Mathf.InverseLerp(_angleThresholdForMinInfluence, _angleThresholdForMaxInfluence, angle);
         _currentForceMultiplier = Mathf.Lerp(_minForceMult, _maxForceMult, lerp);
+        _currentForceMultiplier = 1;
         //Debug.DrawRay(transform.position, _movement.TargetDirectionNormalized * 15, Color.red);
         //Debug.DrawRay(transform.position, PlayerToAnchorVectoRaw.normalized * 15, Color.red);
         //Debug.Log(angle);
