@@ -623,11 +623,12 @@ MonoBehaviour:
   _tentacleCollisionLayers:
     serializedVersion: 2
     m_Bits: 384
-  _raycastConeCount: 8
+  _raycastConeCount: 12
   _raycastDepth: 3
-  _angleWidth: 20
+  _angleWidth: 40
   _targetLocation: {x: 0, y: 0, z: 0}
   _tentacleChangeElapsed: 0
+  _canFireTentacles: 1
 --- !u!114 &160632612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,19 +665,19 @@ MonoBehaviour:
   - {fileID: 1530722045}
   - {fileID: 416713714}
   _finalVector: {x: 0, y: 0}
-  _implulseMagnitude: 12
+  _implulseMagnitude: 25
   _linearDragConnected: 5
   _angularDragConnected: 5
   _linearDragFree: 0.2
   _angularDragFree: 0.2
-  _lilImpulseMaxDistance: 1
-  _lilAccelerationBoost: 0.1
+  _lilImpulseMaxSpeed: 25
+  _lilAccelerationBoost: 3
   _notGroundedForceMultiplier: 0.5
-  _lilImpulseCooldown: 0.1
   _groundLayers:
     serializedVersion: 2
     m_Bits: 384
   _groundSphereCastRadius: 1
+  _speed: 0
   IsOnSurface: 0
   CurrentSurfaceNormal: {x: 0, y: 1, z: 0}
 --- !u!1 &200623195
@@ -2405,7 +2406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &872394412
 Transform:
   m_ObjectHideFlags: 0

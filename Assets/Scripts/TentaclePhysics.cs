@@ -22,7 +22,6 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
-    [SerializeField] private float _lilImpulseCooldown = 0.2f;
 
     [Header("On Surface Settings")]
     [SerializeField] private LayerMask _groundLayers;
