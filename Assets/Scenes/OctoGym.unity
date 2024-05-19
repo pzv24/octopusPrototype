@@ -670,9 +670,11 @@ MonoBehaviour:
   _angularDragConnected: 5
   _linearDragFree: 0.2
   _angularDragFree: 0.2
-  _lilImpulseMaxSpeed: 25
+  _useLittleImpulse: 1
+  _lilImpulseMaxSpeed: 10
   _lilAccelerationBoost: 3
   _notGroundedForceMultiplier: 0.5
+  _maxAngleFromNormal: 20
   _groundLayers:
     serializedVersion: 2
     m_Bits: 384
@@ -884,6 +886,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &337993147
 Transform:
@@ -935,6 +943,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &338801383
 Transform:
@@ -1131,6 +1145,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &416713715
 Transform:
@@ -2022,6 +2042,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &784034109
 Transform:
@@ -2372,6 +2398,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &872107058
 Transform:
@@ -3128,6 +3160,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &1037935322
 Transform:
@@ -4348,6 +4386,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &1530722046
 Transform:
@@ -5658,6 +5702,12 @@ MonoBehaviour:
   _isConnected: 0
   _breakDistance: 12
   _anchorPosition: {x: 0, y: 0}
+  _currentForceMultiplier: 1
+  _angleThresholdForMaxInfluence: 5
+  _angleThresholdForMinInfluence: 90
+  _minForceMult: 0.5
+  _maxForceMult: 2
+  _selfBreakAngleThreshold: 165
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &2036747452
 Transform:
