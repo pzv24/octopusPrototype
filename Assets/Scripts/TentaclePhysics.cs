@@ -19,6 +19,7 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _angularDragFree = 0.2f;
 
     [Header("Little Impulse Settings")]
+    [SerializeField] private bool _useLittleImpulse = true;
     [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
@@ -60,18 +61,9 @@ public class TentaclePhysics : MonoBehaviour
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                _finalVector += _tentacles[i].PlayerToAnchorVector;
+                _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
+                Debug.DrawRay(transform.position, _finalVector, Color.cyan);
             }
-        }
-        if( _finalVector == Vector2.zero )
-        {
-            _rigidBody.angularDrag = _angularDragFree;
-            _rigidBody.drag = _linearDragFree;
-        }
-        else
-        {
-            _rigidBody.angularDrag = _angularDragConnected;
-            _rigidBody.drag = _linearDragConnected;
         }
     }
 
@@ -84,6 +76,7 @@ public class TentaclePhysics : MonoBehaviour
         IsOnSurface = CheckSurface();
         FindFinal();
         ImpulseByTentacles();
+        AdjustDrag();
         _speed = _rigidBody.velocity.magnitude;
     }
     private bool CheckSurface()
@@ -100,17 +93,32 @@ public class TentaclePhysics : MonoBehaviour
     }
     public void TryGiveFreeImpulse(Vector3 targetDirectionNormalized, int activeTentacleCount)
     {
-        if (_controller.HasActiveInput)
+        if (_controller.HasActiveInput && _useLittleImpulse)
         {
-            Vector3 finalImpulseDirection = Vector3.RotateTowards(CurrentSurfaceNormal, targetDirectionNormalized, _maxAngleFromNormal * Mathf.Deg2Rad, 0);
-            if(IsOnSurface)
+            //if not connected and on ground
+            if(activeTentacleCount == 0 && IsOnSurface)
             {
+                Vector3 finalImpulseDirection = Vector3.RotateTowards(CurrentSurfaceNormal, targetDirectionNormalized, _maxAngleFromNormal * Mathf.Deg2Rad, 0);
                 _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(finalImpulseDirection));
             }
-            else if (!IsOnSurface && activeTentacleCount > 0)
+            else if (activeTentacleCount > 0)
             {
-                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(finalImpulseDirection) * _notGroundedForceMultiplier);
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized) * _notGroundedForceMultiplier);
             }
+        }
+    }
+
+    private void AdjustDrag()
+    {
+        if (_finalVector == Vector2.zero)
+        {
+            _rigidBody.angularDrag = _angularDragFree;
+            _rigidBody.drag = _linearDragFree;
+        }
+        else
+        {
+            _rigidBody.angularDrag = _angularDragConnected;
+            _rigidBody.drag = _linearDragConnected;
         }
     }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)

@@ -12,7 +12,21 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private float _breakDistance = 10;
     [SerializeField, ReadOnly] private Vector2 _anchorPosition;
 
+    [Header("Modular Force Settings")]
+    [SerializeField, Range(0, 2)] private float _currentForceMultiplier = 1;
+    [SerializeField] private float _angleThresholdForMaxInfluence = 5;
+    [SerializeField] private float _angleThresholdForMinInfluence = 108;
+    [SerializeField] private float _minForceMult = 0.3f;
+    [SerializeField] private float _maxForceMult = 2;
+    [SerializeField, Range(0, 360)] private float _selfBreakAngleThreshold = 90;
+
+    public float CurrentForceMultiplier { get { return _currentForceMultiplier; } }
+
+    private TentacleMovement _movement;
+
     [SerializeField, ReadOnly] private Vector2 _playerToAnchorVector = Vector2.zero;
+    private bool _isRetracting;
+
     public Vector2 PlayerToAnchorVector 
     { 
         get 
@@ -20,13 +34,22 @@ public class Tentacle : MonoBehaviour
             return new Vector2(_anchorPosition.x, _anchorPosition.y) - new Vector2(transform.position.x, transform.position.y); 
         } 
     }
-    public bool IsConnected { get { return _isConnected; } } 
+    public float ForceMultiplier { get { return _currentForceMultiplier; } }
+    public bool IsConnected { get { return _isConnected; } }
 
+    private void Start()
+    {
+        _movement = GetComponentInParent<TentacleMovement>();
+    }
     private void Update()
     {
         if( _isConnected)
         {
             _tentacleVisual.SetPosition(1, PlayerToAnchorVector);
+            if (!_isRetracting)
+            {
+                CalculateInfluenceModifier();
+            }
             if(_playerToAnchorVector.magnitude > _breakDistance)
             {
                 DeactivateTentacle(12);
@@ -36,7 +59,10 @@ public class Tentacle : MonoBehaviour
 
     public void DeactivateTentacle(float speed)
     {
-        StartCoroutine(TentacleVisualLerpBack(speed));
+        if (!_isRetracting)
+        {
+            StartCoroutine(TentacleVisualLerpBack(speed));
+        }
     }
 
     public void ActivateTentacleVisual()
@@ -58,6 +84,20 @@ public class Tentacle : MonoBehaviour
         StartCoroutine(TentacleVisualLerp(anchorPosition, travelSpeed));
         Debug.Log(anchorPosition);
     }
+    private void CalculateInfluenceModifier()
+    {
+        float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVector.normalized);
+        if(angle >= _selfBreakAngleThreshold)
+        {
+            _movement.TentacleSelfDeactivate(this);
+            return;
+        }
+        float lerp = Mathf.InverseLerp(_angleThresholdForMinInfluence, _angleThresholdForMaxInfluence, angle);
+        _currentForceMultiplier = Mathf.Lerp(_minForceMult, _maxForceMult, lerp);
+        //Debug.DrawRay(transform.position, _movement.TargetDirectionNormalized * 15, Color.red);
+        //Debug.DrawRay(transform.position, PlayerToAnchorVectoRaw.normalized * 15, Color.red);
+        //Debug.Log(angle);
+    }
 
     // line position 0 -> local anchor coordinate (always 0,0)
     // line position 1 -> relative player position 
@@ -76,6 +116,7 @@ public class Tentacle : MonoBehaviour
     }
     private IEnumerator TentacleVisualLerpBack(float speed)
     {
+        _isRetracting = true;
         float iterator = 1;
         _isConnected = false;
         while (iterator > 0)
@@ -88,6 +129,7 @@ public class Tentacle : MonoBehaviour
         }
         _tentacleVisual.gameObject.SetActive(false);
         _anchorPosition = Vector3.zero;
+        _isRetracting = false;
         gameObject.SetActive(false);
     }
 }
