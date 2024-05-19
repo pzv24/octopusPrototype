@@ -671,7 +671,7 @@ MonoBehaviour:
   _linearDragFree: 0.2
   _angularDragFree: 0.2
   _useLittleImpulse: 1
-  _lilImpulseMaxSpeed: 10
+  _lilImpulseMaxSpeed: 5
   _lilAccelerationBoost: 3
   _notGroundedForceMultiplier: 0.5
   _maxAngleFromNormal: 20
