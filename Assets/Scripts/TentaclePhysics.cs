@@ -22,6 +22,7 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
+    [SerializeField] private float _maxAngleFromNormal = 20f;
 
     [Header("On Surface Settings")]
     [SerializeField] private LayerMask _groundLayers;
@@ -101,13 +102,14 @@ public class TentaclePhysics : MonoBehaviour
     {
         if (_controller.HasActiveInput)
         {
+            Vector3 finalImpulseDirection = Vector3.RotateTowards(CurrentSurfaceNormal, targetDirectionNormalized, _maxAngleFromNormal * Mathf.Deg2Rad, 0);
             if(IsOnSurface)
             {
-                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized));
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(finalImpulseDirection));
             }
             else if (!IsOnSurface && activeTentacleCount > 0)
             {
-                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized) * _notGroundedForceMultiplier);
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(finalImpulseDirection) * _notGroundedForceMultiplier);
             }
         }
     }
