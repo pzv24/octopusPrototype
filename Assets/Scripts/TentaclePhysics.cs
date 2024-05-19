@@ -11,7 +11,6 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
-    [SerializeField] private bool _useImpulseModifier = false;
 
     [SerializeField] private float _linearDragConnected = 5;
     [SerializeField] private float _angularDragConnected = 5;
@@ -20,18 +19,15 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _angularDragFree = 0.2f;
 
     [Header("Little Impulse Settings")]
-    [SerializeField] private bool _useFreeImpulse = true;
+    [SerializeField] private bool _useLittleImpulse = true;
     [SerializeField] private float _lilImpulseMaxSpeed = 5;
     [SerializeField] private float _lilAccelerationBoost = 1;
     [SerializeField] private float _notGroundedForceMultiplier = 0.1f;
+    [SerializeField] private float _maxAngleFromNormal = 20f;
 
     [Header("On Surface Settings")]
     [SerializeField] private LayerMask _groundLayers;
     [SerializeField] private float _groundSphereCastRadius = 1;
-
-    [Header("Rope-like settings")]
-    [SerializeField] private float _maxRopeLength = 10f;
-    [SerializeField] private float _elasticity = 0.1f;
 
     [SerializeField, ReadOnly] private float _speed;
 
@@ -56,37 +52,17 @@ public class TentaclePhysics : MonoBehaviour
     }
     public void InitPhysics(List<Tentacle> tentacles)
     {
-        Debug.Log("innit physics");
-        _tentacles.Clear();
-        for (int i = 0; i < tentacles.Count; i++)
-        {
-            _tentacles.Add(tentacles[i]);
-        }
+        _tentacles = tentacles;
     }
-    private void FindActiveForces()
+    private void FindFinal()
     {
         _finalVector = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                float modifier = _useImpulseModifier ? _tentacles[i].CurrentInfluenceModifier : 1;
-                _finalVector += _tentacles[i].PlayerToAnchorVectoRaw * modifier;
-            }
-        }
-    }
-    private void FindRopeLikeForces()
-    {
-        _finalVector = Vector2.zero;
-        for (int i = 0; i < _tentacles.Count; i++)
-        {
-            if (_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
-            {
-                if (_tentacles[i].LockedMagnitude != -1 && _tentacles[i].PlayerToAnchorVectoRaw.magnitude > _tentacles[i].LockedMagnitude)
-                {
-                    _finalVector += _tentacles[i].PlayerToAnchorVectoRaw.normalized;
-                    _finalVector = new Vector2(_finalVector.x, _finalVector.y*_rigidBody.gravityScale);
-                }
+                _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
+                Debug.DrawRay(transform.position, _finalVector, Color.cyan);
             }
         }
     }
@@ -98,25 +74,9 @@ public class TentaclePhysics : MonoBehaviour
     private void Update()
     {
         IsOnSurface = CheckSurface();
-        if (true)
-        {
-            FindActiveForces();
-        }
-        else
-        {
-            FindRopeLikeForces();
-        }
+        FindFinal();
         ImpulseByTentacles();
-        if (_finalVector == Vector2.zero)
-        {
-            _rigidBody.angularDrag = _angularDragFree;
-            _rigidBody.drag = _linearDragFree;
-        }
-        else
-        {
-            _rigidBody.angularDrag = _angularDragConnected;
-            _rigidBody.drag = _linearDragConnected;
-        }
+        AdjustDrag();
         _speed = _rigidBody.velocity.magnitude;
     }
     private bool CheckSurface()
@@ -133,16 +93,32 @@ public class TentaclePhysics : MonoBehaviour
     }
     public void TryGiveFreeImpulse(Vector3 targetDirectionNormalized, int activeTentacleCount)
     {
-        if (_useFreeImpulse && _controller.HasActiveInput)
+        if (_controller.HasActiveInput && _useLittleImpulse)
         {
-            if(IsOnSurface)
+            //if not connected and on ground
+            if(activeTentacleCount == 0 && IsOnSurface)
             {
-                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized));
+                Vector3 finalImpulseDirection = Vector3.RotateTowards(CurrentSurfaceNormal, targetDirectionNormalized, _maxAngleFromNormal * Mathf.Deg2Rad, 0);
+                _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(finalImpulseDirection));
             }
-            else if (!IsOnSurface && activeTentacleCount > 0)
+            else if (activeTentacleCount > 0)
             {
                 _rigidBody.AddForce(_rigidBody.mass * ImpulseAcceleration(targetDirectionNormalized) * _notGroundedForceMultiplier);
             }
+        }
+    }
+
+    private void AdjustDrag()
+    {
+        if (_finalVector == Vector2.zero)
+        {
+            _rigidBody.angularDrag = _angularDragFree;
+            _rigidBody.drag = _linearDragFree;
+        }
+        else
+        {
+            _rigidBody.angularDrag = _angularDragConnected;
+            _rigidBody.drag = _linearDragConnected;
         }
     }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)
@@ -157,7 +133,7 @@ public class TentaclePhysics : MonoBehaviour
     {
         foreach (Tentacle tentacle in _tentacles)
         {
-            Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVectoRaw + Get2DPosition());
+            Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
         }
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());

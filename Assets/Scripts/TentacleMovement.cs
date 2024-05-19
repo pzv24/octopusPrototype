@@ -42,10 +42,7 @@ public class TentacleMovement : MonoBehaviour
         if(targetLocation != Vector3.zero)
         {
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
-            if(_canFireTentacles)
-            {
-                _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
-            }
+            _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
         }
         //Debug.DrawLine(transform.position, _targetLocation);
         //Debug.DrawRay(transform.position, _targetLocation.normalized);
@@ -56,7 +53,7 @@ public class TentacleMovement : MonoBehaviour
         _tentacleChangeElapsed += Time.deltaTime;
         //RaycastTentacle();
         // if has active input basically
-        if (Vector3.Distance(_targetLocation, transform.position) > 0.5f)
+        if (Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
         {
             TryChangeTentacleAnchor();
         }
@@ -185,6 +182,13 @@ public class TentacleMovement : MonoBehaviour
         tentacleToMove.gameObject.SetActive(true);
         tentacleToMove.LaunchTentacle(newPosition, _tentacleLaunchSpeed);
 
+    }
+    // to be called by individual tentacles when certain critera is met to self-deactivate
+    public void TentacleSelfDeactivate(Tentacle tentacle)
+    {
+        _tentacleBank.Add(tentacle);
+        _activeTentacles.Remove(tentacle);
+        tentacle.DeactivateTentacle(_tentacleLaunchSpeed);
     }
 
     //private TentacleAnchor ManageTentacleCycle()
