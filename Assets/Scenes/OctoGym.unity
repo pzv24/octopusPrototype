@@ -665,14 +665,14 @@ MonoBehaviour:
   - {fileID: 1530722045}
   - {fileID: 416713714}
   _finalVector: {x: 0, y: 0}
-  _implulseMagnitude: 25
+  _implulseMagnitude: 18
   _linearDragConnected: 5
   _angularDragConnected: 5
   _linearDragFree: 0.2
   _angularDragFree: 0.2
   _useLittleImpulse: 1
-  _lilImpulseMaxSpeed: 5
-  _lilAccelerationBoost: 3
+  _lilImpulseMaxSpeed: 8
+  _lilAccelerationBoost: 5
   _notGroundedForceMultiplier: 0.5
   _maxAngleFromNormal: 20
   _groundLayers:

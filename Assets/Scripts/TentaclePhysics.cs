@@ -61,8 +61,14 @@ public class TentaclePhysics : MonoBehaviour
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
-                Debug.DrawRay(transform.position, _finalVector, Color.cyan);
+                if (_controller.HasActiveInput)
+                {
+                    _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
+                }
+                else
+                {
+                    _finalVector += _tentacles[i].PlayerToAnchorVector.normalized * _tentacles[i].ForceMultiplier;
+                }
             }
         }
     }
