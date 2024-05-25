@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class TentaclePhysics : MonoBehaviour
 {
 
-    [SerializeField, ReadOnly] private List<Tentacle> _tentacles = new List<Tentacle>();
+    [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;

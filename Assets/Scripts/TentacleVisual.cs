@@ -36,8 +36,9 @@ public class TentacleVisual : MonoBehaviour
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching = false;
 
-    private void Start()
+    public void InitVisual(Transform anchor)
     {
+        //_followEndTransform = anchor;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = _tentacleSegmentCount;
         _segmentPositions = new Vector3[_tentacleSegmentCount];

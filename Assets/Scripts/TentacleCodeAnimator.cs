@@ -35,22 +35,22 @@ public class TentacleCodeAnimator : MonoBehaviour
     {
         StartCoroutine(RetractTentacle());
     }
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Mouse left click");
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            AnimateLaunch(mousePosition);
-            Debug.Log("Distance of launch is : " +Vector3.Distance(transform.position, mousePosition));
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Mouse right click");
-            AnimateRetract();
-        }
-    }
+    //private void Update()
+    //{
+    //    if(Input.GetMouseButtonDown(0))
+    //    {
+    //        Debug.Log("Mouse left click");
+    //        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //        mousePosition.z = 0;
+    //        AnimateLaunch(mousePosition);
+    //        Debug.Log("Distance of launch is : " +Vector3.Distance(transform.position, mousePosition));
+    //    }
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Debug.Log("Mouse right click");
+    //        AnimateRetract();
+    //    }
+    //}
 
     private IEnumerator LaunchTentacle(Vector3 anchorWorldPosition)
     {
@@ -82,12 +82,13 @@ public class TentacleCodeAnimator : MonoBehaviour
         while (lerp < 1)
         {
             lerp += (1 / _retractAnimationDuration) * Time.deltaTime;
-            Vector3 finalPosition = Vector3.Lerp(startPos, Vector3.zero, lerp);
+            Vector3 finalPosition = Vector3.Lerp(startPos, transform.position, lerp);
             SetDistanceBasedWiggle();
             _visual.SetFollowEndPosition(finalPosition);
             yield return new WaitForEndOfFrame();
         }
         _visual.SetIsWiggling(false);
+        gameObject.SetActive(false);
     }
 
     private void SetDistanceBasedWiggle()
