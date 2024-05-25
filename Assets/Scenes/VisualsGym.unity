@@ -620,9 +620,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tentacleSegmentCount: 30
-  _smoothSpeed: 0.005
+  _smoothSpeed: 0.001
   _connectedSmoothFactor: 20
-  _detachedSmoothFactor: 1000
+  _detachedSmoothFactor: 2500
   _tentacleLengthModifier: 1
   _setAutoConnect: 1
   _autoConnectDistance: 0.3
