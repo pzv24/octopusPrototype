@@ -17,6 +17,10 @@ public class TentacleCodeAnimator : MonoBehaviour
     [SerializeField] private Vector2 _wiggleFrequencyMinAndMaxBasedOnDistance = Vector2.zero;
     [SerializeField] private Vector2 _wiggleAmplitudeMinAndMaxBasedOnDistance = Vector2.zero;
 
+    [SerializeField] private float _bezierCurveHeight = 3;
+    [SerializeField, Range(0,1)] private float _bezierAnchorModifier = 0.5f;
+    [SerializeField] private float _curveDirection = 1;
+
     private void Start()
     {
         _visual = GetComponent<TentacleVisual>();
@@ -52,10 +56,18 @@ public class TentacleCodeAnimator : MonoBehaviour
     {
         float lerp = 0;
         _visual.IsLaunching = true;
+        Vector3 start = Vector3.zero;
+        Vector3 end = anchorWorldPosition;
+        Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + Vector3.Cross((end-start).normalized, Vector3.forward * _curveDirection) * _bezierCurveHeight;
+        Debug.DrawLine(start, bezierAnchor, Color.blue, 1);
+        Debug.DrawLine(end, bezierAnchor, Color.blue, 1);
         while (lerp < 1)
         {
             lerp += _launchAnimationSpeed * Time.deltaTime;
-            Vector3 finalPosition = Vector3.Slerp(Vector3.zero, anchorWorldPosition, lerp);
+            //Vector3 finalPosition = Vector3.Slerp(Vector3.zero, anchorWorldPosition, lerp);
+            Vector3 startToAnchor = Vector3.Lerp(start, bezierAnchor, lerp);
+            Vector3 anchorToEnd = Vector3.Lerp(bezierAnchor, end, lerp);
+            Vector3 finalPosition = Vector3.Lerp(startToAnchor, anchorToEnd, lerp);
             _visual.SetFollowEndPosition(finalPosition);
             yield return new WaitForEndOfFrame();
         }
