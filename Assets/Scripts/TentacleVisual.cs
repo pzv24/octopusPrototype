@@ -32,10 +32,15 @@ public class TentacleVisual : MonoBehaviour
     private LineRenderer _lineRenderer;
     private Vector3[] _segmentPositions;
     private Vector3[] _segmentVelocities;
+    private Tentacle _tentacleCore;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching = false;
 
+    private void Start()
+    {
+        _tentacleCore = GetComponentInParent<Tentacle>();
+    }
     public void InitVisual(Transform anchor)
     {
         //_followEndTransform = anchor;
@@ -103,6 +108,7 @@ public class TentacleVisual : MonoBehaviour
     public void SetIsConnecteed(bool isConnecteed)
     {
         _connected = isConnecteed;
+        _tentacleCore.SetIsConnected(isConnecteed);
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)

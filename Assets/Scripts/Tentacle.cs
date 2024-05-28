@@ -69,6 +69,10 @@ public class Tentacle : MonoBehaviour
     {
         _tentacleAnimation.AnimateRetract();
     }
+    public void SetIsConnected(bool isConnected)
+    {
+        _isConnected = isConnected;
+    }
     private void CalculateInfluenceModifier()
     {
         float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVector.normalized);
