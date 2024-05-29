@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using TreeEditor;
+using Unity.VisualScripting;
 
 public class Tentacle : MonoBehaviour
 {
@@ -63,15 +64,23 @@ public class Tentacle : MonoBehaviour
         _anchor.position = anchorPosition;
         _tentacleVisualObject.SetActive(true);
         _tentacleAnimation.AnimateLaunch(anchorPosition);
+        StartCoroutine(GameplayConnectedTimer(travelSpeed));
         Debug.Log(anchorPosition);
+    }
+    private IEnumerator GameplayConnectedTimer(float connectSpeed)
+    {
+        float lerp = 0;
+        while (lerp <= 1)
+        {
+            lerp += Time.deltaTime * connectSpeed;
+            yield return new WaitForFixedUpdate();
+        }
+        _isConnected = true;
     }
     public void DeactivateTentacle(float speed)
     {
+        _isConnected = false;
         _tentacleAnimation.AnimateRetract();
-    }
-    public void SetIsConnected(bool isConnected)
-    {
-        _isConnected = isConnected;
     }
     private void CalculateInfluenceModifier()
     {

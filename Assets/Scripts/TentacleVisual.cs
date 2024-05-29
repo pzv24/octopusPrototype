@@ -27,7 +27,7 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private Transform _followEndTransform;
 
     [Header("Debug")]
-    [SerializeField] private bool _connected = false;
+    [SerializeField] private bool _visualConnected = false;
 
     private LineRenderer _lineRenderer;
     private Vector3[] _segmentPositions;
@@ -87,7 +87,7 @@ public class TentacleVisual : MonoBehaviour
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
-            float smoothFactorModifier = _connected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
+            float smoothFactorModifier = _visualConnected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
 
             //calculate the position with smooth damp function
             _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothFactorModifier);
@@ -107,8 +107,7 @@ public class TentacleVisual : MonoBehaviour
     }
     public void SetIsConnecteed(bool isConnecteed)
     {
-        _connected = isConnecteed;
-        _tentacleCore.SetIsConnected(isConnecteed);
+        _visualConnected = isConnecteed;
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)
