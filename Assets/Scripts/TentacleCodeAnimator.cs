@@ -17,7 +17,8 @@ public class TentacleCodeAnimator : MonoBehaviour
     [SerializeField] private Vector2 _wiggleFrequencyMinAndMaxBasedOnDistance = Vector2.zero;
     [SerializeField] private Vector2 _wiggleAmplitudeMinAndMaxBasedOnDistance = Vector2.zero;
 
-    [SerializeField] private float _bezierCurveHeight = 3;
+    [SerializeField] private float _bezerCurveMaxHeight = 3;
+    [SerializeField] private float _bezerCurveMinHeight = 0.2f;
     [SerializeField, Range(0,1)] private float _bezierAnchorModifier = 0.5f;
     [SerializeField] private float _curveDirection = 1;
 
@@ -58,7 +59,10 @@ public class TentacleCodeAnimator : MonoBehaviour
         _visual.IsLaunching = true;
         Vector3 start = transform.position;
         Vector3 end = anchorWorldPosition;
-        Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + new  Vector3(hitNormal.x,hitNormal.y,0) * _bezierCurveHeight;
+        float bezerLerpValue = Mathf.InverseLerp(0, 8, Vector3.Distance(anchorWorldPosition, transform.position));
+        float bezierHeight = Mathf.Lerp(_bezerCurveMinHeight, _bezerCurveMaxHeight, bezerLerpValue);
+        Debug.Log(bezierHeight);
+        Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + new  Vector3(hitNormal.x,hitNormal.y,0) * bezierHeight;
         Debug.DrawRay(start, hitNormal*15, Color.red);
         Debug.DrawLine(start, bezierAnchor, Color.blue, 1);
         Debug.DrawLine(end, bezierAnchor, Color.blue, 1);
