@@ -139,7 +139,10 @@ public class TentaclePhysics : MonoBehaviour
     {
         foreach (Tentacle tentacle in _tentacles)
         {
-            Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+            if(tentacle.IsConnected)
+            {
+                Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+            }
         }
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());

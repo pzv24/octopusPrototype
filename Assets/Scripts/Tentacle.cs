@@ -59,11 +59,11 @@ public class Tentacle : MonoBehaviour
             }
         }
     }
-    public void LaunchTentacle(Vector3 anchorPosition, float travelSpeed = 10f)
+    public void LaunchTentacle(Vector3 anchorPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
         _anchor.position = anchorPosition;
         _tentacleVisualObject.SetActive(true);
-        _tentacleAnimation.AnimateLaunch(anchorPosition);
+        _tentacleAnimation.AnimateLaunch(anchorPosition, hitNormal);
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
         Debug.Log(anchorPosition);
     }

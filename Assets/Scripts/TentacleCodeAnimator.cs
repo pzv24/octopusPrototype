@@ -26,9 +26,9 @@ public class TentacleCodeAnimator : MonoBehaviour
         _visual = GetComponent<TentacleVisual>();
     }
     [Button]
-    public void AnimateLaunch(Vector3 anchorWorldPosition)
+    public void AnimateLaunch(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
-        StartCoroutine(LaunchTentacle(anchorWorldPosition));
+        StartCoroutine(LaunchTentacle(anchorWorldPosition, hitNormal));
     }
     [Button]
     public void AnimateRetract()
@@ -52,13 +52,14 @@ public class TentacleCodeAnimator : MonoBehaviour
     //    }
     //}
 
-    private IEnumerator LaunchTentacle(Vector3 anchorWorldPosition)
+    private IEnumerator LaunchTentacle(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
         float lerp = 0;
         _visual.IsLaunching = true;
-        Vector3 start = Vector3.zero;
+        Vector3 start = transform.position;
         Vector3 end = anchorWorldPosition;
-        Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + Vector3.Cross((end-start).normalized, Vector3.forward * _curveDirection) * _bezierCurveHeight;
+        Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + new  Vector3(hitNormal.x,hitNormal.y,0) * _bezierCurveHeight;
+        Debug.DrawRay(start, hitNormal*15, Color.red);
         Debug.DrawLine(start, bezierAnchor, Color.blue, 1);
         Debug.DrawLine(end, bezierAnchor, Color.blue, 1);
         while (lerp < 1)
@@ -68,6 +69,7 @@ public class TentacleCodeAnimator : MonoBehaviour
             Vector3 startToAnchor = Vector3.Lerp(start, bezierAnchor, lerp);
             Vector3 anchorToEnd = Vector3.Lerp(bezierAnchor, end, lerp);
             Vector3 finalPosition = Vector3.Lerp(startToAnchor, anchorToEnd, lerp);
+            _visual.SetIsRetracted(false);
             _visual.SetFollowEndPosition(finalPosition);
             yield return new WaitForEndOfFrame();
         }
@@ -88,7 +90,8 @@ public class TentacleCodeAnimator : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         _visual.SetIsWiggling(false);
-        gameObject.SetActive(false);
+        _visual.SetIsRetracted(true);
+        //gameObject.SetActive(false);
     }
 
     private void SetDistanceBasedWiggle()

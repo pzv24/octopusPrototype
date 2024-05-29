@@ -14,6 +14,7 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private float _tentacleLengthModifier = 1;
     [SerializeField] private bool _setAutoConnect = true;
     [SerializeField] private float _autoConnectDistance = 0.3f;
+    [SerializeField] private bool _isRetracted = true;
 
     [Header("Wiggle Settings")]
     [SerializeField] private bool _isWiggling = false;
@@ -55,6 +56,10 @@ public class TentacleVisual : MonoBehaviour
 
     private void GetWiggledTargetPosition()
     {
+        if (_isRetracted)
+        {
+            _followEndTransform.position = transform.position;
+        }
         if(_isWiggling)
         {
             _wiggleTime += Time.deltaTime;
@@ -108,6 +113,11 @@ public class TentacleVisual : MonoBehaviour
     public void SetIsConnecteed(bool isConnecteed)
     {
         _visualConnected = isConnecteed;
+    }
+    public void SetIsRetracted(bool isRetracted)
+    {
+        _isRetracted = isRetracted;
+        _visualConnected = isRetracted;
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)
