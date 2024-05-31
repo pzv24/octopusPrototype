@@ -74,15 +74,16 @@ public class TentacleMovement : MonoBehaviour
         if(_tentacleChangeElapsed > _tentacleFireCooldown && _canFireTentacles)
         {
             //raycast to see if we find a new anchor location
-            Vector2 newAnchorPosition = RaycastConeAndChoose();
+            RaycastHit2D hit = RaycastConeAndChoose();
+            Vector2 newAnchorPosition = hit.point;
             Debug.DrawLine(transform.position, newAnchorPosition, Color.green);
 
             // if location valid, then launch a new tentacle in that direction
             if (newAnchorPosition != Vector2.zero)
             {
                 _tentacleChangeElapsed = 0;
-                Debug.Log("firing tentacle");
-                MoveTentacleAnchor(newAnchorPosition);
+                //Debug.Log("firing tentacle");
+                MoveTentacleAnchor(newAnchorPosition, hit.normal);
             }
         }
     }
@@ -114,7 +115,7 @@ public class TentacleMovement : MonoBehaviour
     }
 
     //raycast in a cone and return the farthest reaching vector
-    private Vector2 RaycastConeAndChoose()
+    private RaycastHit2D RaycastConeAndChoose()
     {
         // get the target position and make it a Vector2 directional vector
         Vector2 targetDirection = (_targetLocation - transform.position).normalized;
@@ -149,7 +150,7 @@ public class TentacleMovement : MonoBehaviour
                 bestHidDistanceTotarget = currentDistanceToTarget;
             }
         }
-        return bestHit.point;
+        return bestHit;
     }
 
     private Vector2 ReturnRotatedVectorByXDegrees(Vector2 vector, float degrees)
@@ -158,7 +159,7 @@ public class TentacleMovement : MonoBehaviour
             vector.x * Mathf.Cos(Mathf.Deg2Rad * degrees) - vector.y * Mathf.Sin(Mathf.Deg2Rad * degrees),
             vector.y * Mathf.Cos(Mathf.Deg2Rad * degrees) + vector.x * Mathf.Sin(Mathf.Deg2Rad * degrees));
     }
-    private void MoveTentacleAnchor(Vector2 newPosition)
+    private void MoveTentacleAnchor(Vector2 newPosition, Vector2 hitNormal)
     {
         //ManageTentacleCycle();
         // deactivate the 
@@ -173,7 +174,7 @@ public class TentacleMovement : MonoBehaviour
         _tentacleBank.RemoveAt(0);
         _activeTentacles.Add(tentacleToMove);
         tentacleToMove.gameObject.SetActive(true);
-        tentacleToMove.LaunchTentacle(newPosition, _tentacleLaunchSpeed);
+        tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
 
     }
     // to be called by individual tentacles when certain critera is met to self-deactivate

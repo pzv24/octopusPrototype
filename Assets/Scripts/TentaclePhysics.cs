@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class TentaclePhysics : MonoBehaviour
 {
 
-    [SerializeField, ReadOnly] private List<Tentacle> _tentacles = new List<Tentacle>();
+    [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
     private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
@@ -139,7 +139,10 @@ public class TentaclePhysics : MonoBehaviour
     {
         foreach (Tentacle tentacle in _tentacles)
         {
-            Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+            if(tentacle.IsConnected)
+            {
+                Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+            }
         }
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());

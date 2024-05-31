@@ -14,6 +14,7 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private float _tentacleLengthModifier = 1;
     [SerializeField] private bool _setAutoConnect = true;
     [SerializeField] private float _autoConnectDistance = 0.3f;
+    [SerializeField] private bool _isRetracted = true;
 
     [Header("Wiggle Settings")]
     [SerializeField] private bool _isWiggling = false;
@@ -27,17 +28,23 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private Transform _followEndTransform;
 
     [Header("Debug")]
-    [SerializeField] private bool _connected = false;
+    [SerializeField] private bool _visualConnected = false;
 
     private LineRenderer _lineRenderer;
     private Vector3[] _segmentPositions;
     private Vector3[] _segmentVelocities;
+    private Tentacle _tentacleCore;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching = false;
 
     private void Start()
     {
+        _tentacleCore = GetComponentInParent<Tentacle>();
+    }
+    public void InitVisual(Transform anchor)
+    {
+        //_followEndTransform = anchor;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = _tentacleSegmentCount;
         _segmentPositions = new Vector3[_tentacleSegmentCount];
@@ -49,6 +56,10 @@ public class TentacleVisual : MonoBehaviour
 
     private void GetWiggledTargetPosition()
     {
+        if (_isRetracted)
+        {
+            _followEndTransform.position = transform.position;
+        }
         if(_isWiggling)
         {
             _wiggleTime += Time.deltaTime;
@@ -81,7 +92,7 @@ public class TentacleVisual : MonoBehaviour
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
-            float smoothFactorModifier = _connected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
+            float smoothFactorModifier = _visualConnected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
 
             //calculate the position with smooth damp function
             _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothFactorModifier);
@@ -101,7 +112,12 @@ public class TentacleVisual : MonoBehaviour
     }
     public void SetIsConnecteed(bool isConnecteed)
     {
-        _connected = isConnecteed;
+        _visualConnected = isConnecteed;
+    }
+    public void SetIsRetracted(bool isRetracted)
+    {
+        _isRetracted = isRetracted;
+        _visualConnected = isRetracted;
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)
@@ -112,7 +128,7 @@ public class TentacleVisual : MonoBehaviour
             if (_randomizeStartDirection)
             {
                 int random = Random.Range(0, 2);
-                Debug.Log(random.ToString());
+                //Debug.Log(random.ToString());
                 bool startDown = random == 0;
                 _wiggleTime = startDown ? Mathf.PI*2 : Mathf.PI * -2;
             }
