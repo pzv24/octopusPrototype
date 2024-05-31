@@ -65,7 +65,7 @@ public class Tentacle : MonoBehaviour
         _tentacleVisualObject.SetActive(true);
         _tentacleAnimation.AnimateLaunch(anchorPosition, hitNormal);
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
-        Debug.Log(anchorPosition);
+        //Debug.Log(anchorPosition);
     }
     private IEnumerator GameplayConnectedTimer(float connectSpeed)
     {

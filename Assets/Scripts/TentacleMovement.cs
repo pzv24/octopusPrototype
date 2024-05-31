@@ -82,7 +82,7 @@ public class TentacleMovement : MonoBehaviour
             if (newAnchorPosition != Vector2.zero)
             {
                 _tentacleChangeElapsed = 0;
-                Debug.Log("firing tentacle");
+                //Debug.Log("firing tentacle");
                 MoveTentacleAnchor(newAnchorPosition, hit.normal);
             }
         }

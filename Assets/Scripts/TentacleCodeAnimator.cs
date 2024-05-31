@@ -30,6 +30,7 @@ public class TentacleCodeAnimator : MonoBehaviour
     public void AnimateLaunch(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
         StartCoroutine(LaunchTentacle(anchorWorldPosition, hitNormal));
+        Debug.Log($"Launching tentacle {gameObject.transform.parent.name} to {anchorWorldPosition}", gameObject);
     }
     [Button]
     public void AnimateRetract()
@@ -61,7 +62,7 @@ public class TentacleCodeAnimator : MonoBehaviour
         Vector3 end = anchorWorldPosition;
         float bezerLerpValue = Mathf.InverseLerp(0, 8, Vector3.Distance(anchorWorldPosition, transform.position));
         float bezierHeight = Mathf.Lerp(_bezerCurveMinHeight, _bezerCurveMaxHeight, bezerLerpValue);
-        Debug.Log(bezierHeight);
+        //Debug.Log(bezierHeight);
         Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + new  Vector3(hitNormal.x,hitNormal.y,0) * bezierHeight;
         Debug.DrawRay(start, hitNormal*15, Color.red);
         Debug.DrawLine(start, bezierAnchor, Color.blue, 1);

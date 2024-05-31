@@ -128,7 +128,7 @@ public class TentacleVisual : MonoBehaviour
             if (_randomizeStartDirection)
             {
                 int random = Random.Range(0, 2);
-                Debug.Log(random.ToString());
+                //Debug.Log(random.ToString());
                 bool startDown = random == 0;
                 _wiggleTime = startDown ? Mathf.PI*2 : Mathf.PI * -2;
             }
