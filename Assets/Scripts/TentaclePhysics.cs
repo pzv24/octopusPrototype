@@ -35,6 +35,8 @@ public class TentaclePhysics : MonoBehaviour
     public Vector3 CurrentSurfaceNormal = Vector3.up;
     private Coroutine _impulseCooldownCoroutine = null;
     private PlayerController _controller;
+    private TentacleMovement _movement;
+
     //public void FindIndividualVectors()
     //{
     //    _tentacleVectors.Clear();
@@ -49,35 +51,64 @@ public class TentaclePhysics : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _controller = GetComponent<PlayerController>();
+        _movement = GetComponent<TentacleMovement>();
     }
     public void InitPhysics(List<Tentacle> tentacles)
     {
-        _tentacles = tentacles;
+        for (int i = 0; i < tentacles.Count; i++)
+        {
+            _tentacles.Add(tentacles[i]);
+        }
     }
     private void FindFinal()
     {
         _finalVector = Vector2.zero;
+        float xCont = 0;
+        float yCont = 0;
         for (int i = 0; i < _tentacles.Count; i++)
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                if (_controller.HasActiveInput)
-                {
-                    _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
-                }
-                else
-                {
-                    _finalVector += _tentacles[i].PlayerToAnchorVector.normalized * _tentacles[i].ForceMultiplier;
-                }
+                //if (_controller.HasActiveInput)
+                //{
+                //    _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
+                //}
+                //else
+                //{
+                //    _finalVector += _tentacles[i].PlayerToAnchorVector.normalized * _tentacles[i].ForceMultiplier;
+                //}
+                _finalVector += _tentacles[i].ContributionVector;
             }
         }
+                    //_finalVector = new Vector2(xCont, yCont);
+        Debug.DrawRay(transform.position, _finalVector*_movement.TargetDirectionRaw.magnitude, Color.green);
+    }
+    private float GetsFinalXContribution(float axisForceContribution)
+    {
+        if (Mathf.Sign(axisForceContribution) == Mathf.Sign(_movement.TargetDirectionRaw.x))
+        {
+            float contribution = Mathf.Clamp(Mathf.Abs(axisForceContribution), 0, (Mathf.Abs(_movement.TargetDirectionRaw.x)));
+            contribution *= Mathf.Sign(axisForceContribution);
+            return contribution;
+        }
+        return 0;
+    }
+    private float GetsFinalYContribution(float axisForceContribution)
+    {
+        if (Mathf.Sign(axisForceContribution) == Mathf.Sign(_movement.TargetDirectionRaw.y))
+        {
+            float contribution = Mathf.Clamp(Mathf.Abs(axisForceContribution), 0, (Mathf.Abs(_movement.TargetDirectionRaw.y)));
+            contribution *= Mathf.Sign(axisForceContribution);
+            return contribution;
+        }
+        return 0;
     }
 
     private void ImpulseByTentacles()
     {
         _rigidBody.AddForce(_finalVector * _implulseMagnitude);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         IsOnSurface = CheckSurface();
         FindFinal();

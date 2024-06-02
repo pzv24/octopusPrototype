@@ -26,7 +26,7 @@ public class Tentacle : MonoBehaviour
     public float CurrentForceMultiplier { get { return _currentForceMultiplier; } }
 
     private TentacleMovement _movement;
-
+    [SerializeField, ReadOnly] private Vector2 _contributionVector = Vector2.zero;
     [SerializeField, ReadOnly] private Vector2 _playerToAnchorVector = Vector2.zero;
     private bool _isRetracting;
 
@@ -39,6 +39,8 @@ public class Tentacle : MonoBehaviour
     }
     public float ForceMultiplier { get { return _currentForceMultiplier; } }
     public bool IsConnected { get { return _isConnected; } }
+
+    public Vector2 ContributionVector { get { return _contributionVector; } }
 
     private void Start()
     {
@@ -58,6 +60,8 @@ public class Tentacle : MonoBehaviour
                 DeactivateTentacle(12);
             }
         }
+        _playerToAnchorVector = PlayerToAnchorVector;
+        CalculateContributionVector();
     }
     public void LaunchTentacle(Vector3 anchorPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
@@ -95,5 +99,24 @@ public class Tentacle : MonoBehaviour
         //Debug.DrawRay(transform.position, _movement.TargetDirectionNormalized * 15, Color.red);
         //Debug.DrawRay(transform.position, PlayerToAnchorVectoRaw.normalized * 15, Color.red);
         //Debug.Log(angle);
+    }
+    private void CalculateContributionVector()
+    {
+        float xContribution = 0; 
+        float yContribution = 0;
+        if (_movement.TargetDirectionRaw.magnitude > 0.01f)
+        {
+
+            // if the current x component is in the same direction (sign) as the target direction
+            if (Mathf.Sign(_movement.TargetDirectionRaw.x) == Mathf.Sign(PlayerToAnchorVector.x))
+            {
+                xContribution = PlayerToAnchorVector.x;
+            }
+            if (Mathf.Sign(_movement.TargetDirectionRaw.y) == Mathf.Sign(PlayerToAnchorVector.y))
+            {
+                yContribution = PlayerToAnchorVector.y;
+            }
+        }
+        _contributionVector = new Vector2(xContribution, yContribution);
     }
 }

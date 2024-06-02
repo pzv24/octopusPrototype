@@ -8,6 +8,8 @@ using UnityEngine.Analytics;
 
 public class TentacleMovement : MonoBehaviour
 {
+    [SerializeField] private Tentacle _tentaclePrefab;
+    [SerializeField] private int _totalTentacleCount;
     [SerializeField] private List<Tentacle> _tentacleBank = new List<Tentacle>();
     [SerializeField] private List<Tentacle> _activeTentacles = new List<Tentacle>();
     [SerializeField] private float _tentacleFireCooldown =1f;
@@ -28,10 +30,18 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private bool _canFireTentacles = true;
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
     public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
+    public Vector2 TargetDirectionRaw { get { return (_targetLocation - transform.position); } }
 
     private void Start()
     {
         _tentacleChangeElapsed = 0;
+        //for (int i = 0; i < _totalTentacleCount; i++)
+        //{
+        //    Tentacle tentacle = Instantiate(_tentaclePrefab,transform);
+        //    tentacle.transform.parent = transform;
+        //    _tentacleBank.Add(tentacle);
+        //    tentacle.InitTentacle();
+        //}
         _tentaclePhysics = GetComponent<TentaclePhysics>();
         //_tentaclePhysics.InitPhysics(_tentacleBank);
     }
@@ -44,7 +54,7 @@ public class TentacleMovement : MonoBehaviour
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
             _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
         }
-        //Debug.DrawLine(transform.position, _targetLocation);
+        Debug.DrawLine(transform.position, _targetLocation, Color.yellow);
         //Debug.DrawRay(transform.position, _targetLocation.normalized);
     }
 
@@ -54,6 +64,10 @@ public class TentacleMovement : MonoBehaviour
         //RaycastTentacle();
         // if has active input basically
         if (Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
+        {
+            TryChangeTentacleAnchor();
+        }
+        if(Input.GetKeyDown(KeyCode.T) && Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
         {
             TryChangeTentacleAnchor();
         }

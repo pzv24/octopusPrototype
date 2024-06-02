@@ -872,6 +872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94128c377306b2842be2b73ff105f2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tentaclePrefab: {fileID: 0}
+  _totalTentacleCount: 0
   _tentacleBank:
   - {fileID: 1965388718}
   - {fileID: 1260531492}
@@ -931,7 +933,7 @@ MonoBehaviour:
   - {fileID: 1444783828}
   - {fileID: 1355156975}
   _finalVector: {x: 0, y: 0}
-  _implulseMagnitude: 21
+  _implulseMagnitude: 60
   _linearDragConnected: 5
   _angularDragConnected: 5
   _linearDragFree: 0.2
@@ -6350,6 +6352,7 @@ MonoBehaviour:
   _minForceMult: 0.5
   _maxForceMult: 2
   _selfBreakAngleThreshold: 165
+  _contributionVector: {x: 0, y: 0}
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &2036747452
 Transform:
