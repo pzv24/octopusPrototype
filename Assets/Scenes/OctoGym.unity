@@ -367,6 +367,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -385,7 +401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -402,6 +418,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -715,7 +735,7 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 3
   m_AngularDrag: 3
-  m_GravityScale: 2
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -945,20 +965,26 @@ MonoBehaviour:
   - {fileID: 1444783828}
   - {fileID: 1355156975}
   _finalVector: {x: 0, y: 0}
-  _implulseMagnitude: 1
-  _linearDragConnected: 5
-  _angularDragConnected: 5
-  _linearDragFree: 0.2
-  _angularDragFree: 0.2
-  _useLittleImpulse: 0
-  _lilImpulseMaxSpeed: 8
+  _implulseMagnitude: 160
+  _linearDragConnected: 6
+  _angularDragConnected: 6
+  _linearDragFree: 0.1
+  _angularDragFree: 0.1
+  _useLittleImpulse: 1
+  _lilImpulseMaxSpeed: 3
   _lilAccelerationBoost: 5
-  _notGroundedForceMultiplier: 0.5
+  _notGroundedForceMultiplier: 0
   _maxAngleFromNormal: 20
   _groundLayers:
     serializedVersion: 2
     m_Bits: 384
   _groundSphereCastRadius: 1
+  _customGravityAcceleration: 120
+  _gravityDecreasePerConnectedTentacle: 0.2
+  _currentGravityScale: 0
+  _currentConnectedTentacles: 0
+  _detachBoostEnabled: 1
+  _boostAccelerationMagnitude: 3500
   _speed: 0
   _canGetToTargetWithCurrentTentacles: 0
   IsOnSurface: 0
@@ -1151,6 +1177,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -1169,7 +1211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1186,6 +1228,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -1472,6 +1518,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -1490,7 +1552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1507,6 +1569,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -1626,6 +1692,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -1644,7 +1726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1661,6 +1743,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -2081,6 +2167,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -2099,7 +2201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -2116,6 +2218,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -3272,6 +3378,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -3290,7 +3412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -3307,6 +3429,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -4040,6 +4166,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -4058,7 +4200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -4075,6 +4217,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -4910,6 +5056,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -4928,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -4945,6 +5107,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -5290,6 +5456,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -5308,7 +5490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5325,6 +5507,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -5412,6 +5598,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -5430,7 +5632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5447,6 +5649,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -5534,6 +5740,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -5552,7 +5774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5569,6 +5791,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -5683,6 +5909,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _retractAnimationDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -5701,7 +5943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 50
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5718,6 +5960,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _solidGroundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
@@ -6497,6 +6743,9 @@ MonoBehaviour:
   _minForceMult: 0.5
   _maxForceMult: 2
   _selfBreakAngleThreshold: 165
+  _solidGroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _contributionVector: {x: 0, y: 0}
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &2036747452

@@ -49,7 +49,7 @@ public class TentacleMovement : MonoBehaviour
     public void SetTargetLocation(Vector3 targetLocation)
     {
         _targetLocation = targetLocation;
-        if(targetLocation != Vector3.zero)
+        if(targetLocation != Vector3.zero && _canFireTentacles)
         {
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
             _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
@@ -63,14 +63,14 @@ public class TentacleMovement : MonoBehaviour
         _tentacleChangeElapsed += Time.deltaTime;
         //RaycastTentacle();
         // if has active input basically
-        if (Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
-        {
-            //TryChangeTentacleAnchor();
-        }
-        if(Input.GetKeyDown(KeyCode.T) && Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
+        if (_canFireTentacles && !_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
         {
             TryChangeTentacleAnchor();
         }
+        //if(Input.GetKeyDown(KeyCode.T) && Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
+        //{
+        //    TryChangeTentacleAnchor();
+        //}
     }
 
     public void ReleaseAllTentacles()
@@ -80,6 +80,7 @@ public class TentacleMovement : MonoBehaviour
             _activeTentacles[i].DeactivateTentacle(_tentacleLaunchSpeed);
             _tentacleBank.Add(_activeTentacles[i]);
         }
+        _tentaclePhysics.GiveDetachAllBost();
         _activeTentacles.Clear();
     }
 

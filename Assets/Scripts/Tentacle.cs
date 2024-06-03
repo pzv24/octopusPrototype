@@ -23,6 +23,9 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private float _maxForceMult = 2;
     [SerializeField, Range(0, 360)] private float _selfBreakAngleThreshold = 90;
 
+    [Header("Raycast Break Settings")]
+    [SerializeField] private LayerMask _solidGroundLayer;
+
     public float CurrentForceMultiplier { get { return _currentForceMultiplier; } }
 
     private TentacleMovement _movement;
@@ -55,7 +58,7 @@ public class Tentacle : MonoBehaviour
             {
                 CalculateInfluenceModifier();
             }
-            if (_playerToAnchorVector.magnitude > _breakDistance)
+            if (_playerToAnchorVector.magnitude > _breakDistance || !HasDirectVisionOfAnchor())
             {
                 DeactivateTentacle(12);
             }
@@ -118,5 +121,19 @@ public class Tentacle : MonoBehaviour
             }
         }
         _contributionVector = new Vector2(xContribution, yContribution);
+    }
+    private bool HasDirectVisionOfAnchor()
+    {
+        RaycastHit2D[] hitInfo = new RaycastHit2D[1];
+        int hits = Physics2D.RaycastNonAlloc(transform.position, PlayerToAnchorVector.normalized, hitInfo, PlayerToAnchorVector.magnitude, _solidGroundLayer);
+        if (hits == 0)
+        {
+            return true;
+        }
+        if (Mathf.Abs(hitInfo[0].distance - PlayerToAnchorVector.magnitude) > 0.5f)
+        {
+            return false;
+        }
+        return true;
     }
 }
