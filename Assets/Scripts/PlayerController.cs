@@ -33,11 +33,13 @@ public class PlayerController : MonoBehaviour
         if(input.Get<float>() == 1)
         {
             _mousePressed = true;
+            _movement.CanFireTentacles(true);
         }
         else
         {
             _mousePressed = false;
-            _targetLocation = transform.position;
+            _movement.CanFireTentacles(false);
+            //_targetLocation = transform.position;
         }
     }
     public void OnRelease(InputValue input)
@@ -46,9 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Releasing tentacles");
             _movement.ReleaseAllTentacles();
+            _targetLocation = transform.position;
             _movement.CanFireTentacles(false);
         }
-        else
+        else if(_mousePressed)
         {
             _movement.CanFireTentacles(true);
         }
@@ -78,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            SetTargetLocation(transform.position);
+            //SetTargetLocation(transform.position);
             HasActiveInput = false;
         }
         _movement.SetTargetLocation(_targetLocation);
