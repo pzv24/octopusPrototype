@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _mousePressed = false;
-            _targetLocation = transform.position;
+            //_targetLocation = transform.position;
         }
     }
     public void OnRelease(InputValue input)
@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            SetTargetLocation(transform.position);
-            HasActiveInput = false;
+            //SetTargetLocation(transform.position);
+            //HasActiveInput = false;
         }
         _movement.SetTargetLocation(_targetLocation);
     }

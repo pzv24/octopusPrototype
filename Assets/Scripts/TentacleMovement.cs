@@ -65,7 +65,7 @@ public class TentacleMovement : MonoBehaviour
         // if has active input basically
         if (Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
         {
-            TryChangeTentacleAnchor();
+            //TryChangeTentacleAnchor();
         }
         if(Input.GetKeyDown(KeyCode.T) && Vector3.Distance(_targetLocation, transform.position) > 0.5f && _canFireTentacles)
         {

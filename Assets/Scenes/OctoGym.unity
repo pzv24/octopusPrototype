@@ -376,8 +376,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -391,6 +399,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 999875769}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -933,12 +945,12 @@ MonoBehaviour:
   - {fileID: 1444783828}
   - {fileID: 1355156975}
   _finalVector: {x: 0, y: 0}
-  _implulseMagnitude: 60
+  _implulseMagnitude: 1
   _linearDragConnected: 5
   _angularDragConnected: 5
   _linearDragFree: 0.2
   _angularDragFree: 0.2
-  _useLittleImpulse: 1
+  _useLittleImpulse: 0
   _lilImpulseMaxSpeed: 8
   _lilAccelerationBoost: 5
   _notGroundedForceMultiplier: 0.5
@@ -948,6 +960,7 @@ MonoBehaviour:
     m_Bits: 384
   _groundSphereCastRadius: 1
   _speed: 0
+  _canGetToTargetWithCurrentTentacles: 0
   IsOnSurface: 0
   CurrentSurfaceNormal: {x: 0, y: 1, z: 0}
 --- !u!1 &200623195
@@ -1147,8 +1160,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 16
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1162,6 +1183,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 667824225}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -1456,8 +1481,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1471,6 +1504,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 77745498418222586}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -1598,8 +1635,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -1613,6 +1658,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 921877502}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -2041,8 +2090,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -2056,6 +2113,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 1691491203}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -3220,8 +3281,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -3235,6 +3304,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 1820211939}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -3976,8 +4049,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -3991,6 +4072,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 562385923}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -4834,8 +4919,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -4849,6 +4942,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 34584162}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -5202,8 +5299,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5217,6 +5322,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 715447374}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -5312,8 +5421,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5327,6 +5444,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 448841}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -5422,8 +5543,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5437,6 +5566,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 1465921900}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
@@ -5559,8 +5692,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160632606}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _maxForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minForceMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _breakDistance
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _tentacleVisual
@@ -5574,6 +5715,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 3144988}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _selfBreakAngleThreshold
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 

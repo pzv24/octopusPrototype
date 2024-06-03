@@ -30,6 +30,7 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private float _groundSphereCastRadius = 1;
 
     [SerializeField, ReadOnly] private float _speed;
+    [SerializeField] private bool _canGetToTargetWithCurrentTentacles = false;
 
     public bool IsOnSurface = false;
     public Vector3 CurrentSurfaceNormal = Vector3.up;
@@ -63,25 +64,19 @@ public class TentaclePhysics : MonoBehaviour
     private void FindFinal()
     {
         _finalVector = Vector2.zero;
-        float xCont = 0;
-        float yCont = 0;
+        Vector2 totalContribution = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
             if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
             {
-                //if (_controller.HasActiveInput)
-                //{
-                //    _finalVector += _tentacles[i].PlayerToAnchorVector * _tentacles[i].ForceMultiplier;
-                //}
-                //else
-                //{
-                //    _finalVector += _tentacles[i].PlayerToAnchorVector.normalized * _tentacles[i].ForceMultiplier;
-                //}
-                _finalVector += _tentacles[i].ContributionVector;
+                totalContribution += _tentacles[i].ContributionVector;
             }
         }
-                    //_finalVector = new Vector2(xCont, yCont);
-        Debug.DrawRay(transform.position, _finalVector*_movement.TargetDirectionRaw.magnitude, Color.green);
+        float clampedXcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.x), 0, Mathf.Abs(_movement.TargetDirectionRaw.x)) * Mathf.Sign(totalContribution.x);
+        float clampedYcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.y), 0, Mathf.Abs(_movement.TargetDirectionRaw.y)) * Mathf.Sign(totalContribution.y);
+        _finalVector = new Vector2(clampedXcontribution, clampedYcontribution);
+        _canGetToTargetWithCurrentTentacles = Vector2.Distance(_finalVector, _movement.TargetDirectionRaw) < 0.5f;
+        Debug.DrawRay(transform.position, _finalVector, Color.magenta);
     }
     private float GetsFinalXContribution(float axisForceContribution)
     {
