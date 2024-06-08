@@ -27,6 +27,7 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private LayerMask _solidGroundLayer;
 
     public float CurrentForceMultiplier { get { return _currentForceMultiplier; } }
+    public Vector2 AnchorNormal { get; private set; }
 
     private TentacleMovement _movement;
     [SerializeField, ReadOnly] private Vector2 _contributionVector = Vector2.zero;
@@ -54,6 +55,7 @@ public class Tentacle : MonoBehaviour
     {
         if (_isConnected)
         {
+            Debug.DrawRay(_anchor.transform.position, AnchorNormal, Color.red);
             if (!_isRetracting)
             {
                 CalculateInfluenceModifier();
@@ -71,6 +73,7 @@ public class Tentacle : MonoBehaviour
         _anchor.position = anchorPosition;
         _tentacleVisualObject.SetActive(true);
         _tentacleAnimation.AnimateLaunch(anchorPosition, hitNormal);
+        AnchorNormal = hitNormal;
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
         //Debug.Log(anchorPosition);
     }

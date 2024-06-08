@@ -32,6 +32,8 @@ public class TentacleMovement : MonoBehaviour
     public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
     public Vector2 TargetDirectionRaw { get { return (_targetLocation - transform.position); } }
 
+    public List<Tentacle> ActiveTentacles { get { return _activeTentacles; } }
+
     private void Start()
     {
         _tentacleChangeElapsed = 0;
