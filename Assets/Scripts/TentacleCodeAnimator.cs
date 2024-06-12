@@ -30,7 +30,7 @@ public class TentacleCodeAnimator : MonoBehaviour
     public void AnimateLaunch(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
         StartCoroutine(LaunchTentacle(anchorWorldPosition, hitNormal));
-        Debug.Log($"Launching tentacle {gameObject.transform.parent.name} to {anchorWorldPosition}", gameObject);
+        //Debug.Log($"Launching tentacle {gameObject.transform.parent.name} to {anchorWorldPosition}", gameObject);
     }
     [Button]
     public void AnimateRetract()

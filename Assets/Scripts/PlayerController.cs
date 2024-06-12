@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _movement = GetComponent<TentacleMovement>();
+        _mousePressed = false;
+        HasActiveInput = false;
+        _movement.CanFireTentacles(false);
     }
     public void OnMove(InputValue input)
     {
@@ -61,10 +64,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 relativeLocation = input.Get<Vector2>() * _tentacleRange;
         Vector2 currentPostion = new Vector2(transform.position.x, transform.position.y);
-        SetTargetLocation(relativeLocation + currentPostion);
+        SetTargetLocationFromInput(relativeLocation + currentPostion);
     }
 
-    private void SetTargetLocation(Vector3 targetLocation)
+    private void SetTargetLocationFromInput(Vector3 targetLocation)
     {
         _targetLocation = targetLocation;
     }
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
-            SetTargetLocation(mousePosition);
+            SetTargetLocationFromInput(mousePosition);
             HasActiveInput = true;
         }
         else

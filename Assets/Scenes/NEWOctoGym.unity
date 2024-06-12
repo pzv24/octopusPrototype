@@ -455,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -498,6 +502,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -879,7 +887,7 @@ Transform:
   m_GameObject: {fileID: 160632605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1, y: 15.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1592,6 +1600,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1635,6 +1647,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4665,7 +4681,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4690,7 +4706,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4536877, y: 0.7748641, z: 0.024565697}
+  m_LocalPosition: {x: 5.5536876, y: 16.374865, z: 0.024565697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4826,6 +4842,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4869,6 +4889,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5004,6 +5028,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5047,6 +5075,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5570,6 +5602,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5613,6 +5649,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -19696,6 +19736,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -19739,6 +19783,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -19842,6 +19890,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -19885,6 +19937,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -20061,6 +20117,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.8156863
       objectReference: {fileID: 0}
+    - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -20104,6 +20164,10 @@ PrefabInstance:
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -21390,7 +21454,7 @@ Transform:
   m_GameObject: {fileID: 2124892367}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4536877, y: 0.7748641, z: 0.024565697}
+  m_LocalPosition: {x: 5.5536876, y: 16.374865, z: 0.024565697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21419,7 +21483,7 @@ MonoBehaviour:
   m_Follow: {fileID: 160632609}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 12
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
