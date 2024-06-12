@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1820822655758364036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3028763810471278683}
-  m_Layer: 0
-  m_Name: Visual
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3028763810471278683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820822655758364036}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9008389263509362537}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7361590461318528216
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9008389263509362537
 Transform:
   m_ObjectHideFlags: 0
@@ -62,8 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3028763810471278683}
+  m_Children: []
   m_Father: {fileID: 8270149566069725189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3104217534544404832
@@ -81,16 +49,17 @@ MonoBehaviour:
   _tentacleSegmentCount: 30
   _smoothSpeed: 0.001
   _connectedSmoothFactor: 20
-  _detachedSmoothFactor: 2500
+  _detachedSmoothFactor: 5000
   _tentacleLengthModifier: 1
   _setAutoConnect: 1
   _autoConnectDistance: 0.3
+  _isRetracted: 1
   _isWiggling: 0
   _randomizeStartDirection: 1
   _waveFrequency: 5
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
-  _connected: 0
+  _visualConnected: 0
   IsLaunching: 0
 --- !u!120 &4612933850736978387
 LineRenderer:
@@ -113,7 +82,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,8 +135,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.81568635, g: 0.6117647, b: 0, a: 1}
-      key1: {r: 0.6698113, g: 0.33769268, b: 0.0031594948, a: 1}
+      key0: {r: 0.7176471, g: 0.3372549, b: 0, a: 1}
+      key1: {r: 0.8156863, g: 0.6117647, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -219,12 +188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visual: {fileID: 3104217534544404832}
   _launchAnimationSpeed: 12
-  _retractAnimationDuration: 0.5
+  _retractAnimationDuration: 0.25
   _minDistanceForWiggle: 0.5
   _maxDistanceForWiggle: 12
-  _wiggleFrequencyMinAndMaxBasedOnDistance: {x: 0.5, y: 3}
-  _wiggleAmplitudeMinAndMaxBasedOnDistance: {x: 0, y: 8}
-  _bezierCurveHeight: 12
+  _wiggleFrequencyMinAndMaxBasedOnDistance: {x: 0.1, y: 2}
+  _wiggleAmplitudeMinAndMaxBasedOnDistance: {x: 0, y: 6}
+  _bezerCurveMaxHeight: 3
+  _bezerCurveMinHeight: 0.2
   _bezierAnchorModifier: 0.038
   _curveDirection: 1
 --- !u!1 &8537638449703668330
@@ -243,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8270149566069725189
 Transform:
   m_ObjectHideFlags: 0
@@ -272,8 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2673b1a0cc1aa4e96fc013b623c134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tentacleVisual: {fileID: 0}
-  _tentacleAnimation: {fileID: 0}
+  _tentacleVisual: {fileID: 3104217534544404832}
+  _tentacleAnimation: {fileID: 1277351936199550567}
+  _tentacleVisualObject: {fileID: 7361590461318528216}
   _playerRB: {fileID: 0}
   _isConnected: 0
   _breakDistance: 12
@@ -281,7 +252,11 @@ MonoBehaviour:
   _currentForceMultiplier: 1
   _angleThresholdForMaxInfluence: 5
   _angleThresholdForMinInfluence: 90
-  _minForceMult: 0.5
-  _maxForceMult: 2
-  _selfBreakAngleThreshold: 165
+  _minForceMult: 1
+  _maxForceMult: 1
+  _selfBreakAngleThreshold: 360
+  _solidGroundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _contributionVector: {x: 0, y: 0}
   _playerToAnchorVector: {x: 0, y: 0}

@@ -92,6 +92,11 @@ public class Tentacle : MonoBehaviour
         _isConnected = false;
         _tentacleAnimation.AnimateRetract();
     }
+    public void DeactivateJumpTentacle()
+    {
+        _isConnected = false;
+        _tentacleAnimation.AnimateJump();
+    }
     private void CalculateInfluenceModifier()
     {
         float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVector.normalized);

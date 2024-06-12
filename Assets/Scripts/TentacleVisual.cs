@@ -10,6 +10,7 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private int _tentacleSegmentCount = 50;
     [SerializeField] private float _smoothSpeed = 10f;
     [SerializeField] private float _connectedSmoothFactor = 20f;
+    [SerializeField] private float _launchingSmoothFactorModifier = 2;
     [SerializeField] private float _detachedSmoothFactor = 200f;
     [SerializeField] private float _tentacleLengthModifier = 1;
     [SerializeField] private bool _setAutoConnect = true;
@@ -36,12 +37,17 @@ public class TentacleVisual : MonoBehaviour
     private Tentacle _tentacleCore;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
-    public bool IsLaunching = false;
+    public bool IsLaunching { get; set; }
 
     private void Start()
     {
         _tentacleCore = GetComponentInParent<Tentacle>();
+        if(_tentacleCore == null)
+        {
+            InitVisual(_followEndTransform);
+        }
     }
+
     public void InitVisual(Transform anchor)
     {
         //_followEndTransform = anchor;
@@ -92,6 +98,7 @@ public class TentacleVisual : MonoBehaviour
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
+
             float smoothFactorModifier = _visualConnected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
 
             //calculate the position with smooth damp function
