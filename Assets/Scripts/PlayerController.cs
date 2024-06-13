@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     private bool _mousePressed = false;
     private bool _canFireTentacles = true;
 
+    //to be used by controller support implementation, currently useless
     [SerializeField] private float _tentacleRange = 5;
+
+    [SerializeField] private bool _debugLog = false;
 
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
 
@@ -49,7 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         if(input.Get<float>() == 1)
         {
-            Debug.Log("Releasing tentacles");
+            if(_debugLog) Debug.Log("Releasing tentacles");
             _movement.ReleaseAllTentacles();
             _targetLocation = transform.position;
             _movement.CanFireTentacles(false);
@@ -91,7 +94,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawSphere(_targetLocation, 1);
+        if (_debugLog)
+        {
+             Gizmos.DrawSphere(_targetLocation, 1);
+        }
     }
 
 }

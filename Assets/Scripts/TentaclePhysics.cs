@@ -8,15 +8,14 @@ using UnityEngine.Experimental.AI;
 
 public class TentaclePhysics : MonoBehaviour
 {
-
+    [Header("Tentacle Settings")]
     [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
-    [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
-    private Rigidbody2D _rigidBody;
     [SerializeField] private float _implulseMagnitude = 1;
+    [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
 
+    [Header("Varied RB Settings")]
     [SerializeField] private float _linearDragConnected = 5;
     [SerializeField] private float _angularDragConnected = 5;
-
     [SerializeField] private float _linearDragFree = 0.2f;
     [SerializeField] private float _angularDragFree = 0.2f;
 
@@ -41,7 +40,8 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private bool _detachBoostEnabled = true;
     [SerializeField] private float _boostAccelerationMagnitude = 50f;
 
-    [SerializeField, ReadOnly] private float _speed;
+    [Header("Misc.")]
+    [SerializeField] private bool _debugEnabled = false;
     [SerializeField, ReadOnly] private bool _canGetToTargetWithCurrentTentacles = false;
 
     public bool CanGetToTargetWithCurrentTentacles { get { return _canGetToTargetWithCurrentTentacles; } }
@@ -50,16 +50,7 @@ public class TentaclePhysics : MonoBehaviour
     public Vector3 CurrentSurfaceNormal = Vector3.up;
     private PlayerController _controller;
     private TentacleMovement _movement;
-
-    //public void FindIndividualVectors()
-    //{
-    //    _tentacleVectors.Clear();
-    //    for (int i = 0; i < _tentacles.Count; i++)
-    //    {
-    //        Vector2 anchorLocation = new Vector2(_tentacles[i].transform.position.x, _tentacles[i].transform.position.y);
-    //        _tentacleVectors.Add(anchorLocation - new Vector2(transform.position.x, transform.position.y));
-    //    }
-    //}
+    private Rigidbody2D _rigidBody;
 
     private void Start()
     {
@@ -67,21 +58,16 @@ public class TentaclePhysics : MonoBehaviour
         _controller = GetComponent<PlayerController>();
         _movement = GetComponent<TentacleMovement>();
     }
-    public void InitPhysics(List<Tentacle> tentacles)
-    {
-        for (int i = 0; i < tentacles.Count; i++)
-        {
-            _tentacles.Add(tentacles[i]);
-        }
-    }
-    private void FindFinal()
+
+    //update methods
+    private void FindFinalVector()
     {
         _finalVector = Vector2.zero;
         _currentConnectedTentacles = 0;
         Vector2 totalContribution = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
-            if(_tentacles[i].IsConnected && _tentacles[i].gameObject.activeInHierarchy)
+            if(_tentacles[i].IsAnchored && _tentacles[i].gameObject.activeInHierarchy)
             {
                 totalContribution += _tentacles[i].ContributionVector;
                 _currentConnectedTentacles++;
@@ -91,7 +77,7 @@ public class TentaclePhysics : MonoBehaviour
         float clampedYcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.y), 0, Mathf.Abs(_movement.TargetDirectionRaw.y)) * Mathf.Sign(totalContribution.y);
         _finalVector = new Vector2(clampedXcontribution, clampedYcontribution);
         _canGetToTargetWithCurrentTentacles = Vector2.Distance(_finalVector, _movement.TargetDirectionRaw) < 0.5f;
-        Debug.DrawRay(transform.position, _finalVector, Color.magenta);
+        if(_debugEnabled) Debug.DrawRay(transform.position, _finalVector, Color.magenta);
     }
 
     private void ImpulseByTentacles()
@@ -99,14 +85,6 @@ public class TentaclePhysics : MonoBehaviour
         _currentGravityScale = _customGravityAcceleration - (_gravityDecreasePerConnectedTentacle * _currentConnectedTentacles * _customGravityAcceleration);
         Vector2 finalFinalForce = (_finalVector * _implulseMagnitude) + (Vector2.down * _currentGravityScale);
         _rigidBody.AddForce(finalFinalForce);
-    }
-    private void FixedUpdate()
-    {
-        IsOnSurface = CheckSurface();
-        FindFinal();
-        ImpulseByTentacles();
-        AdjustDrag();
-        _speed = _rigidBody.velocity.magnitude;
     }
     private bool CheckSurface()
     {
@@ -120,6 +98,28 @@ public class TentaclePhysics : MonoBehaviour
         }
         return false;
     }
+    private void AdjustDrag()
+    {
+        if (_finalVector == Vector2.zero)
+        {
+            _rigidBody.angularDrag = _angularDragFree;
+            _rigidBody.drag = _linearDragFree;
+        }
+        else
+        {
+            _rigidBody.angularDrag = _angularDragConnected;
+            _rigidBody.drag = _linearDragConnected;
+        }
+    }
+    private void FixedUpdate()
+    {
+        IsOnSurface = CheckSurface();
+        FindFinalVector();
+        ImpulseByTentacles();
+        AdjustDrag();
+    }
+
+    // input methods 
     public void TryGiveFreeImpulse(Vector3 targetDirectionNormalized, int activeTentacleCount)
     {
         if (_controller.HasActiveInput && _useLittleImpulse)
@@ -140,20 +140,6 @@ public class TentaclePhysics : MonoBehaviour
     {
         _rigidBody.AddForce(_movement.TargetDirectionNormalized * _boostAccelerationMagnitude);
     }
-
-    private void AdjustDrag()
-    {
-        if (_finalVector == Vector2.zero)
-        {
-            _rigidBody.angularDrag = _angularDragFree;
-            _rigidBody.drag = _linearDragFree;
-        }
-        else
-        {
-            _rigidBody.angularDrag = _angularDragConnected;
-            _rigidBody.drag = _linearDragConnected;
-        }
-    }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)
     {
         Vector2 targetVelocity = _lilImpulseMaxSpeed * targetDirectionNormalized.normalized;
@@ -162,17 +148,21 @@ public class TentaclePhysics : MonoBehaviour
         return acceleration;
     }
 
+    // debug 
     private void OnDrawGizmos()
     {
-        foreach (Tentacle tentacle in _tentacles)
+        if(_debugEnabled)
         {
-            if(tentacle.IsConnected)
+            foreach (Tentacle tentacle in _tentacles)
             {
-                Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+                if(tentacle.IsAnchored)
+                {
+                    Gizmos.DrawLine(transform.position, tentacle.PlayerToAnchorVector + Get2DPosition());
+                }
             }
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());
         }
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, _finalVector + Get2DPosition());
     }
 
     private Vector2 Get2DPosition()

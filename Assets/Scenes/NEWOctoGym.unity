@@ -369,7 +369,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -424,12 +424,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 951433443}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -949,8 +957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94128c377306b2842be2b73ff105f2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tentaclePrefab: {fileID: 0}
-  _totalTentacleCount: 0
   _tentacleBank:
   - {fileID: 1965388718}
   - {fileID: 1260531492}
@@ -961,6 +967,8 @@ MonoBehaviour:
   - {fileID: 1444783828}
   - {fileID: 1355156975}
   _activeTentacles: []
+  _tentaclePrefab: {fileID: 0}
+  _totalTentacleCount: 0
   _tentacleFireCooldown: 0.18
   _tentacleMaxDistance: 12
   _tentacleLaunchSpeed: 12
@@ -971,9 +979,10 @@ MonoBehaviour:
   _raycastConeCount: 12
   _raycastDepth: 3
   _angleWidth: 40
+  _debugEnabled: 0
+  _canFireTentacles: 1
   _targetLocation: {x: 0, y: 0, z: 0}
   _tentacleChangeElapsed: 0
-  _canFireTentacles: 1
 --- !u!114 &160632612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tentacleRange: 5
+  _debugLog: 0
   _targetLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &160632613
 MonoBehaviour:
@@ -1009,8 +1019,8 @@ MonoBehaviour:
   - {fileID: 1624182235}
   - {fileID: 1444783828}
   - {fileID: 1355156975}
-  _finalVector: {x: 0, y: 0}
   _implulseMagnitude: 160
+  _finalVector: {x: 0, y: 0}
   _linearDragConnected: 6
   _angularDragConnected: 6
   _linearDragFree: 0.1
@@ -1030,7 +1040,7 @@ MonoBehaviour:
   _currentConnectedTentacles: 0
   _detachBoostEnabled: 1
   _boostAccelerationMagnitude: 3500
-  _speed: 0
+  _debugEnabled: 0
   _canGetToTargetWithCurrentTentacles: 0
   IsOnSurface: 0
   CurrentSurfaceNormal: {x: 0, y: 1, z: 0}
@@ -1514,7 +1524,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -1569,12 +1579,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4756,7 +4774,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -4811,12 +4829,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1296600912}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4942,7 +4968,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -4997,12 +5023,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1310751713}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5516,7 +5550,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -5571,12 +5605,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 8002524}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6823,7 +6865,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -6878,12 +6920,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17974,7 +18024,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -18029,12 +18079,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19100,7 +19158,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -19155,12 +19213,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19504,7 +19570,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -19559,12 +19625,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19650,7 +19724,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -19705,12 +19779,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 823969482}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19804,7 +19886,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -19859,12 +19941,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1990410192}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -20031,7 +20121,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -20086,12 +20176,20 @@ PrefabInstance:
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _baseSmoothSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1460118909}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactorModifier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -20968,18 +21066,14 @@ MonoBehaviour:
   _tentacleAnimation: {fileID: 0}
   _tentacleVisualObject: {fileID: 0}
   _playerRB: {fileID: 160632606}
-  _isConnected: 0
-  _breakDistance: 12
   _anchor: {fileID: 0}
-  _currentForceMultiplier: 1
-  _angleThresholdForMaxInfluence: 5
-  _angleThresholdForMinInfluence: 90
-  _minForceMult: 0.5
-  _maxForceMult: 2
-  _selfBreakAngleThreshold: 165
+  _tentacleAnchored: 1
+  _breakDistance: 12
   _solidGroundLayer:
     serializedVersion: 2
     m_Bits: 0
+  _breakOnLooseDirectSight: 1
+  _selfBreakAngleThreshold: 165
   _contributionVector: {x: 0, y: 0}
   _playerToAnchorVector: {x: 0, y: 0}
 --- !u!4 &2036747452
@@ -21011,15 +21105,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visual: {fileID: 0}
   _launchAnimationSpeed: 12
+  _bezerCurveMaxHeight: 3
+  _bezerCurveMinHeight: 0.2
+  _bezierAnchorModifier: 0.5
+  _curveDirection: 1
   _retractAnimationDuration: 0.5
   _minDistanceForWiggle: 0.5
   _maxDistanceForWiggle: 12
   _wiggleFrequencyMinAndMaxBasedOnDistance: {x: 0, y: 0}
   _wiggleAmplitudeMinAndMaxBasedOnDistance: {x: 0, y: 0}
-  _bezerCurveMaxHeight: 3
-  _bezerCurveMinHeight: 0.2
-  _bezierAnchorModifier: 0.5
-  _curveDirection: 1
 --- !u!114 &2036747454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21033,20 +21127,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tentacleSegmentCount: 50
-  _smoothSpeed: 10
-  _connectedSmoothFactor: 20
-  _detachedSmoothFactor: 200
+  _baseSmoothSpeed: 10
   _tentacleLengthModifier: 1
-  _setAutoConnect: 1
-  _autoConnectDistance: 0.3
-  _isRetracted: 1
   _isWiggling: 0
   _randomizeStartDirection: 1
   _waveFrequency: 1
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
+  _isRetracted: 1
   _visualConnected: 0
-  IsLaunching: 0
+  _setAutoConnect: 1
+  _autoConnectDistance: 0.3
+  _visualState: 1
+  _defaultState: 1
+  _connectedSmoothFactor: 20
+  _launchingSmoothFactor: 200
+  _looseSmoothFactor: 2500
+  _currentSmoothFactor: 0
 --- !u!1 &2042899330
 GameObject:
   m_ObjectHideFlags: 0

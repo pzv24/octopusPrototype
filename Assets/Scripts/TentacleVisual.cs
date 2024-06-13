@@ -1,21 +1,16 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using TreeEditor;
 using UnityEngine;
 
 public class TentacleVisual : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header(" Movement Settings")]
     [SerializeField] private int _tentacleSegmentCount = 50;
-    [SerializeField] private float _smoothSpeed = 10f;
-    [SerializeField] private float _connectedSmoothFactor = 20f;
-    [SerializeField] private float _launchingSmoothFactorModifier = 2;
-    [SerializeField] private float _detachedSmoothFactor = 200f;
+    [SerializeField] private float _baseSmoothSpeed = 10f;
     [SerializeField] private float _tentacleLengthModifier = 1;
-    [SerializeField] private bool _setAutoConnect = true;
-    [SerializeField] private float _autoConnectDistance = 0.3f;
-    [SerializeField] private bool _isRetracted = true;
 
     [Header("Wiggle Settings")]
     [SerializeField] private bool _isWiggling = false;
@@ -28,13 +23,25 @@ public class TentacleVisual : MonoBehaviour
     [Header("Plug in Fields")]
     [SerializeField] private Transform _followEndTransform;
 
-    [Header("Debug")]
+    [Header("Connection Settings")]
+    [SerializeField] private bool _isRetracted = true;
     [SerializeField] private bool _visualConnected = false;
+    [SerializeField] private bool _setAutoConnect = true;
+    [SerializeField] private float _autoConnectDistance = 0.3f;
+
+    [Header("States Info")]
+    [SerializeField] private TentacleVisualState _visualState = TentacleVisualState.Idle;
+    [SerializeField] private TentacleVisualState _defaultState = TentacleVisualState.Idle;
+    [SerializeField] private float _connectedSmoothFactor = 20f;
+    [SerializeField] private float _launchingSmoothFactor = 5000f;
+    [SerializeField] private float _looseSmoothFactor = 2500f;
+    [SerializeField, ReadOnly] private float _currentSmoothFactor = 0;
+
 
     private LineRenderer _lineRenderer;
+    private Tentacle _tentacleCore;
     private Vector3[] _segmentPositions;
     private Vector3[] _segmentVelocities;
-    private Tentacle _tentacleCore;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching { get; set; }
@@ -46,11 +53,11 @@ public class TentacleVisual : MonoBehaviour
         {
             InitVisual(_followEndTransform);
         }
+        ChangeVisualState(TentacleVisualState.Idle);
     }
 
     public void InitVisual(Transform anchor)
     {
-        //_followEndTransform = anchor;
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = _tentacleSegmentCount;
         _segmentPositions = new Vector3[_tentacleSegmentCount];
@@ -62,7 +69,7 @@ public class TentacleVisual : MonoBehaviour
 
     private void GetWiggledTargetPosition()
     {
-        if (_isRetracted)
+        if (_visualState.Equals(TentacleVisualState.Retracted) || _visualState.Equals(TentacleVisualState.Idle))
         {
             _followEndTransform.position = transform.position;
         }
@@ -84,12 +91,16 @@ public class TentacleVisual : MonoBehaviour
     private void Update()
     {
         GetWiggledTargetPosition();
+
         // set the final target direction for the entire tentacle based on current final position target
         Vector3 finalTargetDirection = (_wiggledEndTransfrom.position - transform.position).normalized;
+
         // calculate the distance per segment based on target distance
         float distancePerSegment = Vector3.Distance(_wiggledEndTransfrom.position, transform.position) * _tentacleLengthModifier / (_tentacleSegmentCount - 1);
+
         // set the root 
         _segmentPositions[0] = transform.position;
+
         for (int i = 1; i < _segmentPositions.Length; i++)
         {
             // for each point, set the target position based on the previous point, plus the direction * disntace 
@@ -99,32 +110,25 @@ public class TentacleVisual : MonoBehaviour
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
 
-            float smoothFactorModifier = _visualConnected ? _smoothSpeed / (_connectedSmoothFactor * i) : (_smoothSpeed + i) / _detachedSmoothFactor;
+            float smoothFactorModifier = _visualState == TentacleVisualState.Connected ? _baseSmoothSpeed / (_currentSmoothFactor * i) : (_baseSmoothSpeed + i) / _currentSmoothFactor;
 
             //calculate the position with smooth damp function
             _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothFactorModifier);
         }
+
         // apply the position to the line renderer
         _lineRenderer.SetPositions(_segmentPositions);
-        if(_setAutoConnect && IsLaunching && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _wiggledEndTransfrom.position) < _autoConnectDistance)
+        if(_setAutoConnect 
+            && _visualState.Equals(TentacleVisualState.Launching) 
+            && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _wiggledEndTransfrom.position) < _autoConnectDistance)
         {
-            SetIsConnecteed(true);
-            IsLaunching = false;
+            ChangeVisualState(TentacleVisualState.Connected);
         }
     }
 
     public void SetFollowEndPosition(Vector3 worldPosition)
     {
         _followEndTransform.position = worldPosition;
-    }
-    public void SetIsConnecteed(bool isConnecteed)
-    {
-        _visualConnected = isConnecteed;
-    }
-    public void SetIsRetracted(bool isRetracted)
-    {
-        _isRetracted = isRetracted;
-        _visualConnected = isRetracted;
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)
@@ -147,6 +151,25 @@ public class TentacleVisual : MonoBehaviour
         _waveFrequency = wiggleFrequency;
         _waveMagnitude = wiggleMagnitude;
     }
+    public void ChangeVisualState(TentacleVisualState state)
+    {
+        _visualState = state;
+        switch (_visualState)
+        {
+            case TentacleVisualState.Connected:
+                _currentSmoothFactor = _connectedSmoothFactor;
+                break;
+            case TentacleVisualState.Retracted:
+                _currentSmoothFactor = _connectedSmoothFactor;
+                break;
+            case TentacleVisualState.Launching:
+                _currentSmoothFactor = _launchingSmoothFactor;
+                break;
+            default:
+                _currentSmoothFactor = _looseSmoothFactor;
+                break;
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -156,4 +179,9 @@ public class TentacleVisual : MonoBehaviour
             Gizmos.DrawWireSphere(_wiggledEndTransfrom.position, 0.1f);
         }
     }
+}
+
+public enum TentacleVisualState
+{
+    Connected, Idle, Retracted, Launching, Retracting
 }
