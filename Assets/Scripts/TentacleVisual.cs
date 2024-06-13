@@ -110,7 +110,7 @@ public class TentacleVisual : MonoBehaviour
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
 
-            float smoothFactorModifier = _visualState == TentacleVisualState.Connected ? _baseSmoothSpeed / (_currentSmoothFactor * i) : (_baseSmoothSpeed + i) / _currentSmoothFactor;
+            float smoothFactorModifier = _currentSmoothFactor == _connectedSmoothFactor ? _baseSmoothSpeed / (_currentSmoothFactor * i) : (_baseSmoothSpeed + i) / _currentSmoothFactor;
 
             //calculate the position with smooth damp function
             _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothFactorModifier);
@@ -164,6 +164,9 @@ public class TentacleVisual : MonoBehaviour
                 break;
             case TentacleVisualState.Launching:
                 _currentSmoothFactor = _launchingSmoothFactor;
+                break;
+            case TentacleVisualState.Idle:
+                _currentSmoothFactor = _connectedSmoothFactor;
                 break;
             default:
                 _currentSmoothFactor = _looseSmoothFactor;

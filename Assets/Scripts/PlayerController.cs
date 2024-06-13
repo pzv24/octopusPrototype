@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveInput;
     private bool _mousePressed = false;
     private bool _canFireTentacles = true;
+    private Vector3 _lookDirection = Vector3.zero;
 
     //to be used by controller support implementation, currently useless
     [SerializeField] private float _tentacleRange = 5;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
 
     public bool HasActiveInput { get; private set; }
+    public Vector3 LookDirection { get { return _lookDirection; } }
 
     private void Start()
     {
@@ -78,10 +80,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _lookDirection = mousePosition - transform.position;
+        mousePosition.z = 0;
         if(_mousePressed)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
             SetTargetLocationFromInput(mousePosition);
             HasActiveInput = true;
         }

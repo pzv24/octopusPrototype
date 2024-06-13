@@ -39,6 +39,7 @@ public class TentaclePhysics : MonoBehaviour
     [Header("Detach All Boost")]
     [SerializeField] private bool _detachBoostEnabled = true;
     [SerializeField] private float _boostAccelerationMagnitude = 50f;
+    [SerializeField, Tooltip("If false, will boost in target direciton instead")] private bool _boostInLookDirection = true;
 
     [Header("Misc.")]
     [SerializeField] private bool _debugEnabled = false;
@@ -138,7 +139,8 @@ public class TentaclePhysics : MonoBehaviour
     }
     public void GiveDetachAllBost()
     {
-        _rigidBody.AddForce(_movement.TargetDirectionNormalized * _boostAccelerationMagnitude);
+        Vector3 forceVector = _boostInLookDirection ? _controller.LookDirection.normalized : _movement.TargetDirectionNormalized;
+        _rigidBody.AddForce(forceVector * _boostAccelerationMagnitude);
     }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)
     {

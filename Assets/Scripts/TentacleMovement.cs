@@ -20,6 +20,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private float _tentacleLaunchSpeed = 3;
     [SerializeField] private int _maxActiveTentacles = 3;
     [SerializeField] private LayerMask _tentacleCollisionLayers;
+    [SerializeField] private float _jumpCooldown = 0.5f;
 
     [Header("Tentacle Raycast Settings")]
     [SerializeField] private int _raycastConeCount = 10;
@@ -39,6 +40,7 @@ public class TentacleMovement : MonoBehaviour
     public List<Tentacle> ActiveTentacles { get { return _activeTentacles; } }
 
     private TentaclePhysics _tentaclePhysics;
+    private float _lastJumpTime = 0;
     private void Start()
     {
         _tentacleChangeElapsed = 0;
@@ -83,13 +85,17 @@ public class TentacleMovement : MonoBehaviour
 
     public void ReleaseAllTentacles()
     {
-        for (int i = 0; i < _activeTentacles.Count; i++)
+        if (_lastJumpTime + _jumpCooldown <= Time.time)
         {
-            _activeTentacles[i].DeactivateTentacle();
-            _tentacleBank.Add(_activeTentacles[i]);
+            for (int i = 0; i < _activeTentacles.Count; i++)
+            {
+                _activeTentacles[i].DeactivateTentacle();
+                _tentacleBank.Add(_activeTentacles[i]);
+            }
+            _tentaclePhysics.GiveDetachAllBost();
+            _activeTentacles.Clear();
+            _lastJumpTime = Time.time;
         }
-        _tentaclePhysics.GiveDetachAllBost();
-        _activeTentacles.Clear();
     }
     public void CanFireTentacles(bool canFireTentacles)
     {
