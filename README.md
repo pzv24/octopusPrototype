@@ -8,5 +8,6 @@ ________________________________________________________________________________
 ### Controls ###
 
 Action                  | Mouse + Keyboard 
+---                     |---
 Movement                | Mouse Left Click
 Jump/Detach Tentacles   | Spacebar
