@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using TreeEditor;
-using System.Runtime.CompilerServices;
-using UnityEngine.Analytics;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -45,6 +42,7 @@ public class TentacleMovement : MonoBehaviour
     {
         _tentacleChangeElapsed = 0;
         _tentaclePhysics = GetComponent<TentaclePhysics>();
+        ReleaseAllTentacles();
     }
     private void TryChangeTentacleAnchor()
     {

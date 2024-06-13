@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using TreeEditor;
-using Unity.VisualScripting;
 
 public class Tentacle : MonoBehaviour
 {
@@ -38,7 +36,6 @@ public class Tentacle : MonoBehaviour
     }
 
     private TentacleMovement _movement;
-
     private void Start()
     {
         _movement = GetComponentInParent<TentacleMovement>();

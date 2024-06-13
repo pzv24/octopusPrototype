@@ -1,8 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using TreeEditor;
 using UnityEngine;
 
 public class TentacleVisual : MonoBehaviour
@@ -65,6 +63,7 @@ public class TentacleVisual : MonoBehaviour
         GameObject wigglePos = new GameObject("WigglePoint");
         wigglePos.transform.parent = _followEndTransform;
         _wiggledEndTransfrom = wigglePos.transform;
+        ForceResetPosition();
     }
 
     private void GetWiggledTargetPosition()
@@ -90,6 +89,11 @@ public class TentacleVisual : MonoBehaviour
 
     private void Update()
     {
+        if(Time.time < 0.5f)
+        {
+            ForceResetPosition();
+            return;
+        }
         GetWiggledTargetPosition();
 
         // set the final target direction for the entire tentacle based on current final position target
@@ -129,6 +133,13 @@ public class TentacleVisual : MonoBehaviour
     public void SetFollowEndPosition(Vector3 worldPosition)
     {
         _followEndTransform.position = worldPosition;
+    }
+    public void ForceResetPosition()
+    {
+        for (int i = 1; i < _segmentPositions.Length; i++)
+        {
+            _segmentPositions[i] = Vector3.zero;
+        }
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)

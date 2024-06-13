@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System;
-using Unity.VisualScripting;
 
 public class TentacleCodeAnimator : MonoBehaviour
 {
