@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private Vector2 _moveInput;
     private bool _mousePressed = false;
+    private bool _releasePressed = false;
     private bool _canFireTentacles = true;
     private Vector3 _lookDirection = Vector3.zero;
 
@@ -39,12 +40,10 @@ public class PlayerController : MonoBehaviour
         if(input.Get<float>() == 1)
         {
             _mousePressed = true;
-            _movement.SetHasActiveInput(true);
         }
         else
         {
             _mousePressed = false;
-            _movement.SetHasActiveInput(false);
             _movement.ReleaseProbingTentacle();
             //_targetLocation = transform.position;
         }
@@ -53,14 +52,14 @@ public class PlayerController : MonoBehaviour
     {
         if(input.Get<float>() == 1)
         {
+            _releasePressed = true;
             if(_debugLog) Debug.Log("Releasing tentacles");
             _movement.ReleaseAllTentacles();
             _targetLocation = transform.position;
-            _movement.SetHasActiveInput(false);
         }
-        else if(_mousePressed)
+        else
         {
-            _movement.SetHasActiveInput(true);
+            _releasePressed = false;
         }
     }
 
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _lookDirection = mousePosition - transform.position;
         mousePosition.z = 0;
-        if(_mousePressed)
+        if(_mousePressed && !_releasePressed)
         {
             SetTargetLocationFromInput(mousePosition);
             HasActiveInput = true;
@@ -92,6 +91,7 @@ public class PlayerController : MonoBehaviour
             //SetTargetLocation(transform.position);
             HasActiveInput = false;
         }
+        _movement.SetHasActiveInput(HasActiveInput);
         _movement.SetTargetLocation(_targetLocation);
     }
     private void OnDrawGizmosSelected()

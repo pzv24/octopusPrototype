@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using static TMPro.TMP_Compatibility;
 
 public class Tentacle : MonoBehaviour
 {

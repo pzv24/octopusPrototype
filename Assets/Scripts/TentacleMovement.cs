@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Runtime.InteropServices.WindowsRuntime;
-using TreeEditor;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -96,6 +95,10 @@ public class TentacleMovement : MonoBehaviour
                 Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
                 _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
             }
+        }
+        else if(_tentaclePhysics.CanGetToTargetWithCurrentTentacles && _probingTentacle != null)
+        {
+            ReleaseProbingTentacle();
         }
     }
 
