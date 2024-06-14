@@ -47,20 +47,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tentacleSegmentCount: 30
-  _smoothSpeed: 0.001
-  _connectedSmoothFactor: 20
-  _detachedSmoothFactor: 5000
+  _baseSmoothSpeed: 10
   _tentacleLengthModifier: 1
-  _setAutoConnect: 1
-  _autoConnectDistance: 0.3
-  _isRetracted: 1
   _isWiggling: 0
   _randomizeStartDirection: 1
   _waveFrequency: 5
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
+  _isRetracted: 1
   _visualConnected: 0
-  IsLaunching: 0
+  _setAutoConnect: 1
+  _autoConnectDistance: 0.3
+  _visualState: 1
+  _defaultState: 1
+  _connectedSmoothFactor: 20
+  _launchingSmoothFactor: 5000
+  _looseSmoothFactor: 2500
+  _currentSmoothFactor: 20
 --- !u!120 &4612933850736978387
 LineRenderer:
   serializedVersion: 2
@@ -188,15 +191,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visual: {fileID: 3104217534544404832}
   _launchAnimationSpeed: 12
+  _bezerCurveMaxHeight: 3
+  _bezerCurveMinHeight: 0.2
+  _bezierAnchorModifier: 0.038
+  _curveDirection: 1
   _retractAnimationDuration: 0.25
   _minDistanceForWiggle: 0.5
   _maxDistanceForWiggle: 12
   _wiggleFrequencyMinAndMaxBasedOnDistance: {x: 0.1, y: 2}
   _wiggleAmplitudeMinAndMaxBasedOnDistance: {x: 0, y: 6}
-  _bezerCurveMaxHeight: 3
-  _bezerCurveMinHeight: 0.2
-  _bezierAnchorModifier: 0.038
-  _curveDirection: 1
 --- !u!1 &8537638449703668330
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,17 +249,18 @@ MonoBehaviour:
   _tentacleAnimation: {fileID: 1277351936199550567}
   _tentacleVisualObject: {fileID: 7361590461318528216}
   _playerRB: {fileID: 0}
-  _isConnected: 0
-  _breakDistance: 12
   _anchor: {fileID: 0}
-  _currentForceMultiplier: 1
-  _angleThresholdForMaxInfluence: 5
-  _angleThresholdForMinInfluence: 90
-  _minForceMult: 1
-  _maxForceMult: 1
-  _selfBreakAngleThreshold: 360
+  _tentacleAnchored: 1
+  _breakDistance: 12
+  _tentacleProbing: 0
+  _bothTerrainLayers:
+    serializedVersion: 2
+    m_Bits: 384
+  _circleCastRadius: 0.3
   _solidGroundLayer:
     serializedVersion: 2
     m_Bits: 128
+  _breakOnLooseDirectSight: 1
+  _selfBreakAngleThreshold: 360
   _contributionVector: {x: 0, y: 0}
   _playerToAnchorVector: {x: 0, y: 0}

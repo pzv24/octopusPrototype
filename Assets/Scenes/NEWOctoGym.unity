@@ -372,6 +372,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -419,6 +423,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 999875769}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -976,6 +984,7 @@ MonoBehaviour:
   - {fileID: 1355156975}
   _activeTentacles: []
   _tentaclePrefab: {fileID: 0}
+  _probingTentacle: {fileID: 0}
   _totalTentacleCount: 0
   _tentacleFireCooldown: 0.18
   _tentacleMaxDistance: 12
@@ -985,11 +994,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   _jumpCooldown: 0.5
-  _raycastConeCount: 12
+  _raycastConeCount: 3
   _raycastDepth: 3
-  _angleWidth: 40
+  _angleWidth: 5
   _debugEnabled: 1
-  _canFireTentacles: 1
+  _hasActiveInput: 1
   _targetLocation: {x: 0, y: 0, z: 0}
   _tentacleChangeElapsed: 0
 --- !u!114 &160632612
@@ -1673,6 +1682,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -1720,6 +1733,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 667824225}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -5992,6 +6009,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -6039,6 +6060,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 77745498418222586}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -6194,6 +6219,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -6241,6 +6270,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 921877502}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -6784,6 +6817,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -6831,6 +6868,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 1691491203}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -8140,6 +8181,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
@@ -18732,6 +18777,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -19874,6 +19923,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -20396,6 +20449,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -20558,6 +20615,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -20605,6 +20666,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 448841}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -20728,6 +20793,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -20775,6 +20844,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 1465921900}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -20971,6 +21044,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectAnimationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -21018,6 +21095,10 @@ PrefabInstance:
       propertyPath: _tentacleVisualObject
       value: 
       objectReference: {fileID: 3144988}
+    - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _breakOnLooseDirectSight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _selfBreakAngleThreshold
       value: 360
@@ -22000,6 +22081,11 @@ MonoBehaviour:
   _anchor: {fileID: 0}
   _tentacleAnchored: 1
   _breakDistance: 12
+  _tentacleProbing: 0
+  _bothTerrainLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _circleCastRadius: 0.3
   _solidGroundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -22036,6 +22122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visual: {fileID: 0}
   _launchAnimationSpeed: 12
+  _connectAnimationSpeed: 12
   _bezerCurveMaxHeight: 3
   _bezerCurveMinHeight: 0.2
   _bezierAnchorModifier: 0.5
@@ -22074,7 +22161,7 @@ MonoBehaviour:
   _connectedSmoothFactor: 20
   _launchingSmoothFactor: 200
   _looseSmoothFactor: 2500
-  _currentSmoothFactor: 0
+  _currentSmoothFactor: 20
 --- !u!1 &2042899330
 GameObject:
   m_ObjectHideFlags: 0

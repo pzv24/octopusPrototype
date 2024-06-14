@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TreeEditor;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class TentacleMovement : MonoBehaviour
     {
         if (_tentacleChangeElapsed > _tentacleFireCooldown && _hasActiveInput)
         {
+            _tentacleChangeElapsed = 0;
             //raycast to see if we find a new anchor location
             RaycastHit2D hit = RaycastConeAndChoose();
             Vector2 newAnchorPosition = hit.point;
@@ -58,7 +60,6 @@ public class TentacleMovement : MonoBehaviour
             // if location valid, then launch a new tentacle in that direction
             if (newAnchorPosition != Vector2.zero)
             {
-                _tentacleChangeElapsed = 0;
                 MoveTentacleAnchor(newAnchorPosition, hit.normal);
                 return true;
             }
@@ -69,27 +70,32 @@ public class TentacleMovement : MonoBehaviour
     {
         _tentacleChangeElapsed += Time.deltaTime;
         // if does not have active input, return 
-        //if has probe: move probe's anchor to target location (clamped by max distance)
+        if (!_hasActiveInput) return;
+        ////if has probe: move probe's anchor to target location (clamped by max distance)
+        //if(_probingTentacle != null)
+        //{
+        //    float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
+        //    Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
+        //    _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
+        //}
         //else if !canGetWithCurrent: Fire tentacle 
         //  if hit, launch, else begin probing
 
-
-
-
-        if (_hasActiveInput && !_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
+        if (!_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
         {
             bool tentacleRaycastSucessful = TryChangeTentacleAnchor();
-            if(!tentacleRaycastSucessful && _probingTentacle == null)
+            if(!tentacleRaycastSucessful)
             {
-                Tentacle tentacle = GetNextTentacle();
-                tentacle.SetTentacleProbing(true);
-                _probingTentacle = tentacle;
+                if(_probingTentacle == null)
+                {
+                    Tentacle tentacle = GetNextTentacle();
+                    tentacle.SetTentacleProbing(true);
+                    _probingTentacle = tentacle;
+                }
+                float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
+                Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
+                _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
             }
-        }
-
-        if(_probingTentacle != null)
-        {
-            _probingTentacle.SetAnchorPosition(_targetLocation);
         }
     }
 
@@ -124,6 +130,8 @@ public class TentacleMovement : MonoBehaviour
         {
             _probingTentacle.DeactivateTentacle();
             _probingTentacle.SetTentacleProbing(false);
+            _tentacleBank.Add(_probingTentacle);
+            _activeTentacles.Remove(_probingTentacle);
             _probingTentacle = null;
         }
     }
@@ -201,8 +209,18 @@ public class TentacleMovement : MonoBehaviour
     }
     private void MoveTentacleAnchor(Vector2 newPosition, Vector2 hitNormal)
     {
-        Tentacle tentacleToMove = GetNextTentacle();
-        tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
+        Tentacle tentacleToMove;
+        if (_probingTentacle != null)
+        {
+            tentacleToMove = _probingTentacle;
+            tentacleToMove.ConnectProbe(newPosition);
+            _probingTentacle = null;
+        }
+        else
+        {
+            tentacleToMove = GetNextTentacle();
+            tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
+        }
     }
 
     private Tentacle GetNextTentacle()

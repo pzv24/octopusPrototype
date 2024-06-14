@@ -11,6 +11,7 @@ public class TentacleCodeAnimator : MonoBehaviour
 
     [Header("Launch Animation Settings")]
     [SerializeField] private float _launchAnimationSpeed = 12f;
+    [SerializeField] private float _connectAnimationSpeed = 12f;
     [SerializeField] private float _bezerCurveMaxHeight = 3;
     [SerializeField] private float _bezerCurveMinHeight = 0.2f;
     [SerializeField, Range(0,1)] private float _bezierAnchorModifier = 0.5f;
@@ -37,6 +38,11 @@ public class TentacleCodeAnimator : MonoBehaviour
     public void AnimateRetract()
     {
         StartCoroutine(RetractTentacle());
+    }
+    [Button]
+    public void AnimateConnectProbe(Vector3 start, Vector3 end)
+    {
+        StartCoroutine(ConnectProbe(start, end));
     }
     public void AnimateJump()
     {
@@ -82,6 +88,19 @@ public class TentacleCodeAnimator : MonoBehaviour
         }
         _visual.SetIsWiggling(false);
         _visual.ChangeVisualState(TentacleVisualState.Idle);
+    }
+    private IEnumerator ConnectProbe(Vector3 start, Vector3 endPosition)
+    {
+        float lerp = 0;
+        _visual.ChangeVisualState(TentacleVisualState.Retracting);
+        while (lerp < 1)
+        {
+            lerp += _launchAnimationSpeed * Time.deltaTime;
+            Vector3 finalPosition = Vector3.Lerp(start, endPosition, lerp);
+            _visual.SetFollowEndPosition(finalPosition);
+            yield return new WaitForEndOfFrame();
+        }
+        _visual.ChangeVisualState(TentacleVisualState.Connected);
     }
     private void SetDistanceBasedWiggle()
     {
