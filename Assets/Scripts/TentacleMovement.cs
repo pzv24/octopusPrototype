@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private List<Tentacle> _tentacleBank = new List<Tentacle>();
     [SerializeField] private List<Tentacle> _activeTentacles = new List<Tentacle>();
     [SerializeField] private Tentacle _tentaclePrefab;
+    [SerializeField, ReadOnly] private Tentacle _probingTentacle;
 
     [Header("Tentacle Settings")]
     [SerializeField] private int _totalTentacleCount;
@@ -26,7 +28,7 @@ public class TentacleMovement : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool _debugEnabled = false;
-    [SerializeField] private bool _canFireTentacles = true;
+    [SerializeField] private bool _hasActiveInput = true;
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
     [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
 
@@ -44,9 +46,9 @@ public class TentacleMovement : MonoBehaviour
         _tentaclePhysics = GetComponent<TentaclePhysics>();
         ReleaseAllTentacles();
     }
-    private void TryChangeTentacleAnchor()
+    private bool TryChangeTentacleAnchor()
     {
-        if (_tentacleChangeElapsed > _tentacleFireCooldown && _canFireTentacles)
+        if (_tentacleChangeElapsed > _tentacleFireCooldown && _hasActiveInput)
         {
             //raycast to see if we find a new anchor location
             RaycastHit2D hit = RaycastConeAndChoose();
@@ -58,22 +60,43 @@ public class TentacleMovement : MonoBehaviour
             {
                 _tentacleChangeElapsed = 0;
                 MoveTentacleAnchor(newAnchorPosition, hit.normal);
+                return true;
             }
         }
+        return false;
     }
     private void FixedUpdate()
     {
         _tentacleChangeElapsed += Time.deltaTime;
-        if (_canFireTentacles && !_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
+        // if does not have active input, return 
+        //if has probe: move probe's anchor to target location (clamped by max distance)
+        //else if !canGetWithCurrent: Fire tentacle 
+        //  if hit, launch, else begin probing
+
+
+
+
+        if (_hasActiveInput && !_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
         {
-            TryChangeTentacleAnchor();
+            bool tentacleRaycastSucessful = TryChangeTentacleAnchor();
+            if(!tentacleRaycastSucessful && _probingTentacle == null)
+            {
+                Tentacle tentacle = GetNextTentacle();
+                tentacle.SetTentacleProbing(true);
+                _probingTentacle = tentacle;
+            }
+        }
+
+        if(_probingTentacle != null)
+        {
+            _probingTentacle.SetAnchorPosition(_targetLocation);
         }
     }
 
     public void SetTargetLocation(Vector3 targetLocation)
     {
         _targetLocation = targetLocation;
-        if (targetLocation != Vector3.zero && _canFireTentacles)
+        if (targetLocation != Vector3.zero && _hasActiveInput)
         {
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
             _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
@@ -95,9 +118,18 @@ public class TentacleMovement : MonoBehaviour
             _lastJumpTime = Time.time;
         }
     }
-    public void CanFireTentacles(bool canFireTentacles)
+    public void ReleaseProbingTentacle()
     {
-        _canFireTentacles = canFireTentacles;
+        if(_probingTentacle != null)
+        {
+            _probingTentacle.DeactivateTentacle();
+            _probingTentacle.SetTentacleProbing(false);
+            _probingTentacle = null;
+        }
+    }
+    public void SetHasActiveInput(bool hasActiveInput)
+    {
+        _hasActiveInput = hasActiveInput;
     }
     private RaycastHit2D RaycastTentacle(Vector2 directionalVector)
     {
@@ -169,6 +201,12 @@ public class TentacleMovement : MonoBehaviour
     }
     private void MoveTentacleAnchor(Vector2 newPosition, Vector2 hitNormal)
     {
+        Tentacle tentacleToMove = GetNextTentacle();
+        tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
+    }
+
+    private Tentacle GetNextTentacle()
+    {
         if (_activeTentacles.Count >= _maxActiveTentacles)
         {
             // deactivate the oldest tentacle in the list
@@ -180,8 +218,7 @@ public class TentacleMovement : MonoBehaviour
         _tentacleBank.RemoveAt(0);
         _activeTentacles.Add(tentacleToMove);
         tentacleToMove.gameObject.SetActive(true);
-        tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
-
+        return tentacleToMove;
     }
     // to be called by individual tentacles when certain critera is met to self-deactivate
     public void TentacleSelfDeactivate(Tentacle tentacle)

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         _movement = GetComponent<TentacleMovement>();
         _mousePressed = false;
         HasActiveInput = false;
-        _movement.CanFireTentacles(false);
+        _movement.SetHasActiveInput(false);
     }
     public void OnMove(InputValue input)
     {
@@ -39,12 +39,13 @@ public class PlayerController : MonoBehaviour
         if(input.Get<float>() == 1)
         {
             _mousePressed = true;
-            _movement.CanFireTentacles(true);
+            _movement.SetHasActiveInput(true);
         }
         else
         {
             _mousePressed = false;
-            _movement.CanFireTentacles(false);
+            _movement.SetHasActiveInput(false);
+            _movement.ReleaseProbingTentacle();
             //_targetLocation = transform.position;
         }
     }
@@ -55,11 +56,11 @@ public class PlayerController : MonoBehaviour
             if(_debugLog) Debug.Log("Releasing tentacles");
             _movement.ReleaseAllTentacles();
             _targetLocation = transform.position;
-            _movement.CanFireTentacles(false);
+            _movement.SetHasActiveInput(false);
         }
         else if(_mousePressed)
         {
-            _movement.CanFireTentacles(true);
+            _movement.SetHasActiveInput(true);
         }
     }
 

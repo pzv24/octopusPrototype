@@ -16,6 +16,11 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private bool _tentacleAnchored = true;
     [SerializeField] private float _breakDistance = 10;
 
+    [Header("Tentacle Probing")]
+    [SerializeField] private bool _tentacleProbing = false;
+    [SerializeField] private LayerMask _bothTerrainLayers;
+    [SerializeField] private float _circleCastRadius = 0.3f;
+
     [Header("Break Settings")]
     [SerializeField] private LayerMask _solidGroundLayer;
     [SerializeField] private bool _breakOnLooseDirectSight = true;
@@ -41,7 +46,7 @@ public class Tentacle : MonoBehaviour
         _movement = GetComponentInParent<TentacleMovement>();
         _tentacleVisual.InitVisual(_anchor);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (_tentacleAnchored)
         {
@@ -51,9 +56,20 @@ public class Tentacle : MonoBehaviour
             {
                 DeactivateTentacle();
             }
+            CalculateContributionVector();
+        }
+        else if (_tentacleProbing)
+        {
+            Collider2D[] hits = new Collider2D[1];
+            int hitCount = Physics2D.OverlapCircleNonAlloc(_anchor.transform.position, _circleCastRadius, hits, _bothTerrainLayers);
+            if(hitCount > 0)
+            {
+                Debug.Log(hits[0].ClosestPoint(_anchor.transform.position));
+                Debug.Log("Probe Connected");
+                _movement.ReleaseProbingTentacle();
+            }
         }
         _playerToAnchorVector = PlayerToAnchorVector;
-        CalculateContributionVector();
     }
     public void LaunchTentacle(Vector3 anchorPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
@@ -90,6 +106,18 @@ public class Tentacle : MonoBehaviour
     {
         _tentacleAnchored = false;
         _tentacleAnimation.AnimateJump();
+    }
+    public void SetTentacleProbing(bool probing)
+    {
+        _tentacleProbing = probing;
+        if(probing)
+        {
+            _tentacleAnchored = false;
+        }
+    }
+    public void SetAnchorPosition(Vector3 position)
+    {
+        _anchor.position = position;
     }
     private void CalculateAngleToTargetPosition()
     {

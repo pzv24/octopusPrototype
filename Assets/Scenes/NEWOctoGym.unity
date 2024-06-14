@@ -988,7 +988,7 @@ MonoBehaviour:
   _raycastConeCount: 12
   _raycastDepth: 3
   _angleWidth: 40
-  _debugEnabled: 0
+  _debugEnabled: 1
   _canFireTentacles: 1
   _targetLocation: {x: 0, y: 0, z: 0}
   _tentacleChangeElapsed: 0

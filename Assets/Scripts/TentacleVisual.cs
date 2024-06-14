@@ -54,6 +54,11 @@ public class TentacleVisual : MonoBehaviour
         ChangeVisualState(TentacleVisualState.Idle);
     }
 
+    private void OnValidate()
+    {
+        ChangeVisualState(_visualState);
+    }
+
     public void InitVisual(Transform anchor)
     {
         _lineRenderer = GetComponent<LineRenderer>();
