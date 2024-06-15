@@ -67,6 +67,10 @@ public class TentacleMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(_tentacleBank.Count + _activeTentacles.Count > _totalTentacleCount)
+        {
+            Debug.LogError("Duplicated Tentacles!");
+        }
         _tentacleChangeElapsed += Time.deltaTime;
         // if does not have active input, return 
         if (!_hasActiveInput) return;
@@ -119,6 +123,10 @@ public class TentacleMovement : MonoBehaviour
         {
             for (int i = 0; i < _activeTentacles.Count; i++)
             {
+                if (_activeTentacles[i] == _probingTentacle)
+                {
+                    _probingTentacle = null;
+                }
                 _activeTentacles[i].DeactivateTentacle();
                 _tentacleBank.Add(_activeTentacles[i]);
             }
@@ -244,8 +252,9 @@ public class TentacleMovement : MonoBehaviour
     // to be called by individual tentacles when certain critera is met to self-deactivate
     public void TentacleSelfDeactivate(Tentacle tentacle)
     {
+        Debug.Log("Tentacle self deactivated");
+        tentacle.DeactivateTentacle();
         _tentacleBank.Add(tentacle);
         _activeTentacles.Remove(tentacle);
-        tentacle.DeactivateTentacle();
     }
 }

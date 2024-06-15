@@ -40,6 +40,7 @@ public class TentacleVisual : MonoBehaviour
     private Tentacle _tentacleCore;
     private Vector3[] _segmentPositions;
     private Vector3[] _segmentVelocities;
+    private float _connectedModifier = 1;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching { get; set; }
@@ -109,7 +110,6 @@ public class TentacleVisual : MonoBehaviour
 
         // set the root 
         _segmentPositions[0] = transform.position;
-
         for (int i = 1; i < _segmentPositions.Length; i++)
         {
             // for each point, set the target position based on the previous point, plus the direction * disntace 
@@ -119,10 +119,10 @@ public class TentacleVisual : MonoBehaviour
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (makign it rigid), specially towards the end point
 
-            float smoothFactorModifier = _currentSmoothFactor == _connectedSmoothFactor ? _baseSmoothSpeed / (_currentSmoothFactor * i) : (_baseSmoothSpeed + i) / _currentSmoothFactor;
+            float smoothSpeed = ((_baseSmoothSpeed + i) / _currentSmoothFactor) / _connectedModifier;
 
             //calculate the position with smooth damp function
-            _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothFactorModifier);
+            _segmentPositions[i] = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothSpeed);
         }
 
         // apply the position to the line renderer
@@ -173,19 +173,24 @@ public class TentacleVisual : MonoBehaviour
         switch (_visualState)
         {
             case TentacleVisualState.Connected:
-                _currentSmoothFactor = _connectedSmoothFactor;
+                _currentSmoothFactor = _launchingSmoothFactor;
+                _connectedModifier = _connectedSmoothFactor;
                 break;
             case TentacleVisualState.Retracted:
-                _currentSmoothFactor = _connectedSmoothFactor;
+                _currentSmoothFactor = _launchingSmoothFactor;
+                _connectedModifier = _connectedSmoothFactor;
                 break;
             case TentacleVisualState.Launching:
                 _currentSmoothFactor = _launchingSmoothFactor;
+                _connectedModifier = 1;
                 break;
             case TentacleVisualState.Idle:
-                _currentSmoothFactor = _connectedSmoothFactor;
+                _currentSmoothFactor = _launchingSmoothFactor;
+                _connectedModifier = _connectedSmoothFactor;
                 break;
             default:
                 _currentSmoothFactor = _looseSmoothFactor;
+                _connectedModifier = 1;
                 break;
         }
     }

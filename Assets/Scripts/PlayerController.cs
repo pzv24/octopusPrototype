@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public bool HasActiveInput { get; private set; }
     public Vector3 LookDirection { get { return _lookDirection; } }
+    public bool ReleasePressed {  get { return _releasePressed; } }
 
     private void Start()
     {

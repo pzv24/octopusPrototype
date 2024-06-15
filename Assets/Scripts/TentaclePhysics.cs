@@ -62,6 +62,7 @@ public class TentaclePhysics : MonoBehaviour
     {
         _finalVector = Vector2.zero;
         _currentConnectedTentacles = 0;
+        if (_controller.ReleasePressed) return;
         Vector2 totalContribution = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {

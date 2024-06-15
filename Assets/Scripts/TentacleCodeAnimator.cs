@@ -53,7 +53,7 @@ public class TentacleCodeAnimator : MonoBehaviour
     {
         float lerp = 0;
         _visual.ChangeVisualState(TentacleVisualState.Launching);
-        Vector3 start = transform.position;
+        Vector3 start = _visual.FollowTransform.position;
         Vector3 end = anchorWorldPosition;
         float bezerLerpValue = Mathf.InverseLerp(0, 8, Vector3.Distance(anchorWorldPosition, transform.position));
         float bezierHeight = Mathf.Lerp(_bezerCurveMinHeight, _bezerCurveMaxHeight, bezerLerpValue);

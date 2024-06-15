@@ -372,8 +372,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -437,15 +441,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 951433443}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -985,7 +1009,7 @@ MonoBehaviour:
   _activeTentacles: []
   _tentaclePrefab: {fileID: 0}
   _probingTentacle: {fileID: 0}
-  _totalTentacleCount: 0
+  _totalTentacleCount: 8
   _tentacleFireCooldown: 0.18
   _tentacleMaxDistance: 12
   _tentacleLaunchSpeed: 12
@@ -1682,8 +1706,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -1747,15 +1775,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -6009,8 +6057,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -6074,15 +6126,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1296600912}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -6219,8 +6291,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -6284,15 +6360,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1310751713}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -6817,8 +6913,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -6882,15 +6982,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 8002524}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -20615,8 +20735,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -20680,15 +20804,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 823969482}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -20793,8 +20937,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -20858,15 +21006,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1990410192}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -21044,8 +21212,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
@@ -21109,15 +21281,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _baseSmoothSpeed
-      value: 0.001
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _looseSmoothFactor
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1460118909}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _autoConnectDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _currentSmoothFactor
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _detachedSmoothFactor
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _connectedSmoothFactor
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchingSmoothFactor
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchingSmoothFactorModifier
@@ -22161,7 +22353,7 @@ MonoBehaviour:
   _connectedSmoothFactor: 20
   _launchingSmoothFactor: 200
   _looseSmoothFactor: 2500
-  _currentSmoothFactor: 20
+  _currentSmoothFactor: 200
 --- !u!1 &2042899330
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class Tentacle : MonoBehaviour
     public Vector2 AnchorNormal { get; private set; }
     public bool IsAnchored { get { return _tentacleAnchored; } }
     public Vector2 ContributionVector { get { return _contributionVector; } }
+    public bool IsProbing { get { return _tentacleProbing; } }
     public Vector2 PlayerToAnchorVector
     {
         get
@@ -76,15 +77,15 @@ public class Tentacle : MonoBehaviour
         }
         _playerToAnchorVector = PlayerToAnchorVector;
     }
-    public void LaunchTentacle(Vector3 anchorPosition, Vector2 hitNormal, float travelSpeed = 10f)
+    public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
-        _anchor.position = anchorPosition;
+        //_anchor.position = anchorEndPosition;
         _tentacleProbing = false;
         _tentacleVisualObject.SetActive(true);
-        _tentacleAnimation.AnimateLaunch(anchorPosition, hitNormal);
+        _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
         AnchorNormal = hitNormal;
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
-        Debug.Log(anchorPosition);
+        Debug.Log(anchorEndPosition);
     }
     private IEnumerator GameplayConnectedTimer(float connectSpeed)
     {
@@ -106,6 +107,7 @@ public class Tentacle : MonoBehaviour
     public void DeactivateTentacle()
     {
         _tentacleAnchored = false;
+        _tentacleProbing = false;
         _tentacleAnimation.AnimateRetract();
     }
     public void DeactivateJumpTentacle()
