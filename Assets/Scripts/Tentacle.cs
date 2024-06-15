@@ -120,7 +120,7 @@ public class Tentacle : MonoBehaviour
         _tentacleProbing = probing;
         if(probing)
         {
-            Debug.Log($"Tentacle {gameObject.name} is now probing...");
+            //Debug.Log($"Tentacle {gameObject.name} is now probing...");
             _tentacleAnchored = false;
             _tentacleVisual.ChangeVisualState(TentacleVisualState.Retracting);
         }

@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveInput;
     private bool _mousePressed = false;
     private bool _releasePressed = false;
-    private bool _canFireTentacles = true;
     private Vector3 _lookDirection = Vector3.zero;
 
     //to be used by controller support implementation, currently useless
@@ -89,7 +88,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //SetTargetLocation(transform.position);
             HasActiveInput = false;
         }
         _movement.SetHasActiveInput(HasActiveInput);

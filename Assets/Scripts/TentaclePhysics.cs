@@ -34,7 +34,6 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField, ReadOnly] private int _currentConnectedTentacles = 0;
 
     [Header("Detach All Boost")]
-    [SerializeField] private bool _detachBoostEnabled = true;
     [SerializeField] private float _boostAccelerationMagnitude = 50f;
     [SerializeField, Tooltip("If false, will boost in target direciton instead")] private bool _boostInLookDirection = true;
 
