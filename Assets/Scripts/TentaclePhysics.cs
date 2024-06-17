@@ -82,7 +82,6 @@ public class TentaclePhysics : MonoBehaviour
         float clampedXcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.x), 0, Mathf.Abs(_movement.TargetDirectionRaw.x)) * Mathf.Sign(totalContribution.x);
         float clampedYcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.y), 0, Mathf.Abs(_movement.TargetDirectionRaw.y)) * Mathf.Sign(totalContribution.y);
         _finalVector = new Vector2(clampedXcontribution, clampedYcontribution);
-        _canGetToTargetWithCurrentTentacles = Vector2.Distance(_finalVector, _movement.TargetDirectionRaw) < 0.5f;
         if(_debugEnabled) Debug.DrawRay(transform.position, _finalVector, Color.magenta);
     }
 
@@ -122,6 +121,7 @@ public class TentaclePhysics : MonoBehaviour
     private void FixedUpdate()
     {
         IsOnSurface = CheckSurface();
+        _canGetToTargetWithCurrentTentacles = Vector2.Distance(_finalVector, _movement.TargetDirectionRaw) < 0.5f;
         FindFinalVector();
         ImpulseByTentacles();
         AdjustDrag();

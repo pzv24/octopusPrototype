@@ -19,6 +19,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private float _tentacleLaunchSpeed = 3;
     [SerializeField] private int _maxActiveTentacles = 3;
     [SerializeField] private LayerMask _tentacleCollisionLayers;
+    [SerializeField] private LayerMask _solidOnlyFilter;
     [SerializeField] private float _jumpCooldown = 0.5f;
 
     [Header("Tentacle Raycast Settings")]
@@ -97,7 +98,14 @@ public class TentacleMovement : MonoBehaviour
                 }
                 float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
                 Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
-                _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
+                Vector3 probePosition = transform.position + clampedDirection;
+                RaycastHit2D[] hitInfo = new RaycastHit2D[1];
+                int hits = Physics2D.RaycastNonAlloc(transform.position, clampedDirection, hitInfo, clampedDirection.magnitude, _solidOnlyFilter);
+                if (hits != 0 )
+                {
+                    probePosition = hitInfo[0].point;
+                }
+                _probingTentacle.SetAnchorPosition(probePosition);
             }
         }
         else if(_tentaclePhysics.CanGetToTargetWithCurrentTentacles && _probingTentacle != null)
