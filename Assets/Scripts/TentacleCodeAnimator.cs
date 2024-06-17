@@ -15,7 +15,6 @@ public class TentacleCodeAnimator : MonoBehaviour
     [SerializeField] private float _bezerCurveMaxHeight = 3;
     [SerializeField] private float _bezerCurveMinHeight = 0.2f;
     [SerializeField, Range(0,1)] private float _bezierAnchorModifier = 0.5f;
-    [SerializeField] private float _curveDirection = 1;
     [Header("Retract Settings")]
     [SerializeField] private float _retractAnimationDuration = 0.5f;
 

@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 public class LookAtMouse : MonoBehaviour
 {
     [SerializeField] private float _rotationSpeed = 5;
-    [SerializeField] private bool _flipSprite = true;
     [SerializeField] private TentacleMovement _movement;
 
     private Vector3 _lookDirection;

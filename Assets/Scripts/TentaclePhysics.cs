@@ -9,6 +9,8 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField] private float _implulseMagnitude = 1;
     [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
+    [SerializeField, ReadOnly] private Vector2 _totalContributionVector = Vector2.zero;
+    [SerializeField, ReadOnly] private Vector2 _totalForcesWithoutContribution = Vector2.zero;
 
     [Header("Varied RB Settings")]
     [SerializeField] private float _linearDragConnected = 5;
@@ -29,8 +31,10 @@ public class TentaclePhysics : MonoBehaviour
 
     [Header("Gravity Settings")]
     [SerializeField] private float _customGravityAcceleration = 20;
+    [SerializeField] private float _xDirCorrectionAcceleration = 20;
     [SerializeField] private float _gravityDecreasePerConnectedTentacle = 0.2f;
     [SerializeField, ReadOnly] private float _currentGravityScale = 0;
+    [SerializeField, ReadOnly] private float _currentXCorrectionScale = 0;
     [SerializeField, ReadOnly] private int _currentConnectedTentacles = 0;
 
     [Header("Detach All Boost")]
@@ -60,17 +64,21 @@ public class TentaclePhysics : MonoBehaviour
     private void FindFinalVector()
     {
         _finalVector = Vector2.zero;
+        _totalForcesWithoutContribution = Vector2.zero;
         _currentConnectedTentacles = 0;
         if (_controller.ReleasePressed) return;
         Vector2 totalContribution = Vector2.zero;
+        Vector2 totalForces = Vector2.zero;
         for (int i = 0; i < _tentacles.Count; i++)
         {
             if(_tentacles[i].IsAnchored && _tentacles[i].gameObject.activeInHierarchy)
             {
                 totalContribution += _tentacles[i].ContributionVector;
+                _totalForcesWithoutContribution += _tentacles[i].PlayerToAnchorVector;
                 _currentConnectedTentacles++;
             }
         }
+        _totalContributionVector = totalContribution;
         float clampedXcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.x), 0, Mathf.Abs(_movement.TargetDirectionRaw.x)) * Mathf.Sign(totalContribution.x);
         float clampedYcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.y), 0, Mathf.Abs(_movement.TargetDirectionRaw.y)) * Mathf.Sign(totalContribution.y);
         _finalVector = new Vector2(clampedXcontribution, clampedYcontribution);
@@ -81,7 +89,9 @@ public class TentaclePhysics : MonoBehaviour
     private void ImpulseByTentacles()
     {
         _currentGravityScale = _customGravityAcceleration - (_gravityDecreasePerConnectedTentacle * _currentConnectedTentacles * _customGravityAcceleration);
-        Vector2 finalFinalForce = (_finalVector * _implulseMagnitude) + (Vector2.down * _currentGravityScale);
+        _currentXCorrectionScale = _xDirCorrectionAcceleration - (_gravityDecreasePerConnectedTentacle * _currentConnectedTentacles * _xDirCorrectionAcceleration);
+        Vector2 finalFinalForce = (_finalVector * _implulseMagnitude) + new Vector2(_totalForcesWithoutContribution.x * _currentXCorrectionScale, (Vector2.down * _currentGravityScale).y);
+        Debug.DrawRay(transform.position, finalFinalForce, Color.black);
         _rigidBody.AddForce(finalFinalForce);
     }
     private bool CheckSurface()

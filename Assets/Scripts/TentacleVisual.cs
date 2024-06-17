@@ -22,8 +22,6 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private Transform _followEndTransform;
 
     [Header("Connection Settings")]
-    [SerializeField] private bool _isRetracted = true;
-    [SerializeField] private bool _visualConnected = false;
     [SerializeField] private bool _setAutoConnect = true;
     [SerializeField] private float _autoConnectDistance = 0.3f;
 

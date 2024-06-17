@@ -1063,6 +1063,8 @@ MonoBehaviour:
   - {fileID: 1355156975}
   _implulseMagnitude: 160
   _finalVector: {x: 0, y: 0}
+  _totalContributionVector: {x: 0, y: 0}
+  _totalForcesWithoutContribution: {x: 0, y: 0}
   _linearDragConnected: 6
   _angularDragConnected: 6
   _linearDragFree: 0.1
@@ -1077,8 +1079,10 @@ MonoBehaviour:
     m_Bits: 384
   _groundSphereCastRadius: 1
   _customGravityAcceleration: 120
+  _xDirCorrectionAcceleration: 20
   _gravityDecreasePerConnectedTentacle: 0.2
   _currentGravityScale: 0
+  _currentXCorrectionScale: 0
   _currentConnectedTentacles: 0
   _boostAccelerationMagnitude: 3500
   _boostInLookDirection: 1
@@ -1309,7 +1313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 360
-  _flipSprite: 1
   _movement: {fileID: 160632611}
   _crossProductSign: 1
 --- !u!95 &241519845
@@ -22361,7 +22364,6 @@ MonoBehaviour:
   _bezerCurveMaxHeight: 3
   _bezerCurveMinHeight: 0.2
   _bezierAnchorModifier: 0.5
-  _curveDirection: 1
   _retractAnimationDuration: 0.5
   _minDistanceForWiggle: 0.5
   _maxDistanceForWiggle: 12
@@ -22387,8 +22389,6 @@ MonoBehaviour:
   _waveFrequency: 1
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
-  _isRetracted: 1
-  _visualConnected: 0
   _setAutoConnect: 1
   _autoConnectDistance: 0.3
   _visualState: 1
