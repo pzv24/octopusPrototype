@@ -21,6 +21,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private LayerMask _tentacleCollisionLayers;
     [SerializeField] private LayerMask _solidOnlyFilter;
     [SerializeField] private float _jumpCooldown = 0.5f;
+    [SerializeField] private bool _tentacleProbingEnabled = true;
 
     [Header("Tentacle Raycast Settings")]
     [SerializeField] private int _raycastConeCount = 10;
@@ -88,7 +89,7 @@ public class TentacleMovement : MonoBehaviour
         if (!_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
         {
             bool tentacleRaycastSucessful = TryChangeTentacleAnchor();
-            if(!tentacleRaycastSucessful)
+            if(_tentacleProbingEnabled && !tentacleRaycastSucessful)
             {
                 if(_probingTentacle == null)
                 {
