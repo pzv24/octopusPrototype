@@ -170,6 +170,7 @@ public class TentacleMovement : MonoBehaviour
         }
         for (int i  = 0; i < hits; i++)
         {
+            Debug.Log(hitInfo[i].point);
             // if you hit a solid wall, that's the farthest you can go already
             if (hitInfo[i].collider.gameObject.layer == LayerMask.NameToLayer("SolidTerrain"))
             {
@@ -178,6 +179,7 @@ public class TentacleMovement : MonoBehaviour
             continue;
         }
         // if no solid walls were hit, return the farthest point
+        Debug.Log(hitInfo[hits - 1].point);
         return hitInfo[hits - 1];
     }
 
@@ -263,7 +265,10 @@ public class TentacleMovement : MonoBehaviour
     {
         Debug.Log("Tentacle self deactivated");
         tentacle.DeactivateTentacle();
-        _tentacleBank.Add(tentacle);
-        _activeTentacles.Remove(tentacle);
+        if (_activeTentacles.Contains(tentacle))
+        {
+            _tentacleBank.Add(tentacle);
+            _activeTentacles.Remove(tentacle);
+        }
     }
 }

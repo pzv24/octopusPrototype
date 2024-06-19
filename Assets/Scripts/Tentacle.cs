@@ -68,10 +68,10 @@ public class Tentacle : MonoBehaviour
         if (_tentacleAnchored && !_tentacleProbing)
         {
             Debug.DrawRay(_anchor.transform.position, AnchorNormal, Color.red);
-            CalculateAngleToTargetPosition();
+            //CalculateAngleToTargetPosition();
             if (AutoBreakConnection())
             {
-                DeactivateTentacle();
+                _movement.TentacleSelfDeactivate(this);
             }
             CalculateContributionVector();
         }
@@ -79,13 +79,14 @@ public class Tentacle : MonoBehaviour
     }
     public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
+        Debug.LogError("Launching " + gameObject.name);
         //_anchor.position = anchorEndPosition;
         _tentacleProbing = false;
         _tentacleVisualObject.SetActive(true);
         _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
         AnchorNormal = hitNormal;
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
-        Debug.Log(anchorEndPosition);
+        //Debug.Log(anchorEndPosition);
     }
     private IEnumerator GameplayConnectedTimer(float connectSpeed)
     {
