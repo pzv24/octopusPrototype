@@ -294,6 +294,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ee30136a-433c-458d-a032-ef0b25b5ed4c",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "SetTargetLocationMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d8e05ccb-9b0b-436c-a452-dcf4f5ed3bf7",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",

@@ -22,6 +22,8 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private LayerMask _solidOnlyFilter;
     [SerializeField] private float _jumpCooldown = 0.5f;
     [SerializeField] private bool _tentacleProbingEnabled = true;
+    [SerializeField] private float _deplotNewProbeCooldown = 0.3f;
+    [SerializeField] private float _probinMinDistance = 1.5f;
 
     [Header("Tentacle Raycast Settings")]
     [SerializeField] private int _raycastConeCount = 10;
@@ -32,7 +34,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private bool _debugEnabled = false;
     [SerializeField] private bool _hasActiveInput = true;
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
-    [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
+    [SerializeField, ReadOnly] private float _lastTentacleFireTime = 0;
 
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
     public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
@@ -42,17 +44,18 @@ public class TentacleMovement : MonoBehaviour
 
     private TentaclePhysics _tentaclePhysics;
     private float _lastJumpTime = 0;
+    private float _lastProbeDeployTime = 0;
     private void Start()
     {
-        _tentacleChangeElapsed = 0;
+        _lastTentacleFireTime = 0;
         _tentaclePhysics = GetComponent<TentaclePhysics>();
         ReleaseAllTentacles();
     }
     private bool TryChangeTentacleAnchor()
     {
-        if (_tentacleChangeElapsed > _tentacleFireCooldown && _hasActiveInput)
+        if (_lastTentacleFireTime + _tentacleFireCooldown <= Time.time && _hasActiveInput)
         {
-            _tentacleChangeElapsed = 0;
+            _lastTentacleFireTime = Time.time;
             //raycast to see if we find a new anchor location
             RaycastHit2D hit = RaycastConeAndChoose();
             Vector2 newAnchorPosition = hit.point;
@@ -73,7 +76,6 @@ public class TentacleMovement : MonoBehaviour
         {
             Debug.LogError("Duplicated Tentacles!");
         }
-        _tentacleChangeElapsed += Time.deltaTime;
         // if does not have active input, return 
         if (!_hasActiveInput) return;
         ////if has probe: move probe's anchor to target location (clamped by max distance)
@@ -91,27 +93,38 @@ public class TentacleMovement : MonoBehaviour
             bool tentacleRaycastSucessful = TryChangeTentacleAnchor();
             if(_tentacleProbingEnabled && !tentacleRaycastSucessful)
             {
-                if(_probingTentacle == null)
+                if(_probingTentacle == null && _lastProbeDeployTime + _deplotNewProbeCooldown <= Time.time && Vector3.Distance(transform.position, _targetLocation) > _probinMinDistance)
                 {
+                    _lastProbeDeployTime = Time.time;
+                    Debug.Log("Getting new probing");
                     Tentacle tentacle = GetNextTentacle();
                     tentacle.SetTentacleProbing(true);
                     _probingTentacle = tentacle;
                 }
-                float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
-                Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
-                Vector3 probePosition = transform.position + clampedDirection;
-                RaycastHit2D[] hitInfo = new RaycastHit2D[1];
-                int hits = Physics2D.RaycastNonAlloc(transform.position, clampedDirection, hitInfo, clampedDirection.magnitude, _solidOnlyFilter);
-                if (hits != 0 )
+
+                if(_probingTentacle != null)
                 {
-                    probePosition = hitInfo[0].point;
+                    float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
+                    Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
+                    Vector3 probePosition = transform.position + clampedDirection;
+                    RaycastHit2D[] hitInfo = new RaycastHit2D[1];
+                    int hits = Physics2D.RaycastNonAlloc(transform.position, probePosition - transform.position, hitInfo, clampedDirection.magnitude, _tentacleCollisionLayers);
+                    if (hits != 0 )
+                    {
+                        probePosition = hitInfo[0].point;
+                    }
+                    if(Vector3.Distance(transform.position, _targetLocation) < _probinMinDistance)
+                    {
+                        ReleaseProbingTentacle();
+                        return;
+                    }
+                    _probingTentacle.SetAnchorPosition(probePosition);
                 }
-                _probingTentacle.SetAnchorPosition(probePosition);
             }
         }
         else if(_tentaclePhysics.CanGetToTargetWithCurrentTentacles && _probingTentacle != null)
         {
-            ReleaseProbingTentacle();
+            //ReleaseProbingTentacle();
         }
     }
 

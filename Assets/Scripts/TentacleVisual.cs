@@ -33,6 +33,12 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private float _looseSmoothFactor = 2500f;
     [SerializeField, ReadOnly] private float _currentSmoothFactor = 0;
 
+    [Header("Tentacle debug colors")]
+    [SerializeField] private bool _changeColorOnState = false;
+    [SerializeField] private Gradient _original;
+    [SerializeField] private Gradient _isLaunchignColor;
+    [SerializeField] private Gradient _isConnectedColor;
+
 
     private LineRenderer _lineRenderer;
     private Tentacle _tentacleCore;
@@ -127,10 +133,10 @@ public class TentacleVisual : MonoBehaviour
         _lineRenderer.SetPositions(_segmentPositions);
         if(_setAutoConnect 
             && _visualState.Equals(TentacleVisualState.Launching) 
-            && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _wiggledEndTransfrom.position) < _autoConnectDistance)
+            && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance)
         {
             ChangeVisualState(TentacleVisualState.Connected);
-            //Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
+            Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
         }
     }
 
@@ -166,31 +172,44 @@ public class TentacleVisual : MonoBehaviour
         _waveFrequency = wiggleFrequency;
         _waveMagnitude = wiggleMagnitude;
     }
+    public void SetAutoConnectEnabled(bool autoConnectEnabled)
+    {
+        _setAutoConnect = autoConnectEnabled;
+    }
     public void ChangeVisualState(TentacleVisualState state)
     {
-        Debug.Log("Tentacle " + gameObject.transform.parent.name + " previous state was " + _visualState + " and just changed to " + state, gameObject);
+        //Debug.Log("Tentacle " + gameObject.transform.parent.name + " previous state was " + _visualState + " and just changed to " + state, gameObject);
         _visualState = state;
         switch (_visualState)
         {
             case TentacleVisualState.Connected:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
+                if (_changeColorOnState) _lineRenderer.colorGradient = _isConnectedColor;
                 break;
             case TentacleVisualState.Retracted:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
+                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+
                 break;
             case TentacleVisualState.Launching:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = 1;
+                if (_changeColorOnState) _lineRenderer.colorGradient = _isLaunchignColor;
+
                 break;
             case TentacleVisualState.Idle:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
+                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+
                 break;
             default:
                 _currentSmoothFactor = _looseSmoothFactor;
                 _connectedModifier = 1;
+                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+
                 break;
         }
     }

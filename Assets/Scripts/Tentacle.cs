@@ -8,7 +8,6 @@ public class Tentacle : MonoBehaviour
     [Header("Plug in Fields")]
     [SerializeField] private TentacleVisual _tentacleVisual;
     [SerializeField] private TentacleCodeAnimator _tentacleAnimation;
-    [SerializeField] private GameObject _tentacleVisualObject;
     [SerializeField] private Rigidbody2D _playerRB;
     [SerializeField] private Transform _anchor;
 
@@ -82,7 +81,7 @@ public class Tentacle : MonoBehaviour
         Debug.LogError("Launching " + gameObject.name);
         //_anchor.position = anchorEndPosition;
         _tentacleProbing = false;
-        _tentacleVisualObject.SetActive(true);
+        _tentacleVisual.ChangeVisualState(TentacleVisualState.Launching);
         _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
         AnchorNormal = hitNormal;
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
@@ -97,6 +96,7 @@ public class Tentacle : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         _tentacleAnchored = true;
+
     }
     private bool AutoBreakConnection()
     {
