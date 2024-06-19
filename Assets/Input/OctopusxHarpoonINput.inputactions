@@ -324,6 +324,17 @@
                     "action": "Release",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7d37138-99e6-478c-be3f-b5018ea85678",
+                    "path": "<Touchscreen>/touch*/Press",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
