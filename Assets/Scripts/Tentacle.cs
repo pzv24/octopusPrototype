@@ -8,13 +8,17 @@ public class Tentacle : MonoBehaviour
     [Header("Plug in Fields")]
     [SerializeField] private TentacleVisual _tentacleVisual;
     [SerializeField] private TentacleCodeAnimator _tentacleAnimation;
-    [SerializeField] private GameObject _tentacleVisualObject;
     [SerializeField] private Rigidbody2D _playerRB;
     [SerializeField] private Transform _anchor;
 
     [Header("Tentacle Settings")]
     [SerializeField] private bool _tentacleAnchored = true;
     [SerializeField] private float _breakDistance = 10;
+
+    [Header("Tentacle Probing")]
+    [SerializeField] private bool _tentacleProbing = false;
+    [SerializeField] private LayerMask _bothTerrainLayers;
+    [SerializeField] private float _circleCastRadius = 0.3f;
 
     [Header("Break Settings")]
     [SerializeField] private LayerMask _solidGroundLayer;
@@ -27,6 +31,7 @@ public class Tentacle : MonoBehaviour
     public Vector2 AnchorNormal { get; private set; }
     public bool IsAnchored { get { return _tentacleAnchored; } }
     public Vector2 ContributionVector { get { return _contributionVector; } }
+    public bool IsProbing { get { return _tentacleProbing; } }
     public Vector2 PlayerToAnchorVector
     {
         get
@@ -41,28 +46,46 @@ public class Tentacle : MonoBehaviour
         _movement = GetComponentInParent<TentacleMovement>();
         _tentacleVisual.InitVisual(_anchor);
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (_tentacleAnchored)
+        //if (_tentacleProbing)
+        //{
+        //    Collider2D[] hits = new Collider2D[1];
+        //    int hitCount = Physics2D.OverlapCircleNonAlloc(_anchor.transform.position, _circleCastRadius, hits, _bothTerrainLayers);
+        //    if(hitCount > 0)
+        //    {
+        //        Debug.Log(hits[0].ClosestPoint(_anchor.transform.position));
+        //        Debug.Log("Probe Connected");
+        //        _anchor.position = (hits[0].ClosestPoint(_anchor.transform.position));
+        //        _tentacleVisual.ChangeVisualState(TentacleVisualState.Connected);
+        //        _movement.AttachProbingTentacle();
+        //        _tentacleAnchored = true;
+        //        _tentacleProbing = false;
+        //    }
+        //    return;
+        //}
+        if (_tentacleAnchored && !_tentacleProbing)
         {
             Debug.DrawRay(_anchor.transform.position, AnchorNormal, Color.red);
-            CalculateAngleToTargetPosition();
+            //CalculateAngleToTargetPosition();
             if (AutoBreakConnection())
             {
-                DeactivateTentacle();
+                _movement.TentacleSelfDeactivate(this);
             }
+            CalculateContributionVector();
         }
         _playerToAnchorVector = PlayerToAnchorVector;
-        CalculateContributionVector();
     }
-    public void LaunchTentacle(Vector3 anchorPosition, Vector2 hitNormal, float travelSpeed = 10f)
+    public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
-        _anchor.position = anchorPosition;
-        _tentacleVisualObject.SetActive(true);
-        _tentacleAnimation.AnimateLaunch(anchorPosition, hitNormal);
+        //Debug.LogError("Launching " + gameObject.name);
+        //_anchor.position = anchorEndPosition;
+        _tentacleProbing = false;
+        _tentacleVisual.ChangeVisualState(TentacleVisualState.Launching);
+        _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
         AnchorNormal = hitNormal;
         StartCoroutine(GameplayConnectedTimer(travelSpeed));
-        //Debug.Log(anchorPosition);
+        //Debug.Log(anchorEndPosition);
     }
     private IEnumerator GameplayConnectedTimer(float connectSpeed)
     {
@@ -73,6 +96,7 @@ public class Tentacle : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         _tentacleAnchored = true;
+
     }
     private bool AutoBreakConnection()
     {
@@ -84,12 +108,35 @@ public class Tentacle : MonoBehaviour
     public void DeactivateTentacle()
     {
         _tentacleAnchored = false;
+        _tentacleProbing = false;
         _tentacleAnimation.AnimateRetract();
     }
     public void DeactivateJumpTentacle()
     {
         _tentacleAnchored = false;
         _tentacleAnimation.AnimateJump();
+    }
+    public void SetTentacleProbing(bool probing)
+    {
+        _tentacleProbing = probing;
+        if(probing)
+        {
+            //Debug.Log($"Tentacle {gameObject.name} is now probing...");
+            _tentacleAnchored = false;
+            _tentacleVisual.ChangeVisualState(TentacleVisualState.Retracting);
+        }
+    }
+    public void ConnectProbe(Vector3 anchorTargetPosition)
+    {
+        _tentacleAnchored = true;
+        _tentacleProbing = false;
+        _tentacleAnimation.AnimateConnectProbe(_anchor.position, anchorTargetPosition);
+
+        StartCoroutine(GameplayConnectedTimer(10));
+    }
+    public void SetAnchorPosition(Vector3 position)
+    {
+        _anchor.position = position;
     }
     private void CalculateAngleToTargetPosition()
     {
@@ -132,5 +179,13 @@ public class Tentacle : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_tentacleProbing)
+        {
+            Gizmos.DrawWireSphere(_anchor.position, _circleCastRadius);
+        }
     }
 }

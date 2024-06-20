@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class TentacleMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private List<Tentacle> _tentacleBank = new List<Tentacle>();
     [SerializeField] private List<Tentacle> _activeTentacles = new List<Tentacle>();
     [SerializeField] private Tentacle _tentaclePrefab;
+    [SerializeField, ReadOnly] private Tentacle _probingTentacle;
 
     [Header("Tentacle Settings")]
     [SerializeField] private int _totalTentacleCount;
@@ -17,7 +19,11 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private float _tentacleLaunchSpeed = 3;
     [SerializeField] private int _maxActiveTentacles = 3;
     [SerializeField] private LayerMask _tentacleCollisionLayers;
+    [SerializeField] private LayerMask _solidOnlyFilter;
     [SerializeField] private float _jumpCooldown = 0.5f;
+    [SerializeField] private bool _tentacleProbingEnabled = true;
+    [SerializeField] private float _deplotNewProbeCooldown = 0.3f;
+    [SerializeField] private float _probinMinDistance = 1.5f;
 
     [Header("Tentacle Raycast Settings")]
     [SerializeField] private int _raycastConeCount = 10;
@@ -26,9 +32,9 @@ public class TentacleMovement : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool _debugEnabled = false;
-    [SerializeField] private bool _canFireTentacles = true;
+    [SerializeField] private bool _hasActiveInput = true;
     [SerializeField, ReadOnly] private Vector3 _targetLocation = Vector3.zero;
-    [SerializeField, ReadOnly] private float _tentacleChangeElapsed = 0;
+    [SerializeField, ReadOnly] private float _lastTentacleFireTime = 0;
 
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
     public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
@@ -38,16 +44,18 @@ public class TentacleMovement : MonoBehaviour
 
     private TentaclePhysics _tentaclePhysics;
     private float _lastJumpTime = 0;
+    private float _lastProbeDeployTime = 0;
     private void Start()
     {
-        _tentacleChangeElapsed = 0;
+        _lastTentacleFireTime = 0;
         _tentaclePhysics = GetComponent<TentaclePhysics>();
         ReleaseAllTentacles();
     }
-    private void TryChangeTentacleAnchor()
+    private bool TryChangeTentacleAnchor()
     {
-        if (_tentacleChangeElapsed > _tentacleFireCooldown && _canFireTentacles)
+        if (_lastTentacleFireTime + _tentacleFireCooldown <= Time.time && _hasActiveInput)
         {
+            _lastTentacleFireTime = Time.time;
             //raycast to see if we find a new anchor location
             RaycastHit2D hit = RaycastConeAndChoose();
             Vector2 newAnchorPosition = hit.point;
@@ -56,24 +64,74 @@ public class TentacleMovement : MonoBehaviour
             // if location valid, then launch a new tentacle in that direction
             if (newAnchorPosition != Vector2.zero)
             {
-                _tentacleChangeElapsed = 0;
                 MoveTentacleAnchor(newAnchorPosition, hit.normal);
+                return true;
             }
         }
+        return false;
     }
     private void FixedUpdate()
     {
-        _tentacleChangeElapsed += Time.deltaTime;
-        if (_canFireTentacles && !_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
+        if(_tentacleBank.Count + _activeTentacles.Count > _totalTentacleCount)
         {
-            TryChangeTentacleAnchor();
+            Debug.LogError("Duplicated Tentacles!");
+        }
+        // if does not have active input, return 
+        if (!_hasActiveInput) return;
+        ////if has probe: move probe's anchor to target location (clamped by max distance)
+        //if(_probingTentacle != null)
+        //{
+        //    float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
+        //    Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
+        //    _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
+        //}
+        //else if !canGetWithCurrent: Fire tentacle 
+        //  if hit, launch, else begin probing
+
+        if (!_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
+        {
+            bool tentacleRaycastSucessful = TryChangeTentacleAnchor();
+            if(_tentacleProbingEnabled && !tentacleRaycastSucessful)
+            {
+                if(_probingTentacle == null && _lastProbeDeployTime + _deplotNewProbeCooldown <= Time.time && Vector3.Distance(transform.position, _targetLocation) > _probinMinDistance)
+                {
+                    _lastProbeDeployTime = Time.time;
+                    //Debug.Log("Getting new probing");
+                    Tentacle tentacle = GetNextTentacle();
+                    tentacle.SetTentacleProbing(true);
+                    _probingTentacle = tentacle;
+                }
+
+                if(_probingTentacle != null)
+                {
+                    float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
+                    Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
+                    Vector3 probePosition = transform.position + clampedDirection;
+                    RaycastHit2D[] hitInfo = new RaycastHit2D[1];
+                    int hits = Physics2D.RaycastNonAlloc(transform.position, probePosition - transform.position, hitInfo, clampedDirection.magnitude, _tentacleCollisionLayers);
+                    if (hits != 0 )
+                    {
+                        probePosition = hitInfo[0].point;
+                    }
+                    if(Vector3.Distance(transform.position, _targetLocation) < _probinMinDistance)
+                    {
+                        ReleaseProbingTentacle();
+                        return;
+                    }
+                    _probingTentacle.SetAnchorPosition(probePosition);
+                }
+            }
+        }
+        else if(_tentaclePhysics.CanGetToTargetWithCurrentTentacles && _probingTentacle != null)
+        {
+            //ReleaseProbingTentacle();
         }
     }
 
     public void SetTargetLocation(Vector3 targetLocation)
     {
         _targetLocation = targetLocation;
-        if (targetLocation != Vector3.zero && _canFireTentacles)
+        if (targetLocation != Vector3.zero && _hasActiveInput)
         {
             Vector2 targetDirection = (_targetLocation - transform.position).normalized;
             _tentaclePhysics.TryGiveFreeImpulse(targetDirection, ActiveTentacleCount);
@@ -87,6 +145,10 @@ public class TentacleMovement : MonoBehaviour
         {
             for (int i = 0; i < _activeTentacles.Count; i++)
             {
+                if (_activeTentacles[i] == _probingTentacle)
+                {
+                    _probingTentacle = null;
+                }
                 _activeTentacles[i].DeactivateTentacle();
                 _tentacleBank.Add(_activeTentacles[i]);
             }
@@ -95,9 +157,20 @@ public class TentacleMovement : MonoBehaviour
             _lastJumpTime = Time.time;
         }
     }
-    public void CanFireTentacles(bool canFireTentacles)
+    public void ReleaseProbingTentacle()
     {
-        _canFireTentacles = canFireTentacles;
+        if(_probingTentacle != null)
+        {
+            _probingTentacle.DeactivateTentacle();
+            _probingTentacle.SetTentacleProbing(false);
+            _tentacleBank.Add(_probingTentacle);
+            _activeTentacles.Remove(_probingTentacle);
+            _probingTentacle = null;
+        }
+    }
+    public void SetHasActiveInput(bool hasActiveInput)
+    {
+        _hasActiveInput = hasActiveInput;
     }
     private RaycastHit2D RaycastTentacle(Vector2 directionalVector)
     {
@@ -110,6 +183,7 @@ public class TentacleMovement : MonoBehaviour
         }
         for (int i  = 0; i < hits; i++)
         {
+            //Debug.Log(hitInfo[i].point);
             // if you hit a solid wall, that's the farthest you can go already
             if (hitInfo[i].collider.gameObject.layer == LayerMask.NameToLayer("SolidTerrain"))
             {
@@ -118,6 +192,7 @@ public class TentacleMovement : MonoBehaviour
             continue;
         }
         // if no solid walls were hit, return the farthest point
+        //Debug.Log(hitInfo[hits - 1].point);
         return hitInfo[hits - 1];
     }
 
@@ -169,6 +244,22 @@ public class TentacleMovement : MonoBehaviour
     }
     private void MoveTentacleAnchor(Vector2 newPosition, Vector2 hitNormal)
     {
+        Tentacle tentacleToMove;
+        if (_probingTentacle != null)
+        {
+            tentacleToMove = _probingTentacle;
+            tentacleToMove.ConnectProbe(newPosition);
+            _probingTentacle = null;
+        }
+        else
+        {
+            tentacleToMove = GetNextTentacle();
+            tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
+        }
+    }
+
+    private Tentacle GetNextTentacle()
+    {
         if (_activeTentacles.Count >= _maxActiveTentacles)
         {
             // deactivate the oldest tentacle in the list
@@ -180,14 +271,17 @@ public class TentacleMovement : MonoBehaviour
         _tentacleBank.RemoveAt(0);
         _activeTentacles.Add(tentacleToMove);
         tentacleToMove.gameObject.SetActive(true);
-        tentacleToMove.LaunchTentacle(newPosition, hitNormal, _tentacleLaunchSpeed);
-
+        return tentacleToMove;
     }
     // to be called by individual tentacles when certain critera is met to self-deactivate
     public void TentacleSelfDeactivate(Tentacle tentacle)
     {
-        _tentacleBank.Add(tentacle);
-        _activeTentacles.Remove(tentacle);
+        //Debug.Log("Tentacle self deactivated");
         tentacle.DeactivateTentacle();
+        if (_activeTentacles.Contains(tentacle))
+        {
+            _tentacleBank.Add(tentacle);
+            _activeTentacles.Remove(tentacle);
+        }
     }
 }
