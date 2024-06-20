@@ -96,7 +96,7 @@ public class TentacleMovement : MonoBehaviour
                 if(_probingTentacle == null && _lastProbeDeployTime + _deplotNewProbeCooldown <= Time.time && Vector3.Distance(transform.position, _targetLocation) > _probinMinDistance)
                 {
                     _lastProbeDeployTime = Time.time;
-                    Debug.Log("Getting new probing");
+                    //Debug.Log("Getting new probing");
                     Tentacle tentacle = GetNextTentacle();
                     tentacle.SetTentacleProbing(true);
                     _probingTentacle = tentacle;
@@ -183,7 +183,7 @@ public class TentacleMovement : MonoBehaviour
         }
         for (int i  = 0; i < hits; i++)
         {
-            Debug.Log(hitInfo[i].point);
+            //Debug.Log(hitInfo[i].point);
             // if you hit a solid wall, that's the farthest you can go already
             if (hitInfo[i].collider.gameObject.layer == LayerMask.NameToLayer("SolidTerrain"))
             {
@@ -192,7 +192,7 @@ public class TentacleMovement : MonoBehaviour
             continue;
         }
         // if no solid walls were hit, return the farthest point
-        Debug.Log(hitInfo[hits - 1].point);
+        //Debug.Log(hitInfo[hits - 1].point);
         return hitInfo[hits - 1];
     }
 
@@ -276,7 +276,7 @@ public class TentacleMovement : MonoBehaviour
     // to be called by individual tentacles when certain critera is met to self-deactivate
     public void TentacleSelfDeactivate(Tentacle tentacle)
     {
-        Debug.Log("Tentacle self deactivated");
+        //Debug.Log("Tentacle self deactivated");
         tentacle.DeactivateTentacle();
         if (_activeTentacles.Contains(tentacle))
         {

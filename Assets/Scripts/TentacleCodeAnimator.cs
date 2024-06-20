@@ -73,7 +73,7 @@ public class TentacleCodeAnimator : MonoBehaviour
         }
         _visual.SetAutoConnectEnabled(true);
 
-        Debug.Log("Launch elapsed " + (Time.time - starTime) + " by tentacle " + gameObject.transform.parent.name);
+        //Debug.Log("Launch elapsed " + (Time.time - starTime) + " by tentacle " + gameObject.transform.parent.name);
     }
 
     private IEnumerator RetractTentacle()

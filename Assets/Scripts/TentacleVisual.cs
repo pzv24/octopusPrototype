@@ -136,7 +136,7 @@ public class TentacleVisual : MonoBehaviour
             && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance)
         {
             ChangeVisualState(TentacleVisualState.Connected);
-            Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
+            //Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
         }
     }
 

@@ -78,7 +78,7 @@ public class Tentacle : MonoBehaviour
     }
     public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 10f)
     {
-        Debug.LogError("Launching " + gameObject.name);
+        //Debug.LogError("Launching " + gameObject.name);
         //_anchor.position = anchorEndPosition;
         _tentacleProbing = false;
         _tentacleVisual.ChangeVisualState(TentacleVisualState.Launching);

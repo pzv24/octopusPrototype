@@ -156,6 +156,10 @@ public class TentaclePhysics : MonoBehaviour
         Vector2 acceleration = velocityDiff * _lilAccelerationBoost;
         return acceleration;
     }
+    public void SetBoostInLookDirection(bool boostInDirection)
+    {
+        _boostInLookDirection = boostInDirection;
+    }
 
     // debug 
     private void OnDrawGizmos()
