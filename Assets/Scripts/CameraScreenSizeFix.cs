@@ -9,6 +9,7 @@ public class CameraScreenSizeFix : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
     [SerializeField] private TextMeshProUGUI _displayText;
+    [SerializeField] private TextMeshProUGUI _currentCameraText;
     [SerializeField] private float _targetOrthoSize = 10;
     [SerializeField] private float _maxOrthoSize = 18;
     [SerializeField] private float _minWorldDistance = 20;
@@ -33,6 +34,10 @@ public class CameraScreenSizeFix : MonoBehaviour
             if (_displayText.isActiveAndEnabled)
             {
                 _displayText.text = $"{Screen.width} by {Screen.height} pixels. Resolution is {Screen.currentResolution}. Target Orthosize {target}";
+            }
+            if(_currentCameraText.isActiveAndEnabled)
+            {
+                _currentCameraText.text = $"Current camera ortho size: {_virtualCamera.m_Lens.OrthographicSize}";
             }
             yield return new WaitForSeconds(_refreshCooldown);
         }
