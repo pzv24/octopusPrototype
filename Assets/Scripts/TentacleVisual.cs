@@ -20,12 +20,15 @@ public class TentacleVisual : MonoBehaviour
 
     [Header("Plug in Fields")]
     [SerializeField] private Transform _followEndTransform;
+    [SerializeField] private Transform _freeMoveTentacleTransform;
+    [SerializeField] private float _freeMoveSegmentDistance = 0.02f;
 
     [Header("Connection Settings")]
     [SerializeField] private bool _setAutoConnect = true;
     [SerializeField] private float _autoConnectDistance = 0.3f;
 
     [Header("States Info")]
+    [SerializeField] private bool _targetedEndPosition = true;
     [SerializeField] private TentacleVisualState _visualState = TentacleVisualState.Idle;
     [SerializeField] private TentacleVisualState _defaultState = TentacleVisualState.Idle;
     [SerializeField] private float _connectedSmoothFactor = 20f;
@@ -105,6 +108,7 @@ public class TentacleVisual : MonoBehaviour
             return;
         }
         GetWiggledTargetPosition();
+        SetTextureBasedOnPlayerPosition();
 
         // set the final target direction for the entire tentacle based on current final position target
         Vector3 finalTargetDirection = (_wiggledEndTransfrom.position - transform.position).normalized;
@@ -118,6 +122,10 @@ public class TentacleVisual : MonoBehaviour
         {
             // for each point, set the target position based on the previous point, plus the direction * disntace 
             Vector3 targetPosition = _segmentPositions[i - 1] + finalTargetDirection * distancePerSegment;
+            if (!_targetedEndPosition && _freeMoveTentacleTransform != null)
+            {
+                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleTransform.right * _freeMoveSegmentDistance;
+            }
 
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
@@ -133,7 +141,8 @@ public class TentacleVisual : MonoBehaviour
         _lineRenderer.SetPositions(_segmentPositions);
         if(_setAutoConnect 
             && _visualState.Equals(TentacleVisualState.Launching) 
-            && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance)
+            && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance
+            && !_targetedEndPosition)
         {
             ChangeVisualState(TentacleVisualState.Connected);
             //Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
@@ -150,6 +159,10 @@ public class TentacleVisual : MonoBehaviour
         {
             _segmentPositions[i] = Vector3.zero;
         }
+    }
+    private void SetTextureBasedOnPlayerPosition()
+    {
+        _lineRenderer.textureScale = new Vector2(_lineRenderer.textureScale.x, Mathf.Sign(_tentacleCore.PlayerToAnchorVector.x) * -1);
     }
     [Button]
     public void SetIsWiggling(bool isWiggling)
