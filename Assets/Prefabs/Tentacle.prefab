@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7388870969183552819}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: FreeLookDirectionalRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,40 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3986453777287346561}
   m_Father: {fileID: 9008389263509362537}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2839489104192710411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3986453777287346561}
+  m_Layer: 0
+  m_Name: AnimatedFreeLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3986453777287346561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839489104192710411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7388870969183552819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7361590461318528216
 GameObject:
@@ -87,17 +119,22 @@ MonoBehaviour:
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
   _freeMoveTentacleTransform: {fileID: 7388870969183552819}
-  _freeMoveSegmentDistance: 0.2
+  _headController: {fileID: 0}
   _setAutoConnect: 1
   _autoConnectDistance: 0.25
-  _targetedEndPosition: 1
+  _targetedEndPosition: 0
+  _freeMoveSegmentDistance: 0.2
+  _idleTentacleLength: 6
+  _idleSmoothOverride: 0.1
+  _idleRotationSpeed: 3
+  _idleRotationMagnitude: 15
   _visualState: 1
   _defaultState: 1
   _connectedSmoothFactor: 50
   _launchingSmoothFactor: 3000
   _looseSmoothFactor: 2500
   _currentSmoothFactor: 3000
-  _changeColorOnState: 0
+  _changeColorOnState: 1
   _original:
     serializedVersion: 2
     key0: {r: 0.7176471, g: 0.3372549, b: 0, a: 1}
@@ -373,6 +410,7 @@ MonoBehaviour:
   _tentacleAnimation: {fileID: 1277351936199550567}
   _playerRB: {fileID: 0}
   _anchor: {fileID: 0}
+  _freeLookRoot: {fileID: 0}
   _tentacleAnchored: 1
   _breakDistance: 12
   _tentacleProbing: 0

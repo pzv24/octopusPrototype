@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool _releasePressed = false;
     private SpriteRenderer _targetLocationSprite;
     private Vector3 _lookDirection = Vector3.zero;
+    private Vector3 _upDirection = Vector3.zero;
 
     //to be used by controller support implementation, currently useless
     [SerializeField] private float _tentacleRange = 5;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     public bool HasActiveInput { get; private set; }
     public Vector3 LookDirection { get { return _lookDirection; } }
+    public Vector3 UpDirection { get { return _upDirection; } }
     public bool ReleasePressed {  get { return _releasePressed; } }
 
     private void Start()
@@ -119,6 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _lookDirection = mousePosition - transform.position;
+        _upDirection = Vector3.Cross(_lookDirection, Vector3.forward);
         mousePosition.z = 0;
         if(_mousePressed && !_releasePressed)
         {
@@ -131,9 +134,9 @@ public class PlayerController : MonoBehaviour
         }
         _movement.SetHasActiveInput(HasActiveInput);
         _movement.SetTargetLocation(_targetLocation);
+        _movement.SetUpDirection(UpDirection);
 
     }
-
     private void DirectLineToTargetLocation(Vector3 mousePos)
     {
         RaycastHit2D[] hitInfo = new RaycastHit2D[1];

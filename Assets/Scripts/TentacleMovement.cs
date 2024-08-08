@@ -39,12 +39,15 @@ public class TentacleMovement : MonoBehaviour
     public int ActiveTentacleCount { get { return _activeTentacles.Count; } }
     public Vector2 TargetDirectionNormalized { get { return (_targetLocation - transform.position).normalized; } }
     public Vector2 TargetDirectionRaw { get { return (_targetLocation - transform.position); } }
+    public Vector3 UpDirection { get { return _upDirection; } }
 
     public List<Tentacle> ActiveTentacles { get { return _activeTentacles; } }
 
     private TentaclePhysics _tentaclePhysics;
     private float _lastJumpTime = 0;
     private float _lastProbeDeployTime = 0;
+    private Vector3 _upDirection;
+
     private void Start()
     {
         _lastTentacleFireTime = 0;
@@ -78,15 +81,6 @@ public class TentacleMovement : MonoBehaviour
         }
         // if does not have active input, return 
         if (!_hasActiveInput) return;
-        ////if has probe: move probe's anchor to target location (clamped by max distance)
-        //if(_probingTentacle != null)
-        //{
-        //    float clampedMagnitude = Mathf.Clamp((transform.position - _targetLocation).magnitude, 0, _tentacleMaxDistance);
-        //    Vector3 clampedDirection = TargetDirectionNormalized * clampedMagnitude;
-        //    _probingTentacle.SetAnchorPosition(transform.position + clampedDirection);
-        //}
-        //else if !canGetWithCurrent: Fire tentacle 
-        //  if hit, launch, else begin probing
 
         if (!_tentaclePhysics.CanGetToTargetWithCurrentTentacles)
         {
@@ -283,5 +277,9 @@ public class TentacleMovement : MonoBehaviour
             _tentacleBank.Add(tentacle);
             _activeTentacles.Remove(tentacle);
         }
+    }
+    public void SetUpDirection(Vector3 upDirection)
+    {
+        _upDirection = upDirection;
     }
 }

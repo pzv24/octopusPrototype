@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Security;
 
 public class Tentacle : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Tentacle : MonoBehaviour
     [SerializeField] private TentacleCodeAnimator _tentacleAnimation;
     [SerializeField] private Rigidbody2D _playerRB;
     [SerializeField] private Transform _anchor;
+    [SerializeField] private Transform _freeLookRoot;
 
     [Header("Tentacle Settings")]
     [SerializeField] private bool _tentacleAnchored = true;
@@ -31,7 +33,8 @@ public class Tentacle : MonoBehaviour
     public Vector2 AnchorNormal { get; private set; }
     public bool IsAnchored { get { return _tentacleAnchored; } }
     public Vector2 ContributionVector { get { return _contributionVector; } }
-    public bool IsProbing { get { return _tentacleProbing; } }
+    public Vector3 PlayerUpVector { get { return _movement.UpDirection; } }
+
     public Vector2 PlayerToAnchorVector
     {
         get
@@ -48,22 +51,6 @@ public class Tentacle : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //if (_tentacleProbing)
-        //{
-        //    Collider2D[] hits = new Collider2D[1];
-        //    int hitCount = Physics2D.OverlapCircleNonAlloc(_anchor.transform.position, _circleCastRadius, hits, _bothTerrainLayers);
-        //    if(hitCount > 0)
-        //    {
-        //        Debug.Log(hits[0].ClosestPoint(_anchor.transform.position));
-        //        Debug.Log("Probe Connected");
-        //        _anchor.position = (hits[0].ClosestPoint(_anchor.transform.position));
-        //        _tentacleVisual.ChangeVisualState(TentacleVisualState.Connected);
-        //        _movement.AttachProbingTentacle();
-        //        _tentacleAnchored = true;
-        //        _tentacleProbing = false;
-        //    }
-        //    return;
-        //}
         if (_tentacleAnchored && !_tentacleProbing)
         {
             Debug.DrawRay(_anchor.transform.position, AnchorNormal, Color.red);
