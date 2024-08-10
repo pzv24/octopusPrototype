@@ -21,6 +21,7 @@ public class TentacleVisual : MonoBehaviour
     [Header("Plug in Fields")]
     [SerializeField] private Transform _followEndTransform;
     [SerializeField] private Transform _freeMoveTentacleTransform;
+    [SerializeField] private Transform _freeMoveTentacleAnimatedTransform;
     [SerializeField] private LookAtMouse _headController;
 
     [Header("Connection Settings")]
@@ -136,10 +137,10 @@ public class TentacleVisual : MonoBehaviour
             Vector3 targetPosition = _segmentPositions[i - 1] + finalTargetDirection * distancePerSegment;
             if (!_targetedEndPosition && _freeMoveTentacleTransform != null)
             {
-                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleTransform.forward * _idleTentacleSeparationPerSegment;
+                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleAnimatedTransform.forward * _idleTentacleSeparationPerSegment;
                 if(_headController != null)
                 {
-                    _freeMoveTentacleTransform.rotation = Quaternion.LookRotation(-_headController.PlayerApparentUp, Vector3.forward);
+                    _freeMoveTentacleTransform.rotation = Quaternion.LookRotation(-_headController.PlayerApparentUp, Vector3.down);
                 }
             }
 
@@ -188,6 +189,7 @@ public class TentacleVisual : MonoBehaviour
     }
     private void SetTextureBasedOnPlayerPosition()
     {
+        if (_visualState.Equals(TentacleVisualState.Idle)) return;
         _lineRenderer.textureScale = new Vector2(_lineRenderer.textureScale.x, Mathf.Sign(_tentacleCore.PlayerToAnchorVector.x) * -1);
     }
     public void SetIsWiggling(bool isWiggling)
@@ -251,6 +253,15 @@ public class TentacleVisual : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void SetTentacleTextureScale(float scale)
+    {
+        if (scale == 1f || scale == -1f && _lineRenderer != null)
+        {
+            _lineRenderer.textureScale = new Vector2(_lineRenderer.textureScale.x, scale);
+        }
+
     }
 
     private void OnDrawGizmos()

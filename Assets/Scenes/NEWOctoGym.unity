@@ -189,7 +189,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -439,6 +439,10 @@ PrefabInstance:
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -595,9 +599,37 @@ PrefabInstance:
       propertyPath: _isConnectedColor.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
@@ -657,11 +689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.202
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -695,6 +727,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (3)
@@ -2169,6 +2205,10 @@ PrefabInstance:
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -2330,6 +2370,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -2387,11 +2431,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.202
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.174
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2425,6 +2469,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (7)
@@ -6626,6 +6674,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
+    - target: {fileID: 1212765396449565482, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
       value: 
@@ -6634,6 +6686,162 @@ PrefabInstance:
       propertyPath: _playerRB
       value: 
       objectReference: {fileID: 160632606}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxAnimDuration.x
+      value: 2.1677625
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxAnimDuration.y
+      value: 4.087924
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].time
+      value: 0.12455782
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].time
+      value: 0.25280762
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].time
+      value: 0.60503757
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].time
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[5].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].value
+      value: 0.9279136
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].value
+      value: -0.9098061
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].value
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[0].inSlope
+      value: 7.4496613
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.10932559
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.5371733
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].inSlope
+      value: -0.56369174
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].inSlope
+      value: 0.14263326
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[5].inSlope
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[0].outSlope
+      value: 7.4496613
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.10932559
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].inWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.5371733
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.49835554
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].outSlope
+      value: -0.56369174
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].inWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].outSlope
+      value: 0.14263326
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[5].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[5].outSlope
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[1].outWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[3].outWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[4].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationCurve.m_Curve.Array.data[5].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -6646,13 +6854,17 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1296600912}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.033
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.252
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6687,10 +6899,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1212765396449565482, guid: bbd92ae3072865e499952546cdc36594, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6774,6 +6991,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -6936,6 +7157,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -6993,11 +7218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.185
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7031,6 +7256,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (4)
@@ -7220,7 +7449,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.75294125, g: 0.36862746, b: 0, a: 1}
+  m_Color: {r: 0.7490196, g: 0.36862746, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7518,6 +7747,10 @@ PrefabInstance:
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -7679,6 +7912,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -7736,11 +7973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.153
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.153
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7774,6 +8011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (1)
@@ -8198,7 +8439,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (5)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8573,7 +8814,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (7)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -9059,7 +9300,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -19683,7 +19924,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -19714,7 +19955,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -20038,8 +20279,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.75294125, g: 0.36862746, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d45b7e76e88fe3a48bc9b6f60f84d039, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20255,7 +20496,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -21502,6 +21743,10 @@ PrefabInstance:
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -21663,6 +21908,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -21720,11 +21969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.147
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.142
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21758,6 +22007,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (5)
@@ -21851,6 +22104,10 @@ PrefabInstance:
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -22013,6 +22270,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -22070,11 +22331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.223
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.022
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22108,6 +22369,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (6)
@@ -22248,6 +22513,10 @@ PrefabInstance:
       propertyPath: _solidGroundLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _invertMult
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
       value: 
@@ -22409,6 +22678,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Parameters.textureMode
       value: 4
       objectReference: {fileID: 0}
@@ -22466,11 +22739,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.229
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.027
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22504,6 +22777,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8537638449703668330, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Name
       value: Tentacle (2)
@@ -23294,7 +23571,7 @@ GameObject:
   m_Layer: 0
   m_Name: TentacleAnchor (6)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -23427,7 +23704,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.75294125, g: 0.36862746, b: 0, a: 1}
+  m_Color: {r: 0.7490196, g: 0.36862746, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -23928,7 +24205,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.75294125, g: 0.36862746, b: 0, a: 1}
+  m_Color: {r: 0.7490196, g: 0.36862746, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -24240,6 +24517,10 @@ PrefabInstance:
     - target: {fileID: 5091071945233336734, guid: a34f9ecea7fa9c940a0803c7735236c6, type: 3}
       propertyPath: m_Name
       value: IdleTentacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091071945233336734, guid: a34f9ecea7fa9c940a0803c7735236c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7132458583414103579, guid: a34f9ecea7fa9c940a0803c7735236c6, type: 3}
       propertyPath: m_LocalPosition.x

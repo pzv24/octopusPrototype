@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3986453777287346561}
+  - component: {fileID: 2846894752372467439}
   m_Layer: 0
   m_Name: AnimatedFreeLook
   m_TagString: Untagged
@@ -63,6 +64,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7388870969183552819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2846894752372467439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839489104192710411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ec4163023a2254fa2591809d8657f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visual: {fileID: 3104217534544404832}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.4496613
+      outSlope: 7.4496613
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.12455782
+      value: 0.9279136
+      inSlope: 0.10932559
+      outSlope: 0.10932559
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.25280762
+      value: 1
+      inSlope: -0.5371733
+      outSlope: -0.5371733
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.60503757
+      value: -0.9098061
+      inSlope: -0.56369174
+      outSlope: -0.56369174
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.49835554
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.75
+      value: -1
+      inSlope: 0.14263326
+      outSlope: 0.14263326
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _minMaxMagnitude: {x: 32.607407, y: 162.2183}
+  _minMaxAnimDuration: {x: 2.1677625, y: 4.087924}
 --- !u!1 &7361590461318528216
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +195,7 @@ MonoBehaviour:
   _waveMagnitude: 1
   _followEndTransform: {fileID: 0}
   _freeMoveTentacleTransform: {fileID: 7388870969183552819}
+  _freeMoveTentacleAnimatedTransform: {fileID: 3986453777287346561}
   _headController: {fileID: 0}
   _setAutoConnect: 1
   _autoConnectDistance: 0.25

@@ -35,7 +35,7 @@ public class TentacleIdleTest : MonoBehaviour
 
             //calculate the position with smooth damp function
             //normal
-            Vector3 targetPosition = _segmentPositions[i - 1] + _animRoot.right * _targetDistance;
+            Vector3 targetPosition = _segmentPositions[i - 1] + _animRoot.forward * _targetDistance;
             Vector3 newPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], _smoothSpeed);
             if (Vector3.Distance(newPosition, _segmentPositions[i - 1]) > _maxDistance)
             {
