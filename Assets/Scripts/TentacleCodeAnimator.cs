@@ -32,6 +32,7 @@ public class TentacleCodeAnimator : MonoBehaviour
     public void AnimateLaunch(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
         _visual.ChangeVisualState(TentacleVisualState.Launching);
+        _visual.SetFollowEndPosition(_visual.GetTentacleEndPosition());
         StartCoroutine(LaunchTentacle(anchorWorldPosition, hitNormal));
     }
     [Button]

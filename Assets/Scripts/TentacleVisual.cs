@@ -263,6 +263,10 @@ public class TentacleVisual : MonoBehaviour
         }
 
     }
+    public Vector3 GetTentacleEndPosition()
+    {
+        return _lineRenderer.GetPosition(_tentacleSegmentCount - 1);
+    }
 
     private void OnDrawGizmos()
     {
