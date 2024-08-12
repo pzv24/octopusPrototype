@@ -139,6 +139,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   _minMaxMagnitude: {x: 32.607407, y: 162.2183}
   _minMaxAnimDuration: {x: 2.1677625, y: 4.087924}
+  _invertMult: 1
+  _animateTentacle: 0
 --- !u!1 &7361590461318528216
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +436,8 @@ MonoBehaviour:
   _bezerCurveMinHeight: 0.2
   _bezierAnchorModifier: 0.038
   _retractAnimationDuration: 0.5
+  _jumpAnimationSpeed: 12
+  _animationSignMultiplier: 1
   _minDistanceForWiggle: 0.5
   _maxDistanceForWiggle: 12
   _wiggleFrequencyMinAndMaxBasedOnDistance: {x: 0, y: 2}
@@ -487,7 +491,7 @@ MonoBehaviour:
   _tentacleAnimation: {fileID: 1277351936199550567}
   _playerRB: {fileID: 0}
   _anchor: {fileID: 0}
-  _freeLookRoot: {fileID: 0}
+  _freeLookRoot: {fileID: 3986453777287346561}
   _tentacleAnchored: 1
   _breakDistance: 12
   _tentacleProbing: 0

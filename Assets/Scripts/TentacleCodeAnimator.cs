@@ -18,6 +18,12 @@ public class TentacleCodeAnimator : MonoBehaviour
     [Header("Retract Settings")]
     [SerializeField] private float _retractAnimationDuration = 0.5f;
 
+    [Header("Tentacle Jump Animation Settings")]
+    [SerializeField] private float _jumpAnimationDuration = 0.8f;
+    [SerializeField] private float _animationSignMultiplier = 1;
+    [SerializeField] private float _animationXRotationStart = 90;
+    [SerializeField] private float _animationRotationMagnitude = 180;
+
     [Header("Wiggle Animation Settings")]
     [SerializeField] private float _minDistanceForWiggle = 0.5f;
     [SerializeField] private float _maxDistanceForWiggle = 12f;
@@ -45,9 +51,9 @@ public class TentacleCodeAnimator : MonoBehaviour
     {
         StartCoroutine(ConnectProbe(start, end));
     }
-    public void AnimateJump()
+    public void AnimateJump(Transform freelookRootTransform)
     {
-        StartCoroutine(JumpRetractMotion());
+        StartCoroutine(JumpTentacleAnimation(freelookRootTransform));
     }
 
     private IEnumerator LaunchTentacle(Vector3 anchorWorldPosition, Vector2 hitNormal)
@@ -120,9 +126,33 @@ public class TentacleCodeAnimator : MonoBehaviour
         _visual.SetWiggleVariables(distanceBasedWaveFrequency, distanceBasedWaveMagnitude);
     }
 
-    private IEnumerator JumpRetractMotion()
+    private IEnumerator JumpTentacleAnimation(Transform freelookRootTransform)
     {
-        yield return null;
+        // set the visual state to retracting to get the correct parameters, then set the target mode to untargeted (disable targeted end position)
+        _visual.ChangeVisualState(TentacleVisualState.Retracting);
+        _visual.SetTargetedEndPositionEnabled(false);
+
+        //set the initial object rotation to the start position given the x rotation parameter
+        freelookRootTransform.localRotation = Quaternion.Euler(new Vector3(_animationXRotationStart, 0, 0));
+
+        // init variables
+        float elapsed = 0;
+        float animSpeed = _animationRotationMagnitude / _jumpAnimationDuration;
+
+        while (elapsed < _jumpAnimationDuration)
+        {
+            // get the normalized value of elapsed (between 0 and 1)
+            float newXrotation = freelookRootTransform.localRotation.x + animSpeed * _animationSignMultiplier * elapsed;
+            Debug.Log($"Jump animation x rotation value: { newXrotation}");
+
+            //apply the new x rotation to the free look game object
+            Vector3 targetRotation = new Vector3(newXrotation, 0, 0);
+            freelookRootTransform.localRotation = Quaternion.Euler(targetRotation);
+
+            elapsed += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        _visual.ChangeVisualState(TentacleVisualState.Idle);
     }
 
 }

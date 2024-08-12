@@ -11,7 +11,7 @@ public class LookAtMouse : MonoBehaviour
     private Vector3 _lookDirection;
     [SerializeField] private float _crossProductSign = 1;
     private Animator _animator;
-    private Vector3 _apparentUp = Vector3.zero;
+    [SerializeField, ReadOnly] private Vector3 _apparentUp = Vector3.zero;
     public Vector3 PlayerApparentUp { get { return _apparentUp; } }
 
     private void Start()

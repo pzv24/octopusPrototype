@@ -380,6 +380,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -441,7 +445,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -1750,6 +1762,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _movement: {fileID: 160632611}
   _crossProductSign: 1
+  _apparentUp: {x: 0, y: 0, z: 0}
 --- !u!95 &241519845
 Animator:
   serializedVersion: 5
@@ -2146,6 +2159,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -2207,7 +2224,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -6674,9 +6699,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
-    - target: {fileID: 1212765396449565482, guid: bbd92ae3072865e499952546cdc36594, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -6688,7 +6713,7 @@ PrefabInstance:
       objectReference: {fileID: 160632606}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _minMaxMagnitude.x
@@ -6933,6 +6958,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -6994,7 +7023,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -7151,6 +7188,18 @@ PrefabInstance:
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _isConnectedColor.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997485
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.02242566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -2.57
       objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Enabled
@@ -7688,6 +7737,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -7749,7 +7802,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -7907,6 +7968,18 @@ PrefabInstance:
       propertyPath: _isConnectedColor.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986453777287346561, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -7970,6 +8043,26 @@ PrefabInstance:
     - target: {fileID: 7361590461318528216, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388870969183552819, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99437505
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388870969183552819, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388870969183552819, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388870969183552819, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.105916955
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388870969183552819, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 12.16
       objectReference: {fileID: 0}
     - target: {fileID: 8270149566069725189, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21684,6 +21777,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -21745,7 +21842,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -22046,6 +22151,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -22107,7 +22216,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController
@@ -22454,6 +22571,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -22515,7 +22636,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _invertMult
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.x
+      value: 32.607407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846894752372467439, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _minMaxMagnitude.y
+      value: 162.2183
       objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _headController

@@ -57,6 +57,7 @@ public class TentacleVisual : MonoBehaviour
     private Vector3[] _segmentVelocities;
     private float _connectedModifier = 1;
     private float _idleTentacleSeparationPerSegment;
+    private TentacleIdleAnimation _idleAnimator;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
     public bool IsLaunching { get; set; }
@@ -70,6 +71,7 @@ public class TentacleVisual : MonoBehaviour
         }
         ChangeVisualState(TentacleVisualState.Idle);
         _idleTentacleSeparationPerSegment = _idleTentacleLength / _tentacleSegmentCount;
+        _idleAnimator = _freeMoveTentacleAnimatedTransform.GetComponent<TentacleIdleAnimation>();
                 Debug.Log(_idleTentacleSeparationPerSegment);
     }
 
@@ -119,7 +121,6 @@ public class TentacleVisual : MonoBehaviour
             return;
         }
 
-
         GetWiggledTargetPosition();
         SetTextureBasedOnPlayerPosition();
 
@@ -131,17 +132,22 @@ public class TentacleVisual : MonoBehaviour
 
         // set the root 
         _segmentPositions[0] = transform.position;
+
+        if(_headController != null)
+        {
+            //_freeMoveTentacleTransform.localRotation = Quaternion.LookRotation(-_headController.PlayerApparentUp, Vector3.down);
+            float lookAngle = Mathf.Atan2(_headController.PlayerApparentUp.x, _headController.PlayerApparentUp.y) * Mathf.Rad2Deg;
+            Quaternion lookRotation = Quaternion.AngleAxis(lookAngle + 90, -Vector3.forward);
+            _freeMoveTentacleTransform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360);
+        }
+
         for (int i = 1; i < _segmentPositions.Length; i++)
         {
             // for each point, set the target position based on the previous point, plus the direction * disntace 
             Vector3 targetPosition = _segmentPositions[i - 1] + finalTargetDirection * distancePerSegment;
             if (!_targetedEndPosition && _freeMoveTentacleTransform != null)
             {
-                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleAnimatedTransform.forward * _idleTentacleSeparationPerSegment;
-                if(_headController != null)
-                {
-                    _freeMoveTentacleTransform.rotation = Quaternion.LookRotation(-_headController.PlayerApparentUp, Vector3.down);
-                }
+                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleAnimatedTransform.right * _idleTentacleSeparationPerSegment;
             }
 
             // calculate the smooth factor:
@@ -221,28 +227,33 @@ public class TentacleVisual : MonoBehaviour
         //Debug.Log("Tentacle " + gameObject.transform.parent.name + " previous state was " + _visualState + " and just changed to " + state, gameObject);
         _visualState = state;
         _targetedEndPosition = !_visualState.Equals(TentacleVisualState.Idle);
+        _idleAnimator?.SetIdleAnimationEnabled(_visualState.Equals(TentacleVisualState.Idle));
         switch (_visualState)
         {
             case TentacleVisualState.Connected:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
+                _targetedEndPosition = true;
                 if (_changeColorOnState) _lineRenderer.colorGradient = _isConnectedColor;
                 break;
             case TentacleVisualState.Retracted:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
+                _targetedEndPosition = true;
                 if (_changeColorOnState) _lineRenderer.colorGradient = _original;
 
                 break;
             case TentacleVisualState.Launching:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = 1;
+                _targetedEndPosition = true;
                 if (_changeColorOnState) _lineRenderer.colorGradient = _isLaunchignColor;
 
                 break;
             case TentacleVisualState.Idle:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = 1;
+                _targetedEndPosition = false;
                 if (_changeColorOnState) _lineRenderer.colorGradient = _original;
 
                 break;
@@ -257,7 +268,7 @@ public class TentacleVisual : MonoBehaviour
 
     public void SetTentacleTextureScale(float scale)
     {
-        if (scale == 1f || scale == -1f && _lineRenderer != null)
+        if ((scale == 1f || scale == -1f) && _lineRenderer != null)
         {
             _lineRenderer.textureScale = new Vector2(_lineRenderer.textureScale.x, scale);
         }
@@ -266,6 +277,10 @@ public class TentacleVisual : MonoBehaviour
     public Vector3 GetTentacleEndPosition()
     {
         return _lineRenderer.GetPosition(_tentacleSegmentCount - 1);
+    }
+    public void SetTargetedEndPositionEnabled(bool enabled)
+    {
+        _targetedEndPosition = enabled;
     }
 
     private void OnDrawGizmos()

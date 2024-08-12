@@ -143,7 +143,7 @@ public class TentacleMovement : MonoBehaviour
                 {
                     _probingTentacle = null;
                 }
-                _activeTentacles[i].DeactivateTentacle();
+                _activeTentacles[i].DeactivateJumpTentacle();
                 _tentacleBank.Add(_activeTentacles[i]);
             }
             _tentaclePhysics.GiveDetachAllBost();
