@@ -47,6 +47,7 @@ public class TentacleIdleAnimation : MonoBehaviour
         {
             StopIdleAnimation();
         }
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
         _idleAnimCoroutine = StartCoroutine(AnimateTentacle());
         _coroutineRunning = true;
     }
@@ -58,7 +59,6 @@ public class TentacleIdleAnimation : MonoBehaviour
             StopCoroutine(_idleAnimCoroutine);
             _idleAnimCoroutine = null;
             _coroutineRunning = false;
-            transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
     }
     public void SetTentacleTexture(float value)
@@ -82,10 +82,10 @@ public class TentacleIdleAnimation : MonoBehaviour
             float normalizedElapsed = elapsed / duration;
 
             //evaluate normalized on animation curve and multiply by magnitude
-            float xRotation = _animationCurve.Evaluate(normalizedElapsed) * magnitude;
+            float zRotation = _animationCurve.Evaluate(normalizedElapsed) * magnitude;
 
             //apply the evaluated value on the local x rotation of game object
-            Vector3 targetRotation = new Vector3(0, 0, xRotation);
+            Vector3 targetRotation = new Vector3(0, 0, zRotation);
             transform.localRotation = Quaternion.Euler(targetRotation);
 
             // the first time you go over the first inflexion point, flip the texutre

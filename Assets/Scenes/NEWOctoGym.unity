@@ -372,6 +372,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -384,8 +396,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -398,6 +434,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -503,6 +635,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 951433443}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -1322,6 +1458,7 @@ MonoBehaviour:
   _tentacleProbingEnabled: 1
   _deplotNewProbeCooldown: 0.5
   _probinMinDistance: 3
+  _boostDelay: 0.1
   _raycastConeCount: 5
   _raycastDepth: 5
   _angleWidth: 30
@@ -1374,7 +1511,7 @@ MonoBehaviour:
   - {fileID: 1624182235}
   - {fileID: 1444783828}
   - {fileID: 1355156975}
-  _implulseMagnitude: 160
+  _implulseMagnitude: 100
   _finalVector: {x: 0, y: 0}
   _totalContributionVector: {x: 0, y: 0}
   _totalForcesWithoutContribution: {x: 0, y: 0}
@@ -1397,7 +1534,7 @@ MonoBehaviour:
   _currentGravityScale: 0
   _currentXCorrectionScale: 0
   _currentConnectedTentacles: 0
-  _boostAccelerationMagnitude: 3500
+  _boostAccelerationMagnitude: 7000
   _boostInLookDirection: 1
   _debugEnabled: 1
   _canGetToTargetWithCurrentTentacles: 0
@@ -2151,6 +2288,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -2163,8 +2312,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -2177,6 +2350,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -2282,6 +2551,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 879247744}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -6700,8 +6973,140 @@ PrefabInstance:
     m_TransformParent: {fileID: 160632609}
     m_Modifications:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _jumpAnimationDuration
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -6879,6 +7284,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1296600912}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 4612933850736978387, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: m_SortingOrder
       value: 5
@@ -6950,6 +7359,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -6962,8 +7383,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -6976,6 +7421,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -7081,6 +7622,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1310751713}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -7729,6 +8274,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -7741,8 +8298,28 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -7860,6 +8437,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 8002524}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -21769,6 +22350,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -21781,8 +22374,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -21795,6 +22412,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -21900,6 +22613,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 823969482}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -22143,6 +22860,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -22155,8 +22884,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -22169,6 +22922,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -22274,6 +23123,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1990410192}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25
@@ -22563,6 +23416,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _delayForSwitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _switchThreshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
       value: 8
       objectReference: {fileID: 0}
@@ -22575,8 +23440,32 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationXRotationStart
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _retractAnimationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationEndAnglePosition
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _animationRotationMagnitude
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.x
+      value: 3.0100896
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationSpeedMinMax.y
+      value: 4.5795965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleAmplitudeMinAndMaxBasedOnDistance.y
@@ -22589,6 +23478,102 @@ PrefabInstance:
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _wiggleFrequencyMinAndMaxBasedOnDistance.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.15533024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].time
+      value: 0.6986704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].time
+      value: 0.99019784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].value
+      value: -0.26927185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].value
+      value: 0.9466745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].value
+      value: 0.895839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 8.000049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outSlope
+      value: 0.32085735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].inWeight
+      value: 0.29363656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.40639633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -3.8552878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.78726465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _jumpAnimationCurve.m_Curve.Array.data[3].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2843676933011181862, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _anchor
@@ -22694,6 +23679,10 @@ PrefabInstance:
       propertyPath: _followEndTransform
       value: 
       objectReference: {fileID: 1460118909}
+    - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _idleSmoothOverride
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 3104217534544404832, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _autoConnectDistance
       value: 0.25

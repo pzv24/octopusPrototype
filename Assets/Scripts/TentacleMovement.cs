@@ -24,6 +24,7 @@ public class TentacleMovement : MonoBehaviour
     [SerializeField] private bool _tentacleProbingEnabled = true;
     [SerializeField] private float _deplotNewProbeCooldown = 0.3f;
     [SerializeField] private float _probinMinDistance = 1.5f;
+    [SerializeField] private float _boostDelay = 0.1f;
 
     [Header("Tentacle Raycast Settings")]
     [SerializeField] private int _raycastConeCount = 10;
@@ -137,16 +138,21 @@ public class TentacleMovement : MonoBehaviour
     {
         if (_lastJumpTime + _jumpCooldown <= Time.time)
         {
+            for (int i = 0; i < _tentacleBank.Count; i++)
+            {
+                float sign = i % 2 == 0 ? 1 : -1;
+                _tentacleBank[i].DeactivateJumpTentacle(sign);
+            }
             for (int i = 0; i < _activeTentacles.Count; i++)
             {
                 if (_activeTentacles[i] == _probingTentacle)
                 {
                     _probingTentacle = null;
                 }
-                _activeTentacles[i].DeactivateJumpTentacle();
+                _activeTentacles[i].DeactivateTentacle();
                 _tentacleBank.Add(_activeTentacles[i]);
             }
-            _tentaclePhysics.GiveDetachAllBost();
+            _tentaclePhysics.Invoke("GiveDetachAllBost",_boostDelay);
             _activeTentacles.Clear();
             _lastJumpTime = Time.time;
         }

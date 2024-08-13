@@ -30,11 +30,8 @@ public class TentacleVisual : MonoBehaviour
 
     [Header("Idle Settings")]
     [SerializeField] private bool _targetedEndPosition = true;
-    [SerializeField] private float _freeMoveSegmentDistance = 0.02f;
     [SerializeField] private float _idleTentacleLength = 6;
     [SerializeField] private float _idleSmoothOverride = 0.1f;
-    [SerializeField] private float _idleRotationSpeed = 3;
-    [SerializeField] private float _idleRotationMagnitude = 15;
 
     [Header("States Info")]
     [SerializeField] private TentacleVisualState _visualState = TentacleVisualState.Idle;
@@ -137,8 +134,7 @@ public class TentacleVisual : MonoBehaviour
         {
             //_freeMoveTentacleTransform.localRotation = Quaternion.LookRotation(-_headController.PlayerApparentUp, Vector3.down);
             float lookAngle = Mathf.Atan2(_headController.PlayerApparentUp.x, _headController.PlayerApparentUp.y) * Mathf.Rad2Deg;
-            Quaternion lookRotation = Quaternion.AngleAxis(lookAngle + 90, -Vector3.forward);
-            _freeMoveTentacleTransform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360);
+            _freeMoveTentacleTransform.rotation = Quaternion.AngleAxis(lookAngle + 90, -Vector3.forward);
         }
 
         for (int i = 1; i < _segmentPositions.Length; i++)
@@ -155,7 +151,7 @@ public class TentacleVisual : MonoBehaviour
             // if connected, the opporite, massively increase the speed of the entire tentagle (making it rigid), specially towards the end point
 
             float smoothSpeed = ((_baseSmoothSpeed + i) / _currentSmoothFactor) / _connectedModifier;
-            smoothSpeed = _visualState.Equals(TentacleVisualState.Idle) ? _idleSmoothOverride : smoothSpeed;
+            smoothSpeed = _visualState.Equals(TentacleVisualState.Idle) ? _idleSmoothOverride + _idleSmoothOverride*(i/30): smoothSpeed;
 
             //calculate the position with smooth damp function
             Vector3 newPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothSpeed);
@@ -282,7 +278,6 @@ public class TentacleVisual : MonoBehaviour
     {
         _targetedEndPosition = enabled;
     }
-
     private void OnDrawGizmos()
     {
         if(_wiggledEndTransfrom != null)

@@ -99,10 +99,10 @@ public class Tentacle : MonoBehaviour
         _tentacleAnimation.AnimateRetract();
     }
     [Button]
-    public void DeactivateJumpTentacle()
+    public void DeactivateJumpTentacle(float direction)
     {
         _tentacleAnchored = false;
-        _tentacleAnimation.AnimateJump(_freeLookRoot);
+        _tentacleAnimation.AnimateJump(_freeLookRoot, PlayerToAnchorVector, direction);
     }
     public void SetTentacleProbing(bool probing)
     {
