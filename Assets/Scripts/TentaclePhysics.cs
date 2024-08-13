@@ -8,9 +8,6 @@ public class TentaclePhysics : MonoBehaviour
     [Header("Tentacle Settings")]
     [SerializeField] private List<Tentacle> _tentacles = new List<Tentacle>();
     [SerializeField] private float _implulseMagnitude = 1;
-    [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
-    [SerializeField, ReadOnly] private Vector2 _totalContributionVector = Vector2.zero;
-    [SerializeField, ReadOnly] private Vector2 _totalForcesWithoutContribution = Vector2.zero;
 
     [Header("Varied RB Settings")]
     [SerializeField] private float _linearDragConnected = 5;
@@ -37,13 +34,16 @@ public class TentaclePhysics : MonoBehaviour
     [SerializeField, ReadOnly] private float _currentXCorrectionScale = 0;
     [SerializeField, ReadOnly] private int _currentConnectedTentacles = 0;
 
-    [Header("Detach All Boost")]
+    [Header("Jump Boost")]
     [SerializeField] private float _boostAccelerationMagnitude = 50f;
     [SerializeField, Tooltip("If false, will boost in target direciton instead")] private bool _boostInLookDirection = true;
 
     [Header("Misc.")]
     [SerializeField] private bool _debugEnabled = false;
     [SerializeField, ReadOnly] private bool _canGetToTargetWithCurrentTentacles = false;
+    [SerializeField, ReadOnly] private Vector2 _finalVector = Vector2.zero;
+    [SerializeField, ReadOnly] private Vector2 _totalContributionVector = Vector2.zero;
+    [SerializeField, ReadOnly] private Vector2 _totalForcesWithoutContribution = Vector2.zero;
 
     public bool CanGetToTargetWithCurrentTentacles { get { return _canGetToTargetWithCurrentTentacles; } }
 
@@ -63,12 +63,17 @@ public class TentaclePhysics : MonoBehaviour
     //update methods
     private void FindFinalVector()
     {
+        // zero out innitials
         _finalVector = Vector2.zero;
         _totalForcesWithoutContribution = Vector2.zero;
         _currentConnectedTentacles = 0;
+        //if player has no movement input, return
         if (_controller.ReleasePressed) return;
+
         Vector2 totalContribution = Vector2.zero;
         Vector2 totalForces = Vector2.zero;
+
+        // for every ACTIVE and ANCHORED tentacle, get their contribution vector and add the forces to the total available
         for (int i = 0; i < _tentacles.Count; i++)
         {
             if(_tentacles[i].IsAnchored && _tentacles[i].gameObject.activeInHierarchy)
@@ -79,24 +84,35 @@ public class TentaclePhysics : MonoBehaviour
             }
         }
         _totalContributionVector = totalContribution;
+
+        // split the forces from the total and clamp them relative to the current target direction
+        // impirtant note, the foreces can be negative, so do allow for negative values by considering the signs of the total controbution axis
         float clampedXcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.x), 0, Mathf.Abs(_movement.TargetDirectionRaw.x)) * Mathf.Sign(totalContribution.x);
         float clampedYcontribution = Mathf.Clamp(Mathf.Abs(totalContribution.y), 0, Mathf.Abs(_movement.TargetDirectionRaw.y)) * Mathf.Sign(totalContribution.y);
+
+        // assigned the clamped values as the possible contribution (max force available) in each axis
         _finalVector = new Vector2(clampedXcontribution, clampedYcontribution);
         if(_debugEnabled) Debug.DrawRay(transform.position, _finalVector, Color.magenta);
     }
 
     private void ImpulseByTentacles()
     {
+        // assign the gravity (y correction force) and the X correction force (to prevent unrealisticly "pushing" tentacles) relative to # of connected tentacles
         _currentGravityScale = _customGravityAcceleration - (_gravityDecreasePerConnectedTentacle * _currentConnectedTentacles * _customGravityAcceleration);
         _currentXCorrectionScale = _xDirCorrectionAcceleration - (_gravityDecreasePerConnectedTentacle * _currentConnectedTentacles * _xDirCorrectionAcceleration);
+
+        // calculate the final force after corrections
         Vector2 finalFinalForce = (_finalVector * _implulseMagnitude) + new Vector2(_totalForcesWithoutContribution.x * _currentXCorrectionScale, (Vector2.down * _currentGravityScale).y);
-        Debug.DrawRay(transform.position, finalFinalForce, Color.black);
+
+        //Debug.DrawRay(transform.position, finalFinalForce, Color.black);
+
+        // aplly force to rb
         _rigidBody.AddForce(finalFinalForce);
     }
     private bool CheckSurface()
     {
+        // get the normal of the surface currently in touch (if any)
         RaycastHit2D[] hitInfo = new RaycastHit2D[1];
-        //int hit = Physics2D.OverlapCircleNonAlloc(transform.position, _groundSphereCastRadius, hitInfo, _groundLayers);
         int hit = Physics2D.CircleCastNonAlloc(transform.position, _groundSphereCastRadius, Vector2.zero, hitInfo, 0, _groundLayers);
         if (hit > 0)
         {
@@ -105,6 +121,7 @@ public class TentaclePhysics : MonoBehaviour
         }
         return false;
     }
+    // adjust the drag and angular drag of the octupus on free flight (allows for nicer jumping archs, without the springy behavior while connected to tentacles)
     private void AdjustDrag()
     {
         if (_finalVector == Vector2.zero)
@@ -120,8 +137,13 @@ public class TentaclePhysics : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //check for attached surface (if any)
         IsOnSurface = CheckSurface();
+
+        //check if the player can get to current target location with tentacles already in place
         _canGetToTargetWithCurrentTentacles = Vector2.Distance(_finalVector, _movement.TargetDirectionRaw) < 0.5f;
+
+        //call the update methods
         FindFinalVector();
         ImpulseByTentacles();
         AdjustDrag();
@@ -144,6 +166,7 @@ public class TentaclePhysics : MonoBehaviour
             }
         }
     }
+    // give the jump boost when detaching all tentacles 
     public void GiveDetachAllBost()
     {
         Vector3 forceVector = _boostInLookDirection ? _controller.LookDirection.normalized : _movement.TargetDirectionNormalized;

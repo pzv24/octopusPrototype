@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Security;
 
 public class Tentacle : MonoBehaviour
 {
@@ -33,7 +32,6 @@ public class Tentacle : MonoBehaviour
     public Vector2 AnchorNormal { get; private set; }
     public bool IsAnchored { get { return _tentacleAnchored; } }
     public Vector2 ContributionVector { get { return _contributionVector; } }
-    public Vector3 PlayerUpVector { get { return _movement.UpDirection; } }
 
     public Vector2 PlayerToAnchorVector
     {
@@ -98,7 +96,6 @@ public class Tentacle : MonoBehaviour
         _tentacleProbing = false;
         _tentacleAnimation.AnimateRetract();
     }
-    [Button]
     public void DeactivateJumpTentacle(float direction)
     {
         _tentacleAnchored = false;
@@ -125,15 +122,6 @@ public class Tentacle : MonoBehaviour
     public void SetAnchorPosition(Vector3 position)
     {
         _anchor.position = position;
-    }
-    private void CalculateAngleToTargetPosition()
-    {
-        float angle = Vector2.Angle(_movement.TargetDirectionNormalized, PlayerToAnchorVector.normalized);
-        if (angle >= _selfBreakAngleThreshold)
-        {
-            _movement.TentacleSelfDeactivate(this);
-            return;
-        }
     }
     private void CalculateContributionVector()
     {

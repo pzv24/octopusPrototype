@@ -230,33 +230,33 @@ public class TentacleVisual : MonoBehaviour
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
                 _targetedEndPosition = true;
-                if (_changeColorOnState) _lineRenderer.colorGradient = _isConnectedColor;
+                if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _isConnectedColor;
                 break;
             case TentacleVisualState.Retracted:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = _connectedSmoothFactor;
                 _targetedEndPosition = true;
-                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+                if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _original;
 
                 break;
             case TentacleVisualState.Launching:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = 1;
                 _targetedEndPosition = true;
-                if (_changeColorOnState) _lineRenderer.colorGradient = _isLaunchignColor;
+                if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _isLaunchignColor;
 
                 break;
             case TentacleVisualState.Idle:
                 _currentSmoothFactor = _launchingSmoothFactor;
                 _connectedModifier = 1;
                 _targetedEndPosition = false;
-                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+                if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _original;
 
                 break;
             default:
                 _currentSmoothFactor = _looseSmoothFactor;
                 _connectedModifier = 1;
-                if (_changeColorOnState) _lineRenderer.colorGradient = _original;
+                if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _original;
 
                 break;
         }
