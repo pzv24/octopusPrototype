@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+
+// manager for the moving around of tentacles based on current movement input
 public class TentacleMovement : MonoBehaviour
 {
     [Header("Tentacle Plug in Fields")]

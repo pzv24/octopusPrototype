@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+// tentacle base class, manages the gameplay aspects of the tentacle (tenteacle connect anchor, connected states, raycasts, tentacle probing)
 public class Tentacle : MonoBehaviour
 {
     [Header("Plug in Fields")]
@@ -49,83 +50,37 @@ public class Tentacle : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //if the tentacle is actually connected, calculate contribution and check for break conditions
         if (_tentacleAnchored && !_tentacleProbing)
         {
             Debug.DrawRay(_anchor.transform.position, AnchorNormal, Color.red);
-            //CalculateAngleToTargetPosition();
+            // test for auto break conditions
             if (AutoBreakConnection())
             {
                 _movement.TentacleSelfDeactivate(this);
             }
             CalculateContributionVector();
         }
+        // update the player to anchor vector
         _playerToAnchorVector = PlayerToAnchorVector;
     }
-    public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 10f)
-    {
-        //Debug.LogError("Launching " + gameObject.name);
-        //_anchor.position = anchorEndPosition;
-        _tentacleProbing = false;
-        _tentacleVisual.ChangeVisualState(TentacleVisualState.Launching);
-        _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
-        AnchorNormal = hitNormal;
-        StartCoroutine(GameplayConnectedTimer(travelSpeed));
-        //Debug.Log(anchorEndPosition);
-    }
-    private IEnumerator GameplayConnectedTimer(float connectSpeed)
-    {
-        float lerp = 0;
-        while (lerp <= 1)
-        {
-            lerp += Time.deltaTime * connectSpeed;
-            yield return new WaitForFixedUpdate();
-        }
-        _tentacleAnchored = true;
-
-    }
+    // private update methods
     private bool AutoBreakConnection()
     {
+        // if tentacle extends beyond max range, return true
         if (_playerToAnchorVector.magnitude > _breakDistance) return true;
+
+        // if enabled, when tentacle breaks direct "sight" to anchor, break connection
         if (_breakOnLooseDirectSight && !HasDirectVisionOfAnchor()) return true;
+
         return false;
-
-    }
-    public void DeactivateTentacle()
-    {
-        _tentacleAnchored = false;
-        _tentacleProbing = false;
-        _tentacleAnimation.AnimateRetract();
-    }
-    public void DeactivateJumpTentacle(float direction)
-    {
-        _tentacleAnchored = false;
-        _tentacleAnimation.AnimateJump(_freeLookRoot, PlayerToAnchorVector, direction);
-    }
-    public void SetTentacleProbing(bool probing)
-    {
-        _tentacleProbing = probing;
-        if(probing)
-        {
-            //Debug.Log($"Tentacle {gameObject.name} is now probing...");
-            _tentacleAnchored = false;
-            _tentacleVisual.ChangeVisualState(TentacleVisualState.Retracting);
-        }
-    }
-    public void ConnectProbe(Vector3 anchorTargetPosition)
-    {
-        _tentacleAnchored = true;
-        _tentacleProbing = false;
-        _tentacleAnimation.AnimateConnectProbe(_anchor.position, anchorTargetPosition);
-
-        StartCoroutine(GameplayConnectedTimer(10));
-    }
-    public void SetAnchorPosition(Vector3 position)
-    {
-        _anchor.position = position;
     }
     private void CalculateContributionVector()
     {
-        float xContribution = 0; 
+        // since tentacles can only pull (give a force in the player -> anchor direction), build the contrubution vector from the 
+        // axis the align in direction to the target direction given by the player 
+        // aka, you can only move towards the anchor
+        float xContribution = 0;
         float yContribution = 0;
         if (_movement.TargetDirectionRaw.magnitude > 0.01f)
         {
@@ -144,6 +99,7 @@ public class Tentacle : MonoBehaviour
     }
     private bool HasDirectVisionOfAnchor()
     {
+        //raycast towards anchor, see if it hit a wall on the way
         RaycastHit2D[] hitInfo = new RaycastHit2D[1];
         int hits = Physics2D.RaycastNonAlloc(transform.position, PlayerToAnchorVector.normalized, hitInfo, PlayerToAnchorVector.magnitude, _solidGroundLayer);
         if (hits == 0)
@@ -156,7 +112,74 @@ public class Tentacle : MonoBehaviour
         }
         return true;
     }
+    // timer to force activate the gameplay connected functionality regardless of current animation of tentacle 
+    // prevents animation bugs to propagating into gameplay
+    private IEnumerator GameplayConnectedTimer(float connectSpeed)
+    {
+        float lerp = 0;
+        while (lerp <= 1)
+        {
+            lerp += Time.deltaTime * connectSpeed;
+            yield return new WaitForFixedUpdate();
+        }
+        _tentacleAnchored = true;
 
+    }
+    // public call methods
+    public void LaunchTentacle(Vector3 anchorEndPosition, Vector2 hitNormal, float travelSpeed = 1f)
+    {
+        // disable tentacle probing (if valid)
+        _tentacleProbing = false;
+
+        //change the tentacle visual state to launching
+        _tentacleVisual.ChangeVisualState(TentacleVisualState.Launching);
+
+        // send the call to animate the launch and assign the current anchor normal direction 
+        _tentacleAnimation.AnimateLaunch(anchorEndPosition, hitNormal);
+        AnchorNormal = hitNormal;
+
+        // start the fail-safe gameplay connected timer
+        StartCoroutine(GameplayConnectedTimer(travelSpeed));
+    }
+    public void DeactivateTentacle()
+    {
+        // deactivate variables and send the call to animate the retract for the tentacle
+        _tentacleAnchored = false;
+        _tentacleProbing = false;
+        _tentacleAnimation.AnimateRetract();
+    }
+    public void DeactivateJumpTentacle(float direction)
+    {
+        // deactivate the tentacle, but call for the jump animation instead
+        _tentacleAnchored = false;
+        _tentacleAnimation.AnimateJump(_freeLookRoot, PlayerToAnchorVector, direction);
+    }
+    public void SetTentacleProbing(bool probing)
+    {
+        // set tentacle to probing behavior (actual tentacle probing target position managed by movement script)
+        _tentacleProbing = probing;
+        if(probing)
+        {
+            //Debug.Log($"Tentacle {gameObject.name} is now probing...");
+            _tentacleAnchored = false;
+            _tentacleVisual.ChangeVisualState(TentacleVisualState.Retracting);
+        }
+    }
+    // connect tentacle to anchor, called when this tentacle is being used as probe
+    public void ConnectProbe(Vector3 anchorTargetPosition)
+    {
+        _tentacleAnchored = true;
+        _tentacleProbing = false;
+        _tentacleAnimation.AnimateConnectProbe(_anchor.position, anchorTargetPosition);
+
+        StartCoroutine(GameplayConnectedTimer(10));
+    }
+    // set the gameplay tentacle anchor position
+    public void SetAnchorPosition(Vector3 position)
+    {
+        _anchor.position = position;
+    }
+    
     private void OnDrawGizmos()
     {
         if (_tentacleProbing)

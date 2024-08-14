@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Timers;
-using UnityEngine.Rendering;
 
 public class TentacleCodeAnimator : MonoBehaviour
 {
     [Header("Plug in Fields")]
     [SerializeField] private TentacleVisual _visual;
-    //TODO make sure this mathces tentacle gameplay launch speed 
 
     [Header("Launch Animation Settings")]
     [SerializeField] private float _launchAnimationSpeed = 12f;
-    [SerializeField] private float _connectAnimationSpeed = 12f;
     [SerializeField] private float _bezerCurveMaxHeight = 3;
     [SerializeField] private float _bezerCurveMinHeight = 0.2f;
     [SerializeField, Range(0,1)] private float _bezierAnchorModifier = 0.5f;
@@ -33,10 +29,6 @@ public class TentacleCodeAnimator : MonoBehaviour
     [SerializeField] private Vector2 _wiggleFrequencyMinAndMaxBasedOnDistance = Vector2.zero;
     [SerializeField] private Vector2 _wiggleAmplitudeMinAndMaxBasedOnDistance = Vector2.zero;
 
-    private void Start()
-    {
-        _visual = GetComponent<TentacleVisual>();
-    }
     [Button]
     public void AnimateLaunch(Vector3 anchorWorldPosition, Vector2 hitNormal)
     {
@@ -69,9 +61,9 @@ public class TentacleCodeAnimator : MonoBehaviour
         float bezerLerpValue = Mathf.InverseLerp(0, 8, Vector3.Distance(anchorWorldPosition, transform.position));
         float bezierHeight = Mathf.Lerp(_bezerCurveMinHeight, _bezerCurveMaxHeight, bezerLerpValue);
         Vector3 bezierAnchor = start + ((end - start)*_bezierAnchorModifier) + new  Vector3(hitNormal.x,hitNormal.y,0) * bezierHeight;
-        //Debug.DrawRay(start, hitNormal*15, Color.red);
-        //Debug.DrawLine(start, bezierAnchor, Color.blue, 1);
-        //Debug.DrawLine(end, bezierAnchor, Color.blue, 1);
+        Debug.DrawRay(start, hitNormal * 15, Color.red);
+        Debug.DrawLine(start, bezierAnchor, Color.blue, 1);
+        Debug.DrawLine(end, bezierAnchor, Color.blue, 1);
         while (lerp < 1)
         {
             lerp += _launchAnimationSpeed * Time.deltaTime;

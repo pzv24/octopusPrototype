@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// player controller, manages inputs and send calls to respective scripts
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]

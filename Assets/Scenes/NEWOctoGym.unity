@@ -384,8 +384,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -1442,28 +1454,28 @@ MonoBehaviour:
   - {fileID: 1355156975}
   _activeTentacles: []
   _tentaclePrefab: {fileID: 0}
-  _probingTentacle: {fileID: 0}
   _totalTentacleCount: 8
   _tentacleFireCooldown: 0.18
   _tentacleMaxDistance: 12
   _tentacleLaunchSpeed: 12
   _maxActiveTentacles: 4
+  _jumpCooldown: 0.5
+  _boostDelay: 0.1
+  _tentacleProbingEnabled: 1
+  _deplotNewProbeCooldown: 0.5
+  _probinMinDistance: 3
+  _raycastConeCount: 5
+  _raycastDepth: 5
+  _angleWidth: 30
   _tentacleCollisionLayers:
     serializedVersion: 2
     m_Bits: 384
   _solidOnlyFilter:
     serializedVersion: 2
     m_Bits: 128
-  _jumpCooldown: 0.5
-  _tentacleProbingEnabled: 1
-  _deplotNewProbeCooldown: 0.5
-  _probinMinDistance: 3
-  _boostDelay: 0.1
-  _raycastConeCount: 5
-  _raycastDepth: 5
-  _angleWidth: 30
   _debugEnabled: 1
   _hasActiveInput: 1
+  _probingTentacle: {fileID: 0}
   _targetLocation: {x: 0, y: 0, z: 0}
   _lastTentacleFireTime: 0
 --- !u!114 &160632612
@@ -1478,17 +1490,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002dacffd06210344af9464f9908f551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tentacleRange: 5
-  _debugLog: 0
-  _targetLocation: {x: 0, y: 0, z: 0}
   _targetPostionVisual: {fileID: 1659028907}
+  _solidTerrainLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _debugLog: 0
   _showTargetPosition: 1
   _canGetThereColor: {r: 0.17295651, g: 0.7075472, b: 0, a: 0.6509804}
   _outsideCurrentTentaclesColor: {r: 0.8490566, g: 0.7894736, b: 0, a: 0.70980394}
   _noDirectRouteColor: {r: 0.8039216, g: 0.29828253, b: 0, a: 0.6509804}
-  _solidTerrainLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  _targetLocation: {x: 0, y: 0, z: 0}
   _directLineTotarget: 0
 --- !u!114 &160632613
 MonoBehaviour:
@@ -1512,9 +1523,6 @@ MonoBehaviour:
   - {fileID: 1444783828}
   - {fileID: 1355156975}
   _implulseMagnitude: 100
-  _finalVector: {x: 0, y: 0}
-  _totalContributionVector: {x: 0, y: 0}
-  _totalForcesWithoutContribution: {x: 0, y: 0}
   _linearDragConnected: 6
   _angularDragConnected: 6
   _linearDragFree: 0.1
@@ -1538,6 +1546,9 @@ MonoBehaviour:
   _boostInLookDirection: 1
   _debugEnabled: 1
   _canGetToTargetWithCurrentTentacles: 0
+  _finalVector: {x: 0, y: 0}
+  _totalContributionVector: {x: 0, y: 0}
+  _totalForcesWithoutContribution: {x: 0, y: 0}
   IsOnSurface: 0
   CurrentSurfaceNormal: {x: 0, y: 1, z: 0}
 --- !u!1 &165026903
@@ -2300,8 +2311,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -6985,6 +7008,22 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _launchAnimationSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _jumpAnimationDuration
       value: 0.2
       objectReference: {fileID: 0}
@@ -7371,8 +7410,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -8286,8 +8337,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -22362,8 +22425,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -22872,8 +22947,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed
@@ -23428,8 +23515,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMaxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezerCurveMinHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
+      propertyPath: _bezierAnchorModifier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _launchAnimationSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1277351936199550567, guid: bbd92ae3072865e499952546cdc36594, type: 3}
       propertyPath: _connectAnimationSpeed

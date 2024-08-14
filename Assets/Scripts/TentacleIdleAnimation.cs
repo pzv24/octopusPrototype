@@ -14,21 +14,6 @@ public class TentacleIdleAnimation : MonoBehaviour
 
     private Coroutine _idleAnimCoroutine;
 
-    //private void Start()
-    //{
-    //    _idleAnimCoroutine = StartCoroutine(AnimateTentacle());
-    //}
-    //private void OnValidate()
-    //{
-    //    if(_animateTentacle)
-    //    {
-    //        StartCoroutine(AnimateTentacle());
-    //    }
-    //    else
-    //    {
-    //        StopAllCoroutines();
-    //    }
-    //}
     public void SetIdleAnimationEnabled(bool animateIdle)
     {
         if(animateIdle)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+// calculate and apply the forces acting on the octopus at all times given the current active tentacles, input calls, and target position
 public class TentaclePhysics : MonoBehaviour
 {
     [Header("Tentacle Settings")]
