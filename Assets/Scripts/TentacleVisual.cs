@@ -14,7 +14,7 @@ public class TentacleVisual : MonoBehaviour
 
     [Header(" Movement Settings")]
     [SerializeField] private int _tentacleSegmentCount = 50;
-    [SerializeField] private float _baseSmoothSpeed = 10f;
+    [SerializeField] private float _baseSmoothTime = 10f;
     [SerializeField] private float _tentacleLengthModifier = 1;
 
     [Header("Wiggle Settings")]
@@ -184,8 +184,8 @@ public class TentacleVisual : MonoBehaviour
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (making it rigid), specially towards the end point
-            float smoothSpeed = ((_baseSmoothSpeed + i) / _currentSmoothFactor) / _connectedModifier;
-            smoothSpeed = _visualState == TentacleVisualState.Idle? _idleSmoothOverride + (_idleSmoothOverride * (i/_tentacleSegmentCount)) : smoothSpeed;
+            float smoothTime = ((_baseSmoothTime + i) / _currentSmoothFactor) / _connectedModifier;
+            smoothTime = _visualState == TentacleVisualState.Idle? _idleSmoothOverride + (_idleSmoothOverride * (i/_tentacleSegmentCount)) : smoothTime;
 
             if (_targetedEndPosition)
             {
@@ -199,7 +199,7 @@ public class TentacleVisual : MonoBehaviour
             }
 
             //calculate the position with smooth damp function
-            newSegmentPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothSpeed);
+            newSegmentPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothTime);
             newSegmentPosition = IdleRopeLikeCheck(newSegmentPosition, i);
 
             // store the new position for that segment
@@ -315,7 +315,7 @@ public class TentacleVisual : MonoBehaviour
 
                 break;
             case TentacleVisualState.Idle:
-                _currentSmoothFactor = _launchingSmoothFactor;
+                _currentSmoothFactor = _looseSmoothFactor;
                 _connectedModifier = 1;
                 if (_changeColorOnState && _lineRenderer != null) _lineRenderer.colorGradient = _original;
 
