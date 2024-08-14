@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 // visual manager for tentacles. Only mangages tentacle position behavior in the different states 
@@ -125,7 +126,7 @@ public class TentacleVisual : MonoBehaviour
 
         // if tentacle set to autoconnect, then tentacle will automatically stick to a surface when its close enough
         if(_setAutoConnect 
-            && _visualState.Equals(TentacleVisualState.Launching) 
+            && _visualState == TentacleVisualState.Launching 
             && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance
             && !_targetedEndPosition)
         {
@@ -136,7 +137,7 @@ public class TentacleVisual : MonoBehaviour
     private void GetFinalTargetPosition()
     {
         // if retracted, make the targed end position match the root (to hide the tentacle fully)
-        if (_visualState.Equals(TentacleVisualState.Retracted))
+        if (_visualState == TentacleVisualState.Retracted)
         {
             _followEndTransform.position = transform.position;
         }
@@ -165,7 +166,7 @@ public class TentacleVisual : MonoBehaviour
     private void SetTextureBasedOnPlayerPosition()
     {
         // change the scale of the line renderer y coordinate texture based on player to anchor vector of the tentacle (so suckers face downwards relative to player)
-        if (_visualState.Equals(TentacleVisualState.Idle)) return;
+        if (_visualState == TentacleVisualState.Idle) return;
         _lineRenderer.textureScale = new Vector2(_lineRenderer.textureScale.x, Mathf.Sign(_tentacleCore.PlayerToAnchorVector.x) * -1);
     }
     private void FindTentacleLineRendererPositions()
@@ -175,38 +176,50 @@ public class TentacleVisual : MonoBehaviour
 
         // set the final target direction for the entire tentacle based on current final position target
         Vector3 finalTargetDirection = (_wiggledEndTransfrom.position - transform.position).normalized;
-
+        Vector3 targetPosition = Vector3.zero;
+        Vector3 newSegmentPosition = Vector3.zero;
         // iterate on the points on the line renderer to update positions
         for (int i = 1; i < _segmentPositions.Length; i++)
         {
-            // for each point, set the target position based on the previous point, plus the direction * disntace 
-            Vector3 targetPosition = _segmentPositions[i - 1] + finalTargetDirection * distancePerSegment;
-
-            // if the tentacle is in freemove, then base the position on the freemove tentacle root transfrom instead
-            if (!_targetedEndPosition && _freeMoveTentacleTransform != null)
-            {
-                targetPosition = _segmentPositions[i - 1] + _freeMoveTentacleAnimatedTransform.right * _idleTentacleSeparationPerSegment;
-            }
-
             // calculate the smooth factor:
             // if detached, slow down the the smooth modifier towards the tip
             // if connected, the opporite, massively increase the speed of the entire tentagle (making it rigid), specially towards the end point
-
             float smoothSpeed = ((_baseSmoothSpeed + i) / _currentSmoothFactor) / _connectedModifier;
-            smoothSpeed = _visualState.Equals(TentacleVisualState.Idle) ? _idleSmoothOverride + _idleSmoothOverride * (i / 30) : smoothSpeed;
+            smoothSpeed = _visualState == TentacleVisualState.Idle? _idleSmoothOverride + (_idleSmoothOverride * (i/_tentacleSegmentCount)) : smoothSpeed;
+
+            if (_targetedEndPosition)
+            {
+                // for each point, set the target position based on the previous point, plus the direction * disntace 
+                targetPosition = _segmentPositions[i - 1] + finalTargetDirection * distancePerSegment;
+            }
+            // if the tentacle is in freemove, then base the position on the freemove tentacle root transfrom instead
+            else
+            {
+                targetPosition = CalculateIdleTargetPosition(i);
+            }
 
             //calculate the position with smooth damp function
-            Vector3 newPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothSpeed);
+            newSegmentPosition = Vector3.SmoothDamp(_segmentPositions[i], targetPosition, ref _segmentVelocities[i], smoothSpeed);
+            newSegmentPosition = IdleRopeLikeCheck(newSegmentPosition, i);
 
-            // if the tentacle is in idle, and the tentacle would need to "stretch", switch target position to be only based on a fixed distance from the 
-            // previous tentacle. Allow for that "rope-like" movement when carrying the idle tentacles around
-            if (_visualState.Equals(TentacleVisualState.Idle) && Vector3.Distance(newPosition, _segmentPositions[i - 1]) > _idleTentacleSeparationPerSegment)
-            {
-                newPosition = _segmentPositions[i - 1] + (_segmentPositions[i] - _segmentPositions[i - 1]).normalized * _idleTentacleSeparationPerSegment;
-            }
             // store the new position for that segment
-            _segmentPositions[i] = newPosition;
+            _segmentPositions[i] = newSegmentPosition;
         }
+    }
+
+    private Vector3 CalculateIdleTargetPosition(int segmentIndex)
+    {
+        return _segmentPositions[segmentIndex - 1] + _freeMoveTentacleAnimatedTransform.right * _idleTentacleSeparationPerSegment;
+    }
+    private Vector3 IdleRopeLikeCheck(Vector3 newSegmentPosition, int i)
+    {
+        // if the tentacle is in idle, and the tentacle would need to "stretch", switch target position to be only based on a fixed distance from the 
+        // previous tentacle. Allow for that "rope-like" movement when carrying the idle tentacles around
+        if (_visualState == TentacleVisualState.Idle && Vector3.Distance(newSegmentPosition, _segmentPositions[i - 1]) > _idleTentacleSeparationPerSegment)
+        {
+            return _segmentPositions[i - 1] + (_segmentPositions[i] - _segmentPositions[i - 1]).normalized * _idleTentacleSeparationPerSegment;
+        }
+        else return newSegmentPosition;
     }
     private  void ForceResetPosition()
     {
@@ -277,8 +290,8 @@ public class TentacleVisual : MonoBehaviour
         _visualState = state;
 
         // since this behaviors only apply to idle, handle them before the switch
-        _targetedEndPosition = !_visualState.Equals(TentacleVisualState.Idle);
-        _idleAnimator?.SetIdleAnimationEnabled(_visualState.Equals(TentacleVisualState.Idle));
+        _targetedEndPosition =! (_visualState == TentacleVisualState.Idle);
+        _idleAnimator?.SetIdleAnimationEnabled(_visualState == TentacleVisualState.Idle);
 
         // set the smooth factors and connected modifiers based on visual state
         // for debug purposes, change the color of the tentacle based on state (if enabled)
