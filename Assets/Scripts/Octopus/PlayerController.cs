@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private GameObject _targetPostionVisual;
     [SerializeField] private LayerMask _solidTerrainLayer;
+    [SerializeField] private OctopusHeadAnimator _headController;
 
     [Header("Debug")]
     [SerializeField] private bool _debugLog = false;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public bool HasActiveInput { get; private set; }
     public Vector3 LookDirection { get { return _lookDirection; } }
+    public Vector3 ApparentLookDirection { get { return _headController.PlayerApparentForward; } }
     public Vector3 UpDirection { get { return _upDirection; } }
     public bool ReleasePressed {  get { return _releasePressed; } }
 

@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+
+// animate the idle for the tentacles. Uses the free look root object instead of the follow target
 public class TentacleIdleAnimation : MonoBehaviour
 {
+    [Header("Plug in Fields")]
     [SerializeField] private TentacleVisual _visual;
+
+    [Header("Settings")]
     [SerializeField] private AnimationCurve _animationCurve;
     [SerializeField, MinMaxSlider(0,270,ShowFields = true)] Vector2 _minMaxMagnitude;
     [SerializeField, MinMaxSlider(0,10, ShowFields = true)] Vector2 _minMaxAnimDuration;
     [SerializeField] private float _invertMult = 1f;
-    [SerializeField] private bool _animateTentacle;
-    [SerializeField, ReadOnly] private bool _coroutineRunning = false;
 
     private Coroutine _idleAnimCoroutine;
 
+    // starts or stops the Idle animation
     public void SetIdleAnimationEnabled(bool animateIdle)
     {
         if(animateIdle)
@@ -32,9 +36,9 @@ public class TentacleIdleAnimation : MonoBehaviour
         {
             StopIdleAnimation();
         }
+        // reset the rotation on the object before starting the animation
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         _idleAnimCoroutine = StartCoroutine(AnimateTentacle());
-        _coroutineRunning = true;
     }
     [Button]
     private void StopIdleAnimation()
@@ -43,15 +47,16 @@ public class TentacleIdleAnimation : MonoBehaviour
         {
             StopCoroutine(_idleAnimCoroutine);
             _idleAnimCoroutine = null;
-            _coroutineRunning = false;
         }
     }
-    public void SetTentacleTexture(float value)
+    private void SetTentacleTexture(float value)
     {
+        // sets the line renderer material y scale
         _visual.SetTentacleTextureScale(value);
     }
     private IEnumerator AnimateTentacle()
     {
+        // innit variables
         float elapsed = 0;
         bool calledFirstChange = false;
         bool calledSecondChange = false;

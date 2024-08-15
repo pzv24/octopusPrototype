@@ -170,7 +170,7 @@ public class TentaclePhysics : MonoBehaviour
     // give the jump boost when detaching all tentacles 
     public void GiveDetachAllBost()
     {
-        Vector3 forceVector = _boostInLookDirection ? _controller.LookDirection.normalized : _movement.TargetDirectionNormalized;
+        Vector3 forceVector = _boostInLookDirection ? _controller.LookDirection.normalized : _controller.ApparentLookDirection.normalized;
         _rigidBody.AddForce(forceVector * _boostAccelerationMagnitude);
     }
     public Vector2 ImpulseAcceleration(Vector2 targetDirectionNormalized)

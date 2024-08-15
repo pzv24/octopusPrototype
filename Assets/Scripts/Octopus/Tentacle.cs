@@ -68,7 +68,7 @@ public class Tentacle : MonoBehaviour
     private bool AutoBreakConnection()
     {
         // if tentacle extends beyond max range, return true
-        if (_playerToAnchorVector.magnitude > _breakDistance) return true;
+        if (_playerToAnchorVector.magnitude > _breakDistance || _tentacleVisual.VisualState == TentacleVisualState.Idle) return true;
 
         // if enabled, when tentacle breaks direct "sight" to anchor, break connection
         if (_breakOnLooseDirectSight && !HasDirectVisionOfAnchor()) return true;
@@ -178,6 +178,10 @@ public class Tentacle : MonoBehaviour
     public void SetAnchorPosition(Vector3 position)
     {
         _anchor.position = position;
+    }
+    public void ForceTentacleAnchored(bool anchored)
+    {
+        _tentacleAnchored = anchored;
     }
     
     private void OnDrawGizmos()

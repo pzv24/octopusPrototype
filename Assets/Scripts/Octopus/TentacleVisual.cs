@@ -10,12 +10,13 @@ public class TentacleVisual : MonoBehaviour
     [SerializeField] private Transform _followEndTransform;
     [SerializeField] private Transform _freeMoveTentacleTransform;
     [SerializeField] private Transform _freeMoveTentacleAnimatedTransform;
-    [SerializeField] private LookAtMouse _headController;
+    [SerializeField] private OctopusHeadAnimator _headController;
 
     [Header(" Movement Settings")]
     [SerializeField] private int _tentacleSegmentCount = 50;
     [SerializeField] private float _baseSmoothTime = 10f;
     [SerializeField] private float _tentacleLengthModifier = 1;
+    [SerializeField] private float _freeMoveRootRotationSpeed = 10;
 
     [Header("Wiggle Settings")]
     [SerializeField] private bool _isWiggling = false;
@@ -57,6 +58,7 @@ public class TentacleVisual : MonoBehaviour
     private TentacleIdleAnimation _idleAnimator;
 
     public Transform FollowTransform { get { return _followEndTransform; } }
+    public TentacleVisualState VisualState { get { return _visualState; } }
 
     private void Start()
     {
@@ -75,10 +77,10 @@ public class TentacleVisual : MonoBehaviour
         _idleTentacleSeparationPerSegment = _idleTentacleLength / _tentacleSegmentCount;
     }
 
-    private void OnValidate()
-    {
-        ChangeVisualState(_visualState);
-    }
+    //private void OnValidate()
+    //{
+    //    ChangeVisualState(_visualState);
+    //}
 
     public void InitVisual(Transform anchor)
     {
@@ -114,7 +116,9 @@ public class TentacleVisual : MonoBehaviour
         if(_headController != null)
         {
             float lookAngle = Mathf.Atan2(_headController.PlayerApparentUp.x, _headController.PlayerApparentUp.y) * Mathf.Rad2Deg;
-            _freeMoveTentacleTransform.rotation = Quaternion.AngleAxis(lookAngle + 90, -Vector3.forward);
+            Quaternion targetRotation = Quaternion.AngleAxis(lookAngle + 90, -Vector3.forward);
+            _freeMoveTentacleTransform.transform.rotation = Quaternion.RotateTowards(_freeMoveTentacleTransform.transform.rotation, 
+                targetRotation, _freeMoveRootRotationSpeed * Time.deltaTime);
         }
         // set the first line renderer segment position to the root
         _segmentPositions[0] = transform.position;
@@ -128,7 +132,7 @@ public class TentacleVisual : MonoBehaviour
         if(_setAutoConnect 
             && _visualState == TentacleVisualState.Launching 
             && Vector3.Distance(_segmentPositions[_segmentPositions.Length - 1], _followEndTransform.position) < _autoConnectDistance
-            && !_targetedEndPosition)
+            && _targetedEndPosition)
         {
             ChangeVisualState(TentacleVisualState.Connected);
             //Debug.Log("tentacle "+ this.gameObject.name +" auto connected");
