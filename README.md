@@ -1,9 +1,10 @@
 # Octopus Movement Prototype
 
-A little tentacle-based player movement inspired by Carrion. 
+A little octopus player controller prototype inspired by Carrion. 
+Movement is physics-based, using the procedurally animated tentacles as available forces to pull the player along to the target position
 
-Supports mouse on PC and touch controls for mobile.
-Check out the latest build in browser at: https://pzv24.github.io/octopusPrototype/
+Supports mouse + keyboard on PC and touch controls for mobile.
+No download necessary! Try out the latest build in your browser at: https://pzv24.github.io/octopusPrototype/
 
 ________________________________________________________________________________________________________________________________
 

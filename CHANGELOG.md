@@ -1,6 +1,14 @@
 # Changelog
-[0.1.2b] - 2024-06-20
 
+[0.1.3] - 2024-08-14
+- Added untargeted animation option for tentacles
+- Added idle tentacle animations and behavior
+- Added new jump animations and tweaked behavior
+- Added new tentacle and octopus body assets
+- General code clean up and slight optimization
+- Further tuning of movement and animation variables
+
+[0.1.2b] - 2024-06-20
 - Implemnted jump in touch controls
 - Touch controls fixed in code for smoother gameplay
 
